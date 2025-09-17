@@ -1,0 +1,7 @@
+<pp-account-table (selectedItems)="recievedIds = $event" #table></pp-account-table>
+<pp-text-button 
+    buttonText="Ban" 
+    class="transition-all" 
+    disappear={{!this.recievedIds.length}}
+    (onClick)="!recievedIds.length ? '' : banUsers(this.table)">
+</pp-text-button>

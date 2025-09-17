@@ -1,0 +1,41 @@
+name: Deploy Prod
+run-name: ${{ github.actor }} odpalił
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+concurrency:
+  group: PooPosting
+  cancel-in-progress: false
+jobs:
+  DeployProd:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Udało się!"
+      - name: Git repo
+        uses: actions/checkout@v3
+      - name: Setup nodejs
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      #- name: Run tests
+      #  run: npm run test-ci
+      - name: Zaciągnięcie playbooka
+        run: "wget https://raw.githubusercontent.com/PooPosting/DevOps/master/frontend-update.yml -O .github/workflows/frontend-update.yml"
+      - name: Run ansible playbook
+        env:
+          type: prod
+          repo: main
+        uses: dawidd6/action-ansible-playbook@master
+        with:
+          playbook: frontend-update.yml
+          directory: ./.github/workflows
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          inventory: |
+            [vps]
+            ${{ secrets.IP }}

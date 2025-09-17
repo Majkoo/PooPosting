@@ -1,0 +1,23 @@
+<div class="text-4xl text-dark dark:text-dark-dark text-center mt-4">Settings</div>
+
+<pp-setting-option 
+    [text]="'Bardzo testowa opcja (nie naciskać)'" 
+    [switchValue]="settingsService.getTestingButtonSetting()" 
+    (valueChanged)="testSetting = $event; settingsService.setTestingButtonSetting($event)">
+</pp-setting-option>
+<pp-easter-egg [playEasterEgg]="testSetting"></pp-easter-egg>
+
+<pp-setting-option
+    [text]="'Dark Mode'"
+    [switchValue]="settingsService.getDarkModeSetting()"
+    (valueChanged)="settingsService.setDarkModeSetting($event); changeTheme()">
+</pp-setting-option>
+
+<div class="text-2xl text-dark dark:text-dark-dark text-center">For moderators</div>
+
+<pp-setting-option 
+    [ngClass]="isModeratororAdmin ? '' : 'hidden'"
+    [text]="'Show moderator buttons on posts'"
+    [switchValue]="settingsService.getModeratorButtonsSetting()" 
+    (valueChanged)="settingsService.setModeratorButtonsSetting($event)">
+</pp-setting-option>

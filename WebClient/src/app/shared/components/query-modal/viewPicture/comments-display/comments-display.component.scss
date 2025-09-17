@@ -1,0 +1,5 @@
+:host {
+  @apply max-h-80 overflow-auto
+  md:max-h-none md:flex-grow md:min-h-0
+  w-full flex-grow m-0 flex flex-col min-h-0;
+}

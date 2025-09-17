@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "node_modules/primeng/resources/primeng.min.css";
+
+.icon-fz {
+  font-size: 24px;
+}
+.icon {
+  margin: 0 !important;
+  @apply icon-fz flex justify-center items-center h-auto
+}
+.icon-dark {
+  margin: 0 !important;
+  @apply icon-fz text-black dark:text-white flex justify-center items-center h-auto
+}
+.icon-red {
+  margin: 0 !important;
+  @apply icon-fz text-warning dark:text-dark-warning flex justify-center items-center h-auto
+}
+.m-0 {
+  margin: 0 !important;
+}
+body {
+  @apply top-0 w-full bg-surface-200
+}
+html {
+  @apply scroll-smooth
+}
+
+* {
+  font-family: "poppins", sans-serif;
+}
+
+nav, header {
+  @media screen and (max-width: 768px) {
+    z-index: 1102 !important;
+  }
+}
+
+header, footer, nav {
+  @apply z-30
+}
+.pp-shadow {
+  @apply shadow-[0_0_15px_0_rgba(160,160,160,0.5)];
+  @apply dark:shadow-[]
+}
+.font-bolder {
+  font-weight: 900;
+}
+
+.cont {
+  @apply max-w-2xl mx-auto
+}
+.cont-inner {
+  @apply max-w-xl mx-auto
+}
+
+.app-link {
+  @apply flex justify-center items-center gap-1 select-none dark:text-dark-dark hover:text-cta dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer h-full text-lg;
+  >.icon {
+    @apply text-xl;
+  }
+}
+
+.link {
+  @apply select-none hover:text-cta dark:text-dark-dark dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer;
+  >.icon {
+    @apply text-xl;
+  }
+}
+
+.nav-link {
+  @apply flex justify-center items-center gap-0.5 select-none dark:text-dark-dark hover:text-cta dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-2;
+  &.link-active {
+    @apply text-cta dark:text-dark-cta hover:text-opacity-70;
+  }
+}
+
+.nav-link {
+  span {
+    @apply text-lg hidden sm:block
+  }
+}
+
+.cropper-modal, .cropper-container, .cropper-container img {
+  @apply rounded-xl;
+}
+
+.p-dialog {
+  max-height: 100vh !important;
+  padding: 0 !important;
+  .p-dialog-content {
+    padding: 0 !important;
+  }
+}
+
+.btn {
+  @apply rounded-lg transition-all ease-in-out duration-100
+  active:opacity-75
+}
+
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,11 @@
+.nerdEmoji{
+  top: 100%;
+  animation: nerd 5s 1 forwards;
+}
+
+@keyframes nerd {
+  0% { top: 100%; }
+  20% { top: 50%; }
+  80% { top: 50%; }
+  100% { top: 100%; }
+}

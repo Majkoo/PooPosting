@@ -1,0 +1,44 @@
+<header class="w-full fixed bg-surface-100 dark:bg-dark-surface-100 pp-shadow rounded-b-2xl top-0">
+
+  <div class="cont px-4 sm:px-0 h-14 flex items-center justify-between">
+
+    <a class="nav-link" routerLink="/" (click)="onLogoClick()">
+      <img class="invert" ngSrc="../../../../assets/logo/logo-row.png" alt="PooPosting" height="32" width="147"/>
+    </a>
+
+    <ng-container *ngIf="(account$ | async) as acc else loginLink">
+      <div class="flex">
+        <div
+          class="nav-link gap-1"
+          routerLink="/account/{{acc.id}}"
+          routerLinkActive="link-active">
+
+          <p class="p-2 pr-0 text-xs text-end hidden sm:block">
+            Welcome back, <br> <b>{{acc.nickname}}</b>
+          </p>
+          <img
+            class="rounded-full w-10 h-10 mx-2 aspect-square dark:bg-dark-grey"
+            src="{{acc.profilePicUrl | urlTransform}}"
+            alt="{{acc.nickname}}"/>
+        </div>
+        <div class="nav-link gap-1"
+          routerLink="/admin-page"
+          routerLinkActive="link-active">
+
+          <img
+          class="rounded-full w-10 h-10 aspect-square mx-2 mt-1 cursor-pointer dark:bg-dark-grey"
+          src="/assets/images/adminlogo.png"
+          [ngClass]="acc.roleId == '1' ? 'hidden' : ''"
+          alt="'admin panel'"/>
+        </div>
+      </div>
+      
+    </ng-container>
+
+  </div>
+
+</header>
+
+<ng-template #loginLink>
+  <a routerLink="/login" class="icon icon-user nav-link"></a>
+</ng-template>

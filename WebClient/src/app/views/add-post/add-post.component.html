@@ -1,0 +1,56 @@
+<div @fadeIn class="mt-4">
+  <div class="bg-surface-200 dark:bg-dark-surface-200 p-3 rounded-xl shadow">
+    <h2 class="text-3xl font-bolder text-center">ADD POST</h2>
+
+    <div
+      class="my-6 h-10 flex justify-around stepper-header relative"
+    >
+
+      <button
+        class="step-heading"
+        routerLink="/add-post/upload"
+        routerLinkActive="active"
+        [disabled]="false"
+        [ngClass]="currentStepIndex >= 0 ? 'bg-cta dark:dark-bg-cta' : 'bg-primary-800 dark:bg-dark-primary-800'"
+      >
+        Upload
+      </button>
+      <button
+        class="step-heading"
+        routerLink="/add-post/details"
+        routerLinkActive="active"
+        [disabled]="!(maxStepIndex >= 1)"
+        [ngClass]="currentStepIndex >= 1 ? 'bg-cta dark:dark-bg-cta' : 'bg-primary-800 dark:bg-dark-primary-800'"
+      >
+        Details
+      </button>
+      <button
+        class="step-heading"
+        routerLink="/add-post/review"
+        [disabled]="!(maxStepIndex >= 2)"
+        [ngClass]="currentStepIndex >= 2 ? 'bg-cta dark:dark-bg-cta' : 'bg-primary-800 dark:bg-dark-primary-800'"
+      >
+        Review
+      </button>
+
+      <div
+        class="step-line"
+        [ngClass]="{
+       'from-25% to-40%': currentRoute == 'upload',
+       'from-60% to-75%': currentRoute == 'details',
+       'from-90% to-100%': currentRoute == 'review',
+      }"
+      ></div>
+
+    </div>
+  </div>
+
+  <form
+    class="bg-surface-200 dark:bg-dark-surface-200 p-3 rounded-xl shadow mt-4"
+  >
+    <router-outlet />
+  </form>
+</div>
+
+
+

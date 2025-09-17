@@ -1,0 +1,19 @@
+.cont {
+  @apply w-full md:absolute md:top-0 md:bottom-0 md:left-0 flex flex-col;
+}
+
+.section {
+  @apply w-full flex-grow m-0 flex flex-col min-h-0;
+}
+
+.scrollable-content {
+  @apply max-h-80 overflow-auto
+    md:max-h-none md:flex-grow md:min-h-0;
+}
+
+.wrapper {
+  @apply
+  flex flex-col-reverse my-[3.5rem]
+  md:flex-row-reverse md:h-picture-modal-content-height md:mt-0 md:mb-0 md:pt-0 md:gap-3
+  overflow-y-clip;
+}

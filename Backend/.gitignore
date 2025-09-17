@@ -1,0 +1,10 @@
+appsettings.json
+appsettings.Development.json
+*.editorconfig
+bin/
+obj/
+wwwroot/
+.idea/
+*.user
+internal-nlog.txt
+*/internal-nlog.txt

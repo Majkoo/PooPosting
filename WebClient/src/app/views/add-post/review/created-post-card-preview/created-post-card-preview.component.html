@@ -1,0 +1,39 @@
+<div class="pp-shadow w-full bg-surface-100 dark:bg-dark-surface-100 rounded-xl flex flex-col gap-2" *ngIf="postData">
+
+  <!--  Image  -->
+  <div class="flex rounded-t-xl justify-center items-center cursor-pointer">
+    <img class="w-full rounded-t-xl select-none" @fadeIn src="{{postData.url}}" alt="{{postData.description}}">
+  </div>
+
+  <!--  Controls  -->
+  <div class="flex justify-between items-center px-3">
+
+    <a class="flex flex-row justify-between items-center gap-1" *ngIf="(acc$ | async) as acc">
+      <img class="w-8 h-8 rounded-3xl object-center object-contain" src="{{acc.profilePicUrl | urlTransform}}" alt="{{acc.nickname}}">
+      <p class="font-bold text-xl h-min lh flex justify-center items-center">{{acc.nickname}}</p>
+    </a>
+
+    <div class="flex items-start gap-1">
+      <button class="m-0 icon-dark cursor-pointer icon-heart--filled"></button>
+      <button class="icon-dark m-0 icon-share"></button>
+    </div>
+
+  </div>
+
+  <!--  Description  -->
+  <p class="text-md px-3" *ngIf="postData.description">
+    {{postData.description}}
+  </p>
+
+  <!--  Tags  -->
+  <p class="flex gap-2 px-3" *ngIf="postData.tags?.length">
+    <pp-tag *ngFor="let tag of postData.tags" [tag]="tag"/>
+  </p>
+
+  <!--  Comment form  -->
+  <div class="cursor-pointer bg-surface-100 dark:bg-dark-surface-100 border-1 rounded-md text-xs text-gray-400 border-grey flex items-center justify-between m-3 mt-1 px-3">
+    <p>Comment this...</p>
+    <span class="icon-vector text text-lg"></span>
+  </div>
+
+</div>

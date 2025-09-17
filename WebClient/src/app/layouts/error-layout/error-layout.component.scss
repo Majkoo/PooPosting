@@ -1,0 +1,10 @@
+.outer-error-container {
+  height: 100vh;
+  display: flex;
+
+  .inner-error-container {
+    max-width: 620px;
+    margin: auto;
+  }
+
+}

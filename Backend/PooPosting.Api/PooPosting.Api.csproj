@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\PooPosting.Application\PooPosting.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.2.5" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+        <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="bin\Debug\net7.0\logs\all\.gitkeep" />
+        <None Include="bin\Debug\net7.0\logs\exceptions\.gitkeep" />
+        <None Include="bin\Debug\net7.0\logs\internal-nlog.txt" />
+        <None Include="bin\Debug\net7.0\logs\request-time\.gitkeep" />
+        <None Include="bin\Debug\net7.0\logs\requests-warn\.gitkeep" />
+        <None Include="bin\Debug\net7.0\logs\requests\.gitkeep" />
+        <None Include="bin\Debug\net7.0\logs\warnings\.gitkeep" />
+        <None Remove="bin\**" />
+        <None Remove="wwwroot\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Content Update="nlog.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Remove="bin\**" />
+      <Content Remove="wwwroot\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Remove="bin\**" />
+      <Compile Remove="wwwroot\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Remove="bin\**" />
+      <EmbeddedResource Remove="wwwroot\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\background_pictures\default0-bgp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\background_pictures\default1-bgp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\background_pictures\default2-bgp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\background_pictures\default3-bgp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\background_pictures\default4-bgp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\background_pictures\default5-bgp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\default0-pfp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\default1-pfp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\default2-pfp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\default3-pfp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\default4-pfp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\default5-pfp.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\accounts\profile_pictures\lcyshpfw-ymg.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\0omgg4c4-25f.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\3br24kbs-4ub.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\4lprv5vj-nld.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\crwtkvgi-b0z.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\lmx5wba1-jnf.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\meo00xzx-dgz.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\vqwvgzlp-1ly.webp" />
+      <_ContentIncludedByDefault Remove="wwwroot\pictures\y44qdf24-xly.webp" />
+    </ItemGroup>
+
+</Project>

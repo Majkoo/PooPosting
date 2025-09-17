@@ -1,0 +1,11 @@
+.outer-auth-container {
+  height: 100vh;
+  display: flex;
+
+  .inner-auth-container {
+    max-width: 420px;
+    width: 100%;
+    margin: auto;
+  }
+
+}
