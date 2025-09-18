@@ -12,6 +12,7 @@ using PooPosting.Domain.DbContext.Entities;
 using PooPosting.Domain.DbContext.Pagination;
 using PooPosting.Domain.Enums;
 using PooPosting.Domain.Exceptions;
+using System.Linq.Expressions;
 
 namespace PooPosting.Application.Services;
 
@@ -39,14 +40,25 @@ public class AccountService(
             .FirstOrDefaultAsync() ?? throw new NotFoundException();
     }
 
-    public async Task<PagedResult<AccountDto>> GetAll(AccountQueryParams paginationParameters)
+    private static Expression<Func<Account, object>> GetOrderBy(string? orderBy) =>
+    orderBy?.ToLower() switch
+    {
+        "nickname" => a => a.Nickname,
+        "email" => a => a.Email,
+        "roleid" => a => a.RoleId,
+        "accountcreated" => a => a.AccountCreated,
+        _ => a => a.Id
+    };
+
+
+    public async Task<PagedResult<AccountDto>> GetAll(AccountQueryParams queryParams)
     {
         return await dbContext.Accounts.GetPageAsync<Account, AccountDto>(
-            paginationParameters,
-            filter: string.IsNullOrWhiteSpace(paginationParameters.SearchPhrase)
+            queryParams,
+            filter: string.IsNullOrWhiteSpace(queryParams.SearchPhrase)
                 ? null
-                : q => q.Where(a => a.Nickname.Contains(paginationParameters.SearchPhrase)),
-            orderBy: q => q.OrderBy(a => a.Id),
+                : q => q.Where(a => a.Nickname.Contains(queryParams.SearchPhrase)),
+            orderBy: q => queryParams.Direction == "asc" ? q.OrderBy(GetOrderBy(queryParams.OrderBy)) : q.OrderByDescending(GetOrderBy(queryParams.OrderBy)),
             projector: q => q.ProjectToDto(),
             asNoTracking: true,
             asSplitQuery: true

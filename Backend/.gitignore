@@ -8,3 +8,4 @@ wwwroot/
 *.user
 internal-nlog.txt
 */internal-nlog.txt
+.vs
