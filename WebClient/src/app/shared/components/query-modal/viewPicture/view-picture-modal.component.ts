@@ -16,6 +16,7 @@ import {QueryModalEnum} from "../query-modal.enum";
 import {CommentDto} from "../../../utility/dtos/CommentDto";
 import { ModBtnsComponent } from '../../mod-btn/mod-btn.component';
 import { ShareBtnComponent } from "../../share-btn/share-btn.component";
+import { ViewPictureModalSkeletonComponent } from "./skeleton/view-picture-modal-skeleton.component";
 
 @Component({
   selector: 'pp-view-picture-modal',
@@ -35,7 +36,8 @@ import { ShareBtnComponent } from "../../share-btn/share-btn.component";
     CommentFormComponent,
     CommentFormComponent,
     CommentsDisplayComponent,
-    ShareBtnComponent
+    ShareBtnComponent,
+    ViewPictureModalSkeletonComponent
 ],
   animations: [
     fadeInAnimation

@@ -7,11 +7,18 @@ import { Component } from '@angular/core';
 
       <div class="nav cont">
         <a
+          class="icon icon-home nav-link"
+          routerLinkActive="link-active"
+          routerLink=""
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+        </a>
+
+        <a
           class="icon icon-trending nav-link"
           routerLinkActive="link-active"
           routerLink="/trending"
         >
-          <span>Trending</span>
         </a>
 
         <a
@@ -19,15 +26,13 @@ import { Component } from '@angular/core';
           routerLinkActive="link-active"
           routerLink="/liked"
         >
-          <span>Liked</span>
         </a>
 
         <a
-          class="icon icon-add-post nav-link"
+          class="icon icon-plus-squared nav-link"
           routerLinkActive="link-active"
           routerLink="/add-post"
         >
-          <span>Add post</span>
         </a>
 
         <a
@@ -35,7 +40,6 @@ import { Component } from '@angular/core';
           routerLinkActive="link-active"
           routerLink="/search"
         >
-          <span>Search</span>
         </a>
 
         <a
@@ -43,7 +47,6 @@ import { Component } from '@angular/core';
           routerLinkActive="link-active"
           routerLink="/settings"
         >
-          <span>Settings</span>
         </a>
       </div>
 
@@ -58,7 +61,7 @@ import { Component } from '@angular/core';
     .nav {
       @apply
       h-full w-full sticky
-      flex flex-row items-center justify-between
+      flex flex-row items-center justify-around
       w-full h-14 fixed
     }
     .nav-link {

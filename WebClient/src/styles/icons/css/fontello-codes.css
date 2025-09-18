@@ -15,9 +15,11 @@
 .icon-user--circle:before { content: '\e80d'; } /* '' */
 .icon-add-post:before { content: '\e80e'; } /* '' */
 .icon-vector:before { content: '\e80f'; } /* '' */
+.icon-home:before { content: '\e810'; } /* '' */
 .icon-twitter:before { content: '\f099'; } /* '' */
 .icon-facebook:before { content: '\f09a'; } /* '' */
 .icon-mail-alt:before { content: '\f0e0'; } /* '' */
+.icon-plus-squared:before { content: '\f0fe'; } /* '' */
 .icon-angle-left:before { content: '\f104'; } /* '' */
 .icon-angle-right:before { content: '\f105'; } /* '' */
 .icon-angle-up:before { content: '\f106'; } /* '' */

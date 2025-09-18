@@ -2,12 +2,11 @@ import {Component, HostListener, inject} from '@angular/core';
 import { PictureDto } from '../../shared/utility/dtos/PictureDto';
 import {PostCardComponent} from "./post-card/post-card.component";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {
-  CreateAccountBannerComponent
-} from "./create-account-banner/create-account-banner.component";
+import {CreateAccountBannerComponent} from "./create-account-banner/create-account-banner.component";
 import {fadeInAnimation} from "../../shared/utility/animations/fadeInAnimation";
 import {AuthService} from "../../services/api/account/auth.service";
 import {HomePictureTrackingService} from "./home-picture-tracking.service";
+import { PostCardSkeletonComponent } from "./post-card/skeleton/post-card-skeleton.component";
 
 @Component({
   selector: 'pp-home',
@@ -18,8 +17,9 @@ import {HomePictureTrackingService} from "./home-picture-tracking.service";
     AsyncPipe,
     NgForOf,
     CreateAccountBannerComponent,
-    NgIf
-  ],
+    NgIf,
+    PostCardSkeletonComponent
+],
   animations: [fadeInAnimation]
 })
 export class HomeComponent {

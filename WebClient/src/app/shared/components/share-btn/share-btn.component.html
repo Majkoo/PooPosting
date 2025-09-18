@@ -1,7 +1,7 @@
-<p-dialog header="Share to... " [(visible)]="dialogVisible" [draggable]="false" [showHeader]="false" [blockScroll]="true">
-    <div class="w-96 overflow-hidden p-5 flex items-center flex-col bg-surface-400 dark:bg-dark-surface-400">
+<p-dialog header="Share to... " [(visible)]="dialogVisible" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-lg" [resizable]="false">
+    <div class="w-96 overflow-hidden p-5 flex items-center flex-col bg-surface-100 dark:bg-dark-surface-100">
         <div class="w-full flex">
-            <span class="w-full text-center text-2xl pb-3">Share</span>
+            <span class="w-full text-center text-2xl pb-3 font-bold text-dark dark:text-dark-dark">Share</span>
             <button class="m-0 icon-cancel text-2xl absolute right-3" (click)="closeDialog()"></button>
         </div>
         <div class="w-full pb-3 flex items-center flex-row select-none overflow-auto no-scrollbar" (scroll)="onScroll($event)" #scrollCont>
