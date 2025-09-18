@@ -9,6 +9,7 @@ import {OpenQueryModalDirective} from "../../../shared/components/query-modal/op
 
 @Component({
   selector: 'pp-post-preview',
+  templateUrl: './post-preview.component.html',
   standalone: true,
   imports: [
     RouterLink,
@@ -34,46 +35,7 @@ import {OpenQueryModalDirective} from "../../../shared/components/query-modal/op
       }
 
     }
-  `],
-  template: `
-    <div class="image-wrapper group">
-      <img
-        class="image-preview group-hover:scale-125"
-        src="{{pic.url | urlTransform}}"
-        alt="{{pic.description}}"
-        ppOpenQueryModal
-        [modalMode]="QueryModalEnum.VIEW_PICTURE"
-        [id]="pic.id"
-      />
-
-      <div class="data-block opacity-0 group-hover:opacity-100">
-
-        <div class="data-piece rounded-tr-xl">
-          {{pic.commentCount}}
-          <span
-            [ngClass]=" {
-              'cursor-pointer': isLoggedOn,
-              'opacity-60': !isLoggedOn,
-              'icon-vector': true,
-            }"></span>
-        </div>
-
-        <div class="data-piece rounded-tl-xl">
-          {{pic.likeCount}}
-          <span
-            [ngClass]=" {
-              'cursor-pointer': isLoggedOn,
-              'opacity-60': !isLoggedOn,
-              'icon-heart--filled': pic.isLiked,
-              'icon-heart--empty': !pic.isLiked
-            }"></span>
-        </div>
-
-      </div>
-
-    </div>
-  `,
-
+  `]
 })
 export class PostPreviewComponent {
   @Input({required: true}) pic!: PictureDto;

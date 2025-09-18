@@ -11,12 +11,21 @@ public class RegisterDtoValidator : AbstractValidator<RegisterDto>
         RuleFor(x => x.Email)
             .NotEmpty()
             .MaximumLength(100)
-            .EmailAddress();
+            .EmailAddress()
+            .Custom(
+                (value, context) =>
+                {
+                    var emailInUse = dbContext.Accounts.Any(a => a.Email == value);
+                    if (emailInUse)
+                    {
+                        context.AddFailure("ConflictError", "That Email is taken");
+                    }
+                });
 
         RuleFor(x => x.Password)
             .NotEmpty()
             .MinimumLength(8);
-        
+
         RuleFor(x => x.ConfirmPassword)
             .Equal(e => e.Password);
 
@@ -30,7 +39,7 @@ public class RegisterDtoValidator : AbstractValidator<RegisterDto>
                     var nicknameInUse = dbContext.Accounts.Any(a => a.Nickname == value);
                     if (nicknameInUse)
                     {
-                        context.AddFailure("Nickname", "That nickname is taken");
+                        context.AddFailure("ConflictError", "That nickname is taken");
                     }
                 });
     }

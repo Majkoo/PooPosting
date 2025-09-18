@@ -56,7 +56,7 @@ export class RegisterComponent implements OnDestroy {
           this.router.navigateByUrl('/login');
         },
         error: (err: HttpErrorResponse) => {
-          this.msgService.error(err.error.errors['Nickname'][0] ?? "Something went wrong", "Error");
+          this.msgService.error(err.error.errors['ConflictError'][0] ?? "Something went wrong", "Error");
           this.awaitSubmit = false;
         }
       })

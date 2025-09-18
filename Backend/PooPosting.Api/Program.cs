@@ -78,7 +78,7 @@ if (builder.Environment.IsProduction())
 builder.Services.AddSingleton(supabaseConfig);
 builder.Services.AddHttpClient("SupabaseClient", client =>
 {
-    client.BaseAddress = new Uri(supabaseConfig.Endpoint + "/storage/v1/s3");
+    client.BaseAddress = new Uri(supabaseConfig.Endpoint + "/storage/v1/");
     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {supabaseConfig.Jwt}");
 });
 

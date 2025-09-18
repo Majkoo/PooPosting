@@ -13,11 +13,12 @@ import { AccountService } from 'src/app/services/api/account/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { defaultErrorHeading } from 'src/app/shared/utility/constants';
 import { PostPreviewComponent } from "./post-preview/post-preview.component";
+import { AccountSkeletonComponent } from "./skeleton/account-skeleton.component";
 
 @Component({
   selector: 'pp-account',
   standalone: true,
-  imports: [CommonModule, UrlTransformModule, PostPreviewComponent],
+  imports: [CommonModule, UrlTransformModule, PostPreviewComponent, AccountSkeletonComponent],
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
   animations: [fadeInAnimation]
