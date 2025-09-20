@@ -108,13 +108,13 @@ header, footer, nav {
   scrollbar-width: none;
 }
 
-.header{
+.header, h1, h2, h3, h4, h5, h6{
   @apply font-semibold text-grayscale-black dark:text-dark-grayscale-black;
   font-size: 32px;
   line-height: 36px;
 }
 
-.title-large{
+.title-large, p{
   @apply font-semibold text-grayscale-black dark:text-dark-grayscale-black;
   font-size: 20px;
   line-height: 24px;
@@ -133,7 +133,7 @@ header, footer, nav {
 .text-small-bold{
   @apply text-xs font-semibold text-grayscale-black dark:text-dark-grayscale-black;
 }
-.text-regular{
+.text-regular, span, label{
   @apply text-grayscale-black dark:text-dark-grayscale-black;
   font-size: 14px;
   line-height: 18px;
