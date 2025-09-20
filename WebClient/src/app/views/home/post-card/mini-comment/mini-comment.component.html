@@ -9,13 +9,13 @@
 
   <div class="flex flex-col">
     <div class="flex justify-between items-start gap-MD">
-      <a class="text-sm font-bold"
+      <a class="text-bold"
          routerLink="/account/{{comm.account.id}}">
         {{comm.account.nickname}}
       </a>
-      <span class="text-xs text-grey dark:text-dark-grey">{{comm.commentAdded | dateAgo}}</span>
+      <span class="text-small-regular">{{comm.commentAdded | dateAgo}}</span>
     </div>
-    <span class="text-sm">{{ comm.text.length > 125 ? comm.text.substring(0, 125) + '...' : comm.text }}</span>
+    <span class="text-regular">{{ comm.text.length > 125 ? comm.text.substring(0, 125) + '...' : comm.text }}</span>
   </div>
 
 </div>

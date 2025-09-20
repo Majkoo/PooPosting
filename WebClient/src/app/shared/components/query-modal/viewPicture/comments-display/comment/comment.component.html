@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-SM rounded-LG bg-grayscale-light-gray dark:bg-dark-grayscale-light-gray text-dark dark:text-dark-dark p-SM md:p-MD" @fadeInOut>
   <div class="flex flex-row justify-between items-start">
     <pp-account-inline-link [acc]="comm.account" />
-    <span class="text-xs">{{comm.commentAdded | dateAgo}}</span>
+    <span class="text-small-regular">{{comm.commentAdded | dateAgo}}</span>
   </div>
   <div class="flex flex-wrap">
     <p>{{comm.text}}</p>

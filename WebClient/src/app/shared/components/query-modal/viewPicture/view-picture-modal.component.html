@@ -17,7 +17,7 @@
 
           <!--  Controls  -->
           <div class="flex flex-col px-MD md:px-MD py-SM pt-MD border-b-1 order-1 md:order-2 md:pt-0">
-            <div class="flex gap-MD text-2xl icon-dark">
+            <div class="flex gap-MD title-large icon-dark">
               <pp-like-btn [(pic)]="pic" />
               <pp-share-btn [(pic)]="pic"/>
               <pp-mod-btns [pic]="pic"></pp-mod-btns>
@@ -78,7 +78,7 @@
 
         <div class="gap-SM justify-center items-center w-max flex flex-row" >
           <img class="w-8 max-h-8 object-fill rounded-XL" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
-          <div class="text-lg font-bolder">{{pic.account.nickname}}</div>
+          <div class="title-large font-bolder">{{pic.account.nickname}}</div>
         </div>
 
         <div class="flex grow justify-end items-center">
@@ -104,7 +104,7 @@
   <ng-template #commentsOption>
     <!--  Comments heading  -->
     <h2
-      class="text-dark dark:text-dark-dark font-bold md:text-xl p-MD md:mt-0 order-3"
+      class="text-bold md:title-large p-MD md:mt-0 order-3"
       [ngClass]="{'border-t-1 md:border-t-0' : pic.description || pic.tags.length}"
     >
       Comments:

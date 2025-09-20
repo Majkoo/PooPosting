@@ -1,7 +1,7 @@
 <div class="m-4" @fadeIn>
 
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <h2 class="text-2xl font-bolder text-center mb-LG">
+    <h2 class="title-large font-bolder text-center mb-LG">
       Login
     </h2>
 
@@ -17,7 +17,7 @@
         required
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-SM mt-XS text-regular"
         [@errorAnimation]="name.touched && name.dirty ? 'visible' : 'hidden'"
       >
 
@@ -42,7 +42,7 @@
         required
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-SM mt-XS text-regular"
         [@errorAnimation]="password.touched && password.dirty ? 'visible' : 'hidden'"
       >
 
@@ -67,7 +67,7 @@
       </button>
 
       <div
-        class="mt-4 text-grey dark:text-dark dark:text-dark-dark-grey text-sm"
+        class="mt-4 text-grey text-regular"
       >
         Don't have an account?
         <a [routerLink]="['/register']" class="text-cta-light dark:text-dark-cta">Sign up</a>

@@ -1,7 +1,7 @@
 <div class="m-4" @fadeIn>
 
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <h2 class="text-2xl font-bolder text-center mb-LG">
+    <h2 class="title-large font-bolder text-center mb-LG">
       Sign Up
     </h2>
 
@@ -19,7 +19,7 @@
         maxlength="16"
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-SM mt-XS text-regular"
         [@errorAnimation]="name.touched && name.dirty ? 'visible' : 'hidden'"
       >
 
@@ -58,7 +58,7 @@
         maxlength="128"
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-SM mt-XS text-regular"
         [@errorAnimation]="email.touched && email.dirty ? 'visible' : 'hidden'"
       >
 
@@ -97,7 +97,7 @@
         maxlength="128"
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-SM mt-XS text-regular"
         [@errorAnimation]="password.touched && password.dirty ? 'visible' : 'hidden'"
       >
 
@@ -136,7 +136,7 @@
         maxlength="128"
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-SM mt-XS text-regular"
         [@errorAnimation]="confirmPassword.touched && confirmPassword.dirty ? 'visible' : 'hidden'"
       >
 
@@ -160,7 +160,7 @@
       </button>
 
       <div
-        class="mt-4 text-grey dark:text-dark dark:text-dark-dark-grey text-sm"
+        class="mt-4 text-grey dark:text-dark-grey text-regular"
       >
         Already have an account?
         <a [routerLink]="['/login']" class="text-cta-light dark:text-dark-cta">Log in</a>

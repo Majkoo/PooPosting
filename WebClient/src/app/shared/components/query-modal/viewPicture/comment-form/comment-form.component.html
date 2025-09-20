@@ -13,7 +13,7 @@
     <button
       [disabled]="!isLoggedOn || commentForm.invalid || (awaitSubmit | async)"
       [ngClass]="{'opacity-60': !isLoggedOn || commentForm.invalid || (awaitSubmit | async)}"
-      class="bg-cta-light dark:dark-bg-cta-light text-white text-sm py-XS px-MD btn"
+      class="bg-cta-light dark:dark-bg-cta-light text-regular py-XS px-MD btn"
       type="submit"
     >
       Comment

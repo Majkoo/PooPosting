@@ -60,16 +60,16 @@ header, footer, nav {
 }
 
 .app-link {
-  @apply flex justify-center items-center gap-XS select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full text-lg;
+  @apply flex justify-center items-center gap-XS select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full title-large;
   >.icon {
-    @apply text-xl;
+    @apply title-large;
   }
 }
 
 .link {
   @apply select-none hover:text-cta-light dark:text-dark-dark dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer;
   >.icon {
-    @apply text-xl;
+    @apply title-large;
   }
 }
 
@@ -82,7 +82,7 @@ header, footer, nav {
 
 .nav-link {
   span {
-    @apply text-lg hidden sm:block
+    @apply title-large hidden sm:block
   }
 }
 
