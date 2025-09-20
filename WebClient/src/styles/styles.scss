@@ -110,33 +110,33 @@ header, footer, nav {
 
 .header{
   @apply font-semibold text-grayscale-black dark:text-dark-grayscale-black;
-  font-size: 2rem;
-  line-height: 2.5rem;
+  font-size: 32px;
+  line-height: 36px;
 }
 
 .title-large{
   @apply font-semibold text-grayscale-black dark:text-dark-grayscale-black;
-  font-size: 1.25rem;
-  line-height: 1.5rem;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .title-small{
   @apply font-semibold text-grayscale-black dark:text-dark-grayscale-black;
-  font-size: 1.125rem;
-  line-height: 1.375rem;
+  font-size: 18px;
+  line-height: 22px;
 }
 .text-bold{
   @apply font-semibold text-grayscale-black dark:text-dark-grayscale-black;
-  font-size: 0.875rem;
-  line-height: 1.125rem;
+  font-size: 14px;
+  line-height: 18px;
 }
 .text-small-bold{
   @apply text-xs font-semibold text-grayscale-black dark:text-dark-grayscale-black;
 }
 .text-regular{
   @apply text-grayscale-black dark:text-dark-grayscale-black;
-  font-size: 0.875rem;
-  line-height: 1.125rem;
+  font-size: 14px;
+  line-height: 18px;
 }
 .text-small-regular{
   @apply text-xs text-grayscale-black dark:text-dark-grayscale-black;
