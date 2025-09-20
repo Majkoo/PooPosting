@@ -5,7 +5,7 @@
             <button class="m-0 icon-cancel text-2xl absolute right-3" (click)="closeDialog()"></button>
         </div>
         <div class="w-full pb-MD flex items-center flex-row select-none overflow-auto no-scrollbar" (scroll)="onScroll($event)" #scrollCont>
-            <div *ngFor="let share of shareOptions" class="flex flex-col cursor-pointer p-SM m-1 rounded-LG hover:bg-grayscale-light-black dark:hover:bg-dark-grayscale-light-black btn" (click)="closeDialog(share.link)">
+            <div *ngFor="let share of shareOptions" class="flex flex-col cursor-pointer p-SM m-XS rounded-LG hover:bg-grayscale-light-black dark:hover:bg-dark-grayscale-light-black btn" (click)="closeDialog(share.link)">
                 <div class="flex justify-center text-5xl pb-SM" [class]="[share.color, share.icon]"></div>
                 <span class="text-center">{{share.website}}</span>
             </div>

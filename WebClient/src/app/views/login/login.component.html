@@ -1,7 +1,7 @@
 <div class="m-4" @fadeIn>
 
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <h2 class="text-2xl font-bolder text-center mb-6">
+    <h2 class="text-2xl font-bolder text-center mb-LG">
       Login
     </h2>
 
@@ -17,7 +17,7 @@
         required
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-1 text-sm"
+        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
         [@errorAnimation]="name.touched && name.dirty ? 'visible' : 'hidden'"
       >
 
@@ -42,7 +42,7 @@
         required
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-1 text-sm"
+        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-SM mt-XS text-sm"
         [@errorAnimation]="password.touched && password.dirty ? 'visible' : 'hidden'"
       >
 

@@ -95,6 +95,13 @@ module.exports = {
         'LG': '20px', // 5
         'XL': '24px', // 6+
       },
+      margin: {
+        'XS': '4px', // 1
+        'SM': '8px', // 2
+        'MD': '16px', // 3, 4
+        'LG': '20px', // 5
+        'XL': '24px', // 6+
+      },
       borderRadius: {
         'XS': '4px',
         'SM': '8px',

@@ -39,7 +39,7 @@ import {NgForm} from "@angular/forms";
 
       <!--      <div class="flex flex-col gap-XS">-->
       <!--        Post Visibility:-->
-      <!--        <div class="ml-2">-->
+      <!--        <div class="ml-SM">-->
       <!--          <div class="flex flex-row gap-XS">-->
       <!--            <input-->
       <!--              type="radio"-->

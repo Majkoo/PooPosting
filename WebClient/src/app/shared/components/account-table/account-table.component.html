@@ -1,6 +1,6 @@
 <div class="relative overflow-x-auto shadow-md rounded-LG border px-8 pb-8 bg-grayscale-white dark:bg-dark-grayscale-white w-max md:w-auto">
     <div class="py-LG rounded-t-SM border-b flex justify-start">
-        <div class="relative mr-2">
+        <div class="relative mr-SM">
             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-dark dark:text-dark-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" 
@@ -10,7 +10,7 @@
                 </svg>
             </div>
             <input type="text" id="table-search" 
-            class="block py-SM ps-10 text-sm text-dark dark:text-dark-dark border border-grey rounded-LG w-80 bg-grayscale-dark-white dark:bg-dark-grayscale-dark-white focus:ring-cta-lightest0 focus:border-cta-lightest0" 
+            class="block py-SM ps-10 text-regular border border-grey rounded-LG w-80 bg-grayscale-dark-white dark:bg-dark-grayscale-dark-white focus:ring-cta-1000 focus:border-cta-1000" 
             placeholder="Search for users" (keyup)="changeSearchPhrase($event)">
         </div>
     </div>
@@ -87,7 +87,7 @@
         <span class="text-sm font-normal text-dark dark:text-dark-dark mb-4 inline w-auto p-MD">Showing <span class="font-semibold text-dark dark:text-dark-dark">
             {{((PageData.page-1) * PageData.pageSize) + 1 + "-" + (((PageData.page)*PageData.pageSize) < PageData.totalItems ? ((PageData.page)*PageData.pageSize) : PageData.totalItems)}}</span> of <span class="font-semibold text-dark dark:text-dark-dark">{{PageData.totalItems}}
             </span></span>
-        <ul class="inline-flex text-sm h-8 pr-MD my-2.5">
+        <ul class="inline-flex text-sm h-8 pr-MD my-MD">
             <li>
                 <div (click)="PageData.page != 1 ? changePage(1) : ''"
                 class="select-none flex items-center rounded-LG cursor-pointer justify-center px-MD h-8 leading-tight text-dark dark:text-dark-dark bg-grayscale-white dark:bg-dark-grayscale-white hover:text-dark dark:hover:text-dark-dark"

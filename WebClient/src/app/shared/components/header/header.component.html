@@ -17,7 +17,7 @@
             Welcome back, <br> <b>{{acc.nickname}}</b>
           </p>
           <img
-            class="rounded-full w-10 h-10 mx-2 aspect-square dark:bg-dark-grey"
+            class="rounded-full w-10 h-10 mx-SM aspect-square dark:bg-dark-grey"
             src="{{acc.profilePicUrl | urlTransform}}"
             alt="{{acc.nickname}}"/>
         </div>
@@ -26,7 +26,7 @@
           routerLinkActive="link-active">
 
           <img
-          class="rounded-full w-10 h-10 aspect-square mx-2 mt-1 cursor-pointer dark:bg-dark-grey"
+          class="rounded-full w-10 h-10 aspect-square mx-SM mt-XS cursor-pointer dark:bg-dark-grey"
           src="/assets/images/adminlogo.png"
           [ngClass]="acc.roleId == '1' ? 'hidden' : ''"
           alt="'admin panel'"/>
