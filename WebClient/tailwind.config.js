@@ -2,23 +2,25 @@
 
 theme = {
   // Light-mode colors
-  'surface': {
-    '100': '#FFFFFF',
-    '200': '#FBFBFB',
-    '300': '#f1f1f1',
-    '400': '#EDEDED',
-    '500': "#DBDBDB",
-    '600': "#CCCCCC",
+  'grayscale': {
+    'white': '#FAFAFA',
+    'dark-white': '#F5F5F5',
+    'light-gray': '#D4D4D4',
+    'dark-gray': '#737373',
+    'light-black': "#404040",
+    'black': "#171717",
   },
   'primary': {
-    '800': '#5A3F29',
-    '900': '#372719'
+    'tone': '#D99864',
+    'light': '#A6754C',
+    'base': '#5A3F29',
+    'dark': '#402D1D'
   },
   'cta': {
-    DEFAULT: '#2B94A6',
-    '100': '#EFF6FF',
-    '300': '#2196F3',
-    '400': '#1D4ED8'
+    'lightest': '#EFF6FF',
+    'light': '#28BED6',
+    'base': '#2B94A6',
+    'dark': '#247D8C'
   },
   'grey': '#A0A0A0',
   'warning': '#EE0000',
@@ -26,23 +28,25 @@ theme = {
 
 
   // Dark-mode colors
-  'dark-surface': {
-    '100': '#222222',
-    '200': '#444444',
-    '300': '#666666',
-    '400': '#888888',
-    '500': "#AAAAAA",
-    '600': "#CCCCCC",
+  'dark-grayscale': {
+    'white': '#171717',
+    'dark-white': '#404040',
+    'light-gray': '#737373',
+    'dark-gray': '#D4D4D4',
+    'light-black': "#F5F5F5",
+    'black': "#FAFAFA",
   },
   'dark-primary': {
-    '800': '#666666',
-    '900': '#666666'
+    'tone': '#402D1D',
+    'light': '#5A3F29',
+    'base': '#A6754C',
+    'dark': '#D99864'
   },
   'dark-cta': {
-    DEFAULT: '#2B94A6',
-    '100': '#80b7ff',
-    '300': '#1a7dff',
-    '400': '#0063e6'
+    'lightest': '#EFF6FF',
+    'light': '#2B94A6',
+    'base': '#2196F3',
+    'dark': '#1D4ED8'
   },
   'dark-grey': '#222222',
   'dark-warning': '#EE0000',
@@ -83,6 +87,27 @@ module.exports = {
       boxShadow: {
         'top': '0px -2px 4px rgba(0, 0, 0, 0.075)',
         'center': '0px 0px 15px rgba(0, 0, 0, 0.125)',
+      },
+      padding: {
+        'XS': '4px', // 1
+        'SM': '8px', // 2
+        'MD': '16px', // 3, 4
+        'LG': '20px', // 5
+        'XL': '24px', // 6+
+      },
+      borderRadius: {
+        'XS': '4px',
+        'SM': '8px',
+        'MD': '16px',
+        'LG': '20px',
+        'XL': '24px',
+      },
+      gap: {
+        'XS': '4px', // 1
+        'SM': '8px', // 2
+        'MD': '16px', // 3, 4
+        'LG': '20px', // 5
+        'XL': '24px', // 6+
       },
     }
   },

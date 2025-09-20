@@ -8,10 +8,10 @@ import {Router} from "@angular/router";
   styles: [
     `
       .step-heading {
-        @apply block rounded-3xl py-2 px-3 text-white z-20;
+        @apply block rounded-XL py-SM px-MD text-white z-20;
       }
       .step-line {
-        @apply absolute bottom-4 w-full h-2 z-10 bg-gradient-to-r from-cta to-primary-800 rounded;
+        @apply absolute bottom-4 w-full h-2 z-10 bg-gradient-to-r from-cta-light to-primary-base rounded;
       }
     `
   ],

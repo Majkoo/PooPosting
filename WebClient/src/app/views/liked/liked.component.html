@@ -10,7 +10,7 @@
   </h2>
   <p class="text-center my-4">
     <span
-      class="font-bolder tracking-wider bg-primary-900 dark:bg-dark-primary-900 text-white flex-wrap rounded-lg px-2.5 py-1.5 sm:px-3 sm:py-2 cursor-default w-max"
+      class="font-bolder tracking-wider bg-primary-dark dark:bg-dark-primary-dark text-white flex-wrap rounded-LG px-SM py-XS sm:px-MD sm:py-SM cursor-default w-max"
     >
       Posts liked by you: {{totalLikedPictures}}
     </span>
@@ -20,7 +20,7 @@
   </p>
 </div>
 <ng-container *ngIf="(pics$ | async) as pics">
-  <div class="grid grid-cols-2 gap-4" *ngIf="pics.length" @fadeIn>
+  <div class="grid grid-cols-2 gap-MD" *ngIf="pics.length" @fadeIn>
     <pp-post-preview *ngFor="let pic of pics" [pic]="pic" />
   </div>
 </ng-container>

@@ -4,6 +4,7 @@
 
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "node_modules/primeng/resources/primeng.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 .icon-fz {
   font-size: 24px;
@@ -24,14 +25,14 @@
   margin: 0 !important;
 }
 body {
-  @apply top-0 w-full bg-surface-200
+  @apply top-0 w-full bg-grayscale-dark-white
 }
 html {
   @apply scroll-smooth
 }
 
 * {
-  font-family: "poppins", sans-serif;
+  font-family: "Roboto", "poppins", sans-serif;
 }
 
 nav, header {
@@ -59,23 +60,23 @@ header, footer, nav {
 }
 
 .app-link {
-  @apply flex justify-center items-center gap-1 select-none dark:text-dark-dark hover:text-cta dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer h-full text-lg;
+  @apply flex justify-center items-center gap-XS select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full text-lg;
   >.icon {
     @apply text-xl;
   }
 }
 
 .link {
-  @apply select-none hover:text-cta dark:text-dark-dark dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer;
+  @apply select-none hover:text-cta-light dark:text-dark-dark dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer;
   >.icon {
     @apply text-xl;
   }
 }
 
 .nav-link {
-  @apply flex justify-center items-center gap-0.5 select-none dark:text-dark-dark hover:text-cta dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-2;
+  @apply flex justify-center items-center gap-XS select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-SM;
   &.link-active {
-    @apply text-cta dark:text-dark-cta hover:text-opacity-70;
+    @apply text-cta-light dark:text-dark-cta-light hover:text-opacity-70;
   }
 }
 
@@ -86,7 +87,7 @@ header, footer, nav {
 }
 
 .cropper-modal, .cropper-container, .cropper-container img {
-  @apply rounded-xl;
+  @apply rounded-XL;
 }
 
 .p-dialog {
@@ -98,12 +99,44 @@ header, footer, nav {
 }
 
 .btn {
-  @apply rounded-lg transition-all ease-in-out duration-100
+  @apply rounded-LG transition-all ease-in-out duration-100
   active:opacity-75
 }
-
 
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.header{
+  @apply font-semibold;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.title-large{
+  @apply font-semibold;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+.title-small{
+  @apply font-semibold;
+  font-size: 1.125rem;
+  line-height: 1.375rem;
+}
+.text-bold{
+  @apply font-semibold;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+.text-small-bold{
+  @apply text-xs font-semibold;
+}
+.text-regular{
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+.text-small-regular{
+  @apply text-xs;
 }

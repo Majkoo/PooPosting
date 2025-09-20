@@ -1,11 +1,11 @@
 <div 
-    [ngClass]="switchValue ? 'bg-cta-300 dark:bg-dark-cta-300 dark:bg-cta-300' : 'bg-surface-600 dark:bg-dark-surface-600'" 
-    class="w-16 h-9 border border-dark rounded-2xl relative transition-all duration-500 cursor-pointer"
+    [ngClass]="switchValue ? 'bg-cta-dark dark:bg-dark-cta-dark dark:bg-cta-dark' : 'bg-grayscale-black dark:bg-dark-grayscale-black'" 
+    class="w-16 h-9 border border-dark rounded-XL relative transition-all duration-500 cursor-pointer"
     (click)="switchValue = !switchValue; valueChanged.emit(switchValue)">
     
     <div 
         [ngStyle]="{'left': switchValue ? '30px' : '3px'}" 
-        class="w-7 h-7 bg-surface-200 dark:bg-dark-surface-200 absolute rounded-2xl transition-all duration-500"
+        class="w-7 h-7 bg-grayscale-dark-white dark:bg-dark-grayscale-dark-white absolute rounded-XL transition-all duration-500"
         style="top: 3px;">
     </div>
 </div>

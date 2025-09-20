@@ -21,16 +21,16 @@ import {OpenQueryModalDirective} from "../../../shared/components/query-modal/op
   ],
   styles: [`
     .image-wrapper {
-      @apply relative bg-contain overflow-hidden cursor-pointer drop-shadow-xl rounded-lg aspect-square;
+      @apply relative bg-contain overflow-hidden cursor-pointer drop-shadow-xl rounded-LG aspect-square;
 
       .image-preview {
         @apply object-cover transition duration-700 transform w-full aspect-square;
       }
 
       .data-block {
-        @apply bottom-0 text-white w-full absolute transition-all duration-700 transform flex justify-between items-center gap-4;
+        @apply bottom-0 text-white w-full absolute transition-all duration-700 transform flex justify-between items-center gap-MD;
         .data-piece {
-          @apply flex items-center justify-center gap-0.5 bg-black bg-opacity-40 py-2 px-4;
+          @apply flex items-center justify-center gap-XS bg-black bg-opacity-40 py-SM px-MD;
         }
       }
 
