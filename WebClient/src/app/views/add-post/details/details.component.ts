@@ -75,13 +75,13 @@ import {NgForm} from "@angular/forms";
 
       <div class="mt-4 flex items-center justify-between">
         <button
-          class="flex gap-XS text-white px-MD py-SM rounded-LG whitespace-nowrap bg-primary-base dark:bg-dark dark:bg-dark-dark-primary-base disabled:opacity-60"
+          class="flex gap-XS text-regular white-text px-MD py-SM rounded-LG whitespace-nowrap bg-primary-base dark:bg-dark dark:bg-dark-dark-primary-base disabled:opacity-60"
           (click)="goBack()"
         >
           Previous step
         </button>
         <button
-          class="flex gap-XS text-white px-MD py-SM rounded-LG whitespace-nowrap bg-cta-light dark:dark-bg-cta-light disabled:opacity-60"
+          class="flex gap-XS text-regular white-text px-MD py-SM rounded-LG whitespace-nowrap bg-cta-light dark:dark-bg-cta-light disabled:opacity-60"
           [disabled]="!canProceed"
           (click)="goNext()"
         >

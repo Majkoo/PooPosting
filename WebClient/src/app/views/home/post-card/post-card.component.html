@@ -14,7 +14,7 @@
 
       <a class="flex flex-row justify-between items-center gap-XS" routerLink="/account/{{pic.account.id}}">
         <img class="w-8 h-8 rounded-XL object-center object-contain bg-grey dark:bg-dark-grey" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
-        <p class="text-bold h-min lh flex justify-center items-center sm:title-large">{{pic.account.nickname}}</p>
+        <p class="title-small h-min lh flex justify-center items-center sm:title-large">{{pic.account.nickname}}</p>
       </a>
 
       <div class="flex items-start gap-XS">
@@ -49,8 +49,8 @@
     ppOpenQueryModal
     [modalMode]="QueryModalEnum.VIEW_PICTURE"
     [id]="pic.id"
-    class="cursor-pointer bg-grayscale-white dark:bg-dark-grayscale-white border-1 rounded-MD text-small-regular text-gray-400 border-grey flex items-center justify-between m-3 mt-XS px-MD">
-    <p>Comment this...</p>
+    class="cursor-pointer bg-grayscale-white dark:bg-dark-grayscale-white border-1 rounded-MD border-grey flex items-center justify-between m-3 mt-XS px-MD">
+    <p class="text-small-regular">Comment this...</p>
     <span class="icon-vector text text-lg"></span>
   </div>
 

@@ -141,3 +141,6 @@ header, footer, nav {
 .text-small-regular{
   @apply text-xs text-grayscale-black dark:text-dark-grayscale-black;
 }
+.white-text{
+  @apply dark:text-grayscale-black text-dark-grayscale-black #{!important};
+}
