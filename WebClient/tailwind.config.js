@@ -3,24 +3,24 @@
 theme = {
   // Light-mode colors
   'grayscale': {
-    'white': '#FAFAFA',
-    'dark-white': '#F5F5F5',
-    'light-gray': '#D4D4D4',
-    'dark-gray': '#737373',
-    'light-black': "#404040",
-    'black': "#171717",
+    '50': '#FAFAFA',
+    '100': '#F5F5F5',
+    '200': '#D4D4D4',
+    '500': '#737373',
+    '700': '#404040',
+    '900': '#171717',
   },
   'primary': {
-    'tone': '#D99864',
-    'light': '#A6754C',
-    'base': '#5A3F29',
-    'dark': '#402D1D'
+    '500': '#D99864',
+    '600': '#A6754C',
+    '800': '#5A3F29',
+    '900': '#402D1D'
   },
   'cta': {
-    'lightest': '#EFF6FF',
-    'light': '#28BED6',
-    'base': '#2B94A6',
-    'dark': '#247D8C'
+    '50': '#EFF6FF',
+    '500': '#28BED6',
+    '600': '#2B94A6',
+    '700': '#247D8C'
   },
   'grey': '#A0A0A0',
   'warning': '#EE0000',
@@ -29,24 +29,24 @@ theme = {
 
   // Dark-mode colors
   'dark-grayscale': {
-    'white': '#171717',
-    'dark-white': '#404040',
-    'light-gray': '#737373',
-    'dark-gray': '#D4D4D4',
-    'light-black': "#F5F5F5",
-    'black': "#FAFAFA",
+    '50': '#171717',
+    '100': '#404040',
+    '200': '#737373',
+    '500': '#D4D4D4',
+    '700': '#F5F5F5',
+    '900': '#FAFAFA',
   },
   'dark-primary': {
-    'tone': '#402D1D',
-    'light': '#5A3F29',
-    'base': '#A6754C',
-    'dark': '#D99864'
+    '500': '#402D1D',
+    '600': '#5A3F29',
+    '800': '#A6754C',
+    '900': '#D99864'
   },
   'dark-cta': {
-    'lightest': '#EFF6FF',
-    'light': '#2B94A6',
-    'base': '#2196F3',
-    'dark': '#1D4ED8'
+    '50': '#EFF6FF',
+    '500': '#2B94A6',
+    '600': '#2196F3',
+    '700': '#1D4ED8'
   },
   'dark-grey': '#222222',
   'dark-warning': '#EE0000',

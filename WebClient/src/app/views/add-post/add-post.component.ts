@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
         @apply block rounded-xl py-sm px-md text-white z-20;
       }
       .step-line {
-        @apply absolute bottom-4 w-full h-2 z-10 bg-gradient-to-r from-cta-light to-primary-base rounded;
+        @apply absolute bottom-4 w-full h-2 z-10 bg-gradient-to-r from-cta-500 to-primary-800 rounded;
       }
     `
   ],

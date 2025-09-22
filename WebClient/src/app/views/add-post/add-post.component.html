@@ -1,5 +1,5 @@
 <div @fadeIn class="mt-4">
-  <div class="bg-grayscale-dark-white dark:bg-dark-grayscale-dark-white p-md rounded-xl shadow">
+  <div class="bg-grayscale-100 dark:bg-dark-grayscale-100 p-md rounded-xl shadow">
     <h2 class="header text-center">ADD POST</h2>
 
     <div
@@ -11,7 +11,7 @@
         routerLink="/add-post/upload"
         routerLinkActive="active"
         [disabled]="false"
-        [ngClass]="currentStepIndex >= 0 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
+        [ngClass]="currentStepIndex >= 0 ? 'bg-cta-500 dark:dark-bg-cta' : 'bg-primary-800 dark:bg-dark-primary-800'"
       >
         Upload
       </button>
@@ -20,7 +20,7 @@
         routerLink="/add-post/details"
         routerLinkActive="active"
         [disabled]="!(maxStepIndex >= 1)"
-        [ngClass]="currentStepIndex >= 1 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
+        [ngClass]="currentStepIndex >= 1 ? 'bg-cta-500 dark:dark-bg-cta' : 'bg-primary-800 dark:bg-dark-primary-800'"
       >
         Details
       </button>
@@ -28,7 +28,7 @@
         class="step-heading white-text title-small"
         routerLink="/add-post/review"
         [disabled]="!(maxStepIndex >= 2)"
-        [ngClass]="currentStepIndex >= 2 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
+        [ngClass]="currentStepIndex >= 2 ? 'bg-cta-500 dark:dark-bg-cta' : 'bg-primary-800 dark:bg-dark-primary-800'"
       >
         Review
       </button>
@@ -46,7 +46,7 @@
   </div>
 
   <form
-    class="bg-grayscale-dark-white dark:bg-dark-grayscale-dark-white p-md rounded-xl shadow mt-4"
+    class="bg-grayscale-100 dark:bg-dark-grayscale-100 p-md rounded-xl shadow mt-4"
   >
     <router-outlet />
   </form>
