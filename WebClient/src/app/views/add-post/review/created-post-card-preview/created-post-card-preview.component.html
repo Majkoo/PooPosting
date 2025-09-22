@@ -1,19 +1,19 @@
-<div class="pp-shadow w-full bg-grayscale-white dark:bg-dark-grayscale-white rounded-XL flex flex-col gap-SM" *ngIf="postData">
+<div class="pp-shadow w-full bg-grayscale-white dark:bg-dark-grayscale-white rounded-xl flex flex-col gap-sm" *ngIf="postData">
 
   <!--  Image  -->
-  <div class="flex rounded-t-XL justify-center items-center cursor-pointer">
-    <img class="w-full rounded-t-XL select-none" @fadeIn src="{{postData.url}}" alt="{{postData.description}}">
+  <div class="flex rounded-t-xl justify-center items-center cursor-pointer">
+    <img class="w-full rounded-t-xl select-none" @fadeIn src="{{postData.url}}" alt="{{postData.description}}">
   </div>
 
   <!--  Controls  -->
-  <div class="flex justify-between items-center px-MD">
+  <div class="flex justify-between items-center px-md">
 
-    <a class="flex flex-row justify-between items-center gap-XS" *ngIf="(acc$ | async) as acc">
-      <img class="w-8 h-8 rounded-XL object-center object-contain" src="{{acc.profilePicUrl | urlTransform}}" alt="{{acc.nickname}}">
+    <a class="flex flex-row justify-between items-center gap-xs" *ngIf="(acc$ | async) as acc">
+      <img class="w-8 h-8 rounded-xl object-center object-contain" src="{{acc.profilePicUrl | urlTransform}}" alt="{{acc.nickname}}">
       <p class="font-bold title-large h-min lh flex justify-center items-center">{{acc.nickname}}</p>
     </a>
 
-    <div class="flex items-start gap-XS">
+    <div class="flex items-start gap-xs">
       <button class="m-0 icon-dark cursor-pointer icon-heart--filled"></button>
       <button class="icon-dark m-0 icon-share"></button>
     </div>
@@ -21,17 +21,17 @@
   </div>
 
   <!--  Description  -->
-  <p class="title-small px-MD" *ngIf="postData.description">
+  <p class="title-small px-md" *ngIf="postData.description">
     {{postData.description}}
   </p>
 
   <!--  Tags  -->
-  <p class="flex gap-SM px-MD" *ngIf="postData.tags?.length">
+  <p class="flex gap-sm px-md" *ngIf="postData.tags?.length">
     <pp-tag *ngFor="let tag of postData.tags" [tag]="tag"/>
   </p>
 
   <!--  Comment form  -->
-  <div class="cursor-pointer bg-grayscale-white dark:bg-dark-grayscale-white border-1 rounded-MD text-small-regular text-gray-400 border-grey flex items-center justify-between m-3 mt-XS px-MD">
+  <div class="cursor-pointer bg-grayscale-white dark:bg-dark-grayscale-white border-1 rounded-md text-small-regular text-gray-400 border-grey flex items-center justify-between m-3 mt-xs px-md">
     <p>Comment this...</p>
     <span class="icon-vector text title-large"></span>
   </div>

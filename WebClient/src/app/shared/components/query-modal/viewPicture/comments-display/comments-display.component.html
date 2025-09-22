@@ -1,10 +1,10 @@
-<div #scrollableElement class="scrollable-content content mx-3 md:mr-XS">
-  <div class="flex flex-col gap-MD" *ngIf="pic?.comments?.length else noComments">
+<div #scrollableElement class="scrollable-content content mx-3 md:mr-xs">
+  <div class="flex flex-col gap-md" *ngIf="pic?.comments?.length else noComments">
     <pp-comment *ngFor="let comm of pic.comments" [comm]="comm"/>
   </div>
 </div>
 <ng-template #noComments>
-  <div class="text-start text-dark dark:text-dark-dark rounded-LG bg-grayscale-light-gray dark:bg-dark-grayscale-light-gray p-SM md:p-MD">
+  <div class="text-start text-dark dark:text-dark-dark rounded-lg bg-grayscale-light-gray dark:bg-dark-grayscale-light-gray p-sm md:p-md">
     No comments yet <br>
     <span class="text-small-regular">Be the <b>first</b> one to commment this picture!</span>
   </div>

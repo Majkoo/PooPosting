@@ -1,5 +1,5 @@
 <div
-  class="w-full justify-center items-center flex border-4 rounded-XL border-dashed border-cta-light bg-grayscale-dark-gray dark:bg-dark-grayscale-dark-gray"
+  class="w-full justify-center items-center flex border-4 rounded-xl border-dashed border-cta-light bg-grayscale-dark-gray dark:bg-dark-grayscale-dark-gray"
   [ngClass]="{
     'h-40': !rawFileUrl,
     'h-max': rawFileUrl,
@@ -10,9 +10,9 @@
   <div class="flex w-full" *ngIf="!rawFileUrl">
     <label
       for="fileInput"
-      class="w-full flex justify-center items-center rounded-XL hover:blur-sm cursor-pointer transition duration-250 ease-in-out"
+      class="w-full flex justify-center items-center rounded-xl hover:blur-sm cursor-pointer transition duration-250 ease-in-out"
     >
-      <p class="p-SM rounded-XL white-text text-bold">Upload a file...</p>
+      <p class="p-sm rounded-xl white-text text-bold">Upload a file...</p>
     </label>
     <input
       type="file"
@@ -24,8 +24,8 @@
   </div>
 
   <!--  Cropper -->
-  <div *ngIf="rawFileUrl" class="rounded-XL relative flex flex-col">
-    <div class="p-SM" (touchend)="cropperCrop()" (mouseover)="cropperCrop()">
+  <div *ngIf="rawFileUrl" class="rounded-xl relative flex flex-col">
+    <div class="p-sm" (touchend)="cropperCrop()" (mouseover)="cropperCrop()">
       <angular-cropper
         #cropperComponent
         [imageUrl]="rawFileUrl"
@@ -40,12 +40,12 @@
 <ng-container *ngIf="rawFileUrl">
   <!--    aspect ratio buttons  -->
   <div class="flex flex-col my-3">
-    <div class="p-SM pb-0">
+    <div class="p-sm pb-0">
       <p class="title-large text-center">Choose aspect ratio</p>
     </div>
-    <div class="flex gap-MD p-SM pb-0 items-center justify-center flex-wrap">
+    <div class="flex gap-md p-sm pb-0 items-center justify-center flex-wrap">
       <button
-        class="px-SM py-XS rounded-LG text-regular white-text md:px-MD md:py-SM"
+        class="px-sm py-xs rounded-lg text-regular white-text md:px-md md:py-sm"
         [ngClass]="aspectRatio == 3 / 4 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
         (click)="changeAspectRatio(3 / 4)"
         [disabled]="!this.rawFileUrl"
@@ -53,7 +53,7 @@
         3/4
       </button>
       <button
-        class="px-SM py-XS rounded-LG text-regular white-text md:px-MD md:py-SM"
+        class="px-sm py-xs rounded-lg text-regular white-text md:px-md md:py-sm"
         [ngClass]="aspectRatio == 4 / 4 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
         (click)="changeAspectRatio(4 / 4)"
         [disabled]="!this.rawFileUrl"
@@ -61,7 +61,7 @@
         4/4
       </button>
       <button
-        class="px-SM py-XS rounded-LG text-regular white-text md:px-MD md:py-SM"
+        class="px-sm py-xs rounded-lg text-regular white-text md:px-md md:py-sm"
         [ngClass]="aspectRatio == 4/3 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
         (click)="changeAspectRatio(4 / 3)"
         [disabled]="!this.rawFileUrl"
@@ -69,7 +69,7 @@
         4/3
       </button>
       <button
-        class="px-SM py-XS rounded-LG text-regular white-text md:px-MD md:py-SM"
+        class="px-sm py-xs rounded-lg text-regular white-text md:px-md md:py-sm"
         [ngClass]="aspectRatio == 4 / 2 ? 'bg-cta-light dark:dark-bg-cta' : 'bg-primary-base dark:bg-dark-primary-base'"
         (click)="changeAspectRatio(4 / 2)"
         [disabled]="!this.rawFileUrl"
@@ -79,24 +79,24 @@
     </div>
   </div>
 
-  <div class="flex flex-col text-center w-full my-4 border-t-2 justify-center items-center gap-MD flex-wrap"></div>
+  <div class="flex flex-col text-center w-full my-4 border-t-2 justify-center items-center gap-md flex-wrap"></div>
 
 </ng-container>
 
 <div class="mt-3 flex items-between justify-between">
   <button
     @fadeIn
-    class="flex gap-XS text-regular white-text px-MD py-SM rounded-LG whitespace-nowrap bg-primary-base dark:bg-dark dark:bg-dark-dark-primary-base disabled:opacity-60"
+    class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-primary-base dark:bg-dark dark:bg-dark-dark-primary-base disabled:opacity-60"
     [disabled]="!rawFileUrl"
     (click)="reset()"
   >
     Reset
   </button>
 
-  <div class="flex items-end gap-MD">
+  <div class="flex items-end gap-md">
     <button
       @fadeIn
-      class="flex gap-XS text-regular white-text px-MD py-SM rounded-LG whitespace-nowrap bg-cta-light dark:dark-bg-cta-light disabled:opacity-60"
+      class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-cta-light dark:dark-bg-cta-light disabled:opacity-60"
       [disabled]="!canProceed"
       (click)="goNext()"
     >

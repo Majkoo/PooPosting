@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   styles: [
     `
       .step-heading {
-        @apply block rounded-XL py-SM px-MD text-white z-20;
+        @apply block rounded-xl py-sm px-md text-white z-20;
       }
       .step-line {
         @apply absolute bottom-4 w-full h-2 z-10 bg-gradient-to-r from-cta-light to-primary-base rounded;

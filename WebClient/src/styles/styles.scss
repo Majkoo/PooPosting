@@ -60,7 +60,7 @@ header, footer, nav {
 }
 
 .app-link {
-  @apply flex justify-center items-center gap-XS select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full title-large;
+  @apply flex justify-center items-center gap-xs select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full title-large;
   >.icon {
     @apply title-large;
   }
@@ -74,7 +74,7 @@ header, footer, nav {
 }
 
 .nav-link {
-  @apply flex justify-center items-center gap-XS select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-SM;
+  @apply flex justify-center items-center gap-xs select-none dark:text-dark-dark hover:text-cta-light dark:hover:text-dark-cta-light hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-sm;
   &.link-active {
     @apply text-cta-light dark:text-dark-cta-light hover:text-opacity-70;
   }
@@ -87,7 +87,7 @@ header, footer, nav {
 }
 
 .cropper-modal, .cropper-container, .cropper-container img {
-  @apply rounded-XL;
+  @apply rounded-xl;
 }
 
 .p-dialog {
@@ -99,7 +99,7 @@ header, footer, nav {
 }
 
 .btn {
-  @apply rounded-LG transition-all ease-in-out duration-100
+  @apply rounded-lg transition-all ease-in-out duration-100
   active:opacity-75
 }
 

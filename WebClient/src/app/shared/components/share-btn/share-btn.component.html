@@ -1,23 +1,23 @@
-<p-dialog header="Share to... " [(visible)]="dialogVisible" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-LG" [resizable]="false">
-    <div class="w-96 overflow-hidden p-LG flex items-center flex-col bg-grayscale-white dark:bg-dark-grayscale-white">
+<p-dialog header="Share to... " [(visible)]="dialogVisible" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-lg" [resizable]="false">
+    <div class="w-96 overflow-hidden p-lg flex items-center flex-col bg-grayscale-white dark:bg-dark-grayscale-white">
         <div class="w-full flex">
-            <span class="w-full text-center pb-MD font-bold text-large">Share</span>
+            <span class="w-full text-center pb-md font-bold text-large">Share</span>
             <button class="m-0 icon-cancel absolute right-3 text-large" (click)="closeDialog()"></button>
         </div>
-        <div class="w-full pb-MD flex items-center flex-row select-none overflow-auto no-scrollbar" (scroll)="onScroll($event)" #scrollCont>
-            <div *ngFor="let share of shareOptions" class="flex flex-col cursor-pointer p-SM m-XS rounded-LG hover:bg-grayscale-light-black dark:hover:bg-dark-grayscale-light-black btn" (click)="closeDialog(share.link)">
-                <div class="flex justify-center header pb-SM" [class]="[share.color, share.icon]"></div>
+        <div class="w-full pb-md flex items-center flex-row select-none overflow-auto no-scrollbar" (scroll)="onScroll($event)" #scrollCont>
+            <div *ngFor="let share of shareOptions" class="flex flex-col cursor-pointer p-sm m-xs rounded-lg hover:bg-grayscale-light-black dark:hover:bg-dark-grayscale-light-black btn" (click)="closeDialog(share.link)">
+                <div class="flex justify-center header pb-sm" [class]="[share.color, share.icon]"></div>
                 <span class="text-center">{{share.website}}</span>
             </div>
             <div 
-                class="w-8 h-8 absolute right-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-MD flex justify-center items-center cursor-pointer" 
+                class="w-8 h-8 absolute right-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer" 
                 (click)="scrollCont.scrollBy({ left: 273, behavior: 'smooth' })"
                 [ngClass]="scrollLeft >= scrollCont.scrollWidth - scrollCont.clientWidth - 10 ? 'invisible' : 'visible'"
                 >
                 <div class="icon-angle-right text-large"></div>
             </div>
             <div 
-                class="w-8 h-8 absolute left-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-MD flex justify-center items-center cursor-pointer" 
+                class="w-8 h-8 absolute left-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer" 
                 (click)="scrollCont.scrollBy({ left: -273, behavior: 'smooth' })"
                  *ngIf="scrollLeft >= 10"
                 >

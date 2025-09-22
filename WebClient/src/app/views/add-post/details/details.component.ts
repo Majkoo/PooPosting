@@ -9,14 +9,14 @@ import {NgForm} from "@angular/forms";
   selector: 'pp-details',
   template: `
     <div
-      class="flex flex-col gap-MD"
+      class="flex flex-col gap-md"
       @fadeIn
     >
 
-      <div class="flex flex-col gap-XS">
+      <div class="flex flex-col gap-xs">
         Description:
         <textarea
-          class="border-2 p-SM rounded-LG"
+          class="border-2 p-sm rounded-lg"
           rows="3"
           placeholder="Post description..."
           [(ngModel)]="postDetailsTemp.description"
@@ -25,11 +25,11 @@ import {NgForm} from "@angular/forms";
         ></textarea>
       </div>
 
-      <div class="flex flex-col gap-XS">
+      <div class="flex flex-col gap-xs">
         Tags:
         <input
           type="text"
-          class="border-2 px-SM py-XS rounded-LG"
+          class="border-2 px-sm py-xs rounded-lg"
           placeholder="Post tags..."
           name="tags"
           (keyup)="tagChanges()"
@@ -37,10 +37,10 @@ import {NgForm} from "@angular/forms";
         >
       </div>
 
-      <!--      <div class="flex flex-col gap-XS">-->
+      <!--      <div class="flex flex-col gap-xs">-->
       <!--        Post Visibility:-->
-      <!--        <div class="ml-SM">-->
-      <!--          <div class="flex flex-row gap-XS">-->
+      <!--        <div class="ml-sm">-->
+      <!--          <div class="flex flex-row gap-xs">-->
       <!--            <input-->
       <!--              type="radio"-->
       <!--              id="public"-->
@@ -50,7 +50,7 @@ import {NgForm} from "@angular/forms";
       <!--            >-->
       <!--            <label for="public">Public</label>-->
       <!--          </div>-->
-      <!--          <div class="flex flex-row gap-XS">-->
+      <!--          <div class="flex flex-row gap-xs">-->
       <!--            <input-->
       <!--              type="radio"-->
       <!--              id="feed"-->
@@ -60,7 +60,7 @@ import {NgForm} from "@angular/forms";
       <!--            >-->
       <!--            <label for="feed">Feed only</label>-->
       <!--          </div>-->
-      <!--          <div class="flex flex-row gap-XS">-->
+      <!--          <div class="flex flex-row gap-xs">-->
       <!--            <input-->
       <!--              type="radio"-->
       <!--              id="private"-->
@@ -75,13 +75,13 @@ import {NgForm} from "@angular/forms";
 
       <div class="mt-4 flex items-center justify-between">
         <button
-          class="flex gap-XS text-regular white-text px-MD py-SM rounded-LG whitespace-nowrap bg-primary-base dark:bg-dark dark:bg-dark-dark-primary-base disabled:opacity-60"
+          class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-primary-base dark:bg-dark dark:bg-dark-dark-primary-base disabled:opacity-60"
           (click)="goBack()"
         >
           Previous step
         </button>
         <button
-          class="flex gap-XS text-regular white-text px-MD py-SM rounded-LG whitespace-nowrap bg-cta-light dark:dark-bg-cta-light disabled:opacity-60"
+          class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-cta-light dark:dark-bg-cta-light disabled:opacity-60"
           [disabled]="!canProceed"
           (click)="goNext()"
         >

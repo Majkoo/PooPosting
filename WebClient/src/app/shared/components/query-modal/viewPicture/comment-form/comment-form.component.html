@@ -2,18 +2,18 @@
   <textarea
     [(ngModel)]="commentText"
     [placeholder]="isLoggedOn ? 'Write a comment...' : 'Log in to write a comment...'"
-    class="p-SM border-2 border-b-0 rounded-t-LG resize-none focus:outline-0 bg-grayscale-white dark:bg-dark-grayscale-white text-dark dark:text-dark-dark"
+    class="p-sm border-2 border-b-0 rounded-t-lg resize-none focus:outline-0 bg-grayscale-white dark:bg-dark-grayscale-white text-dark dark:text-dark-dark"
     minlength="2"
     name="commentText"
     required
     rows="3">
   </textarea>
 
-  <div class="w-full flex flex-row justify-between items-center border-2 border-t-0 rounded-b-LG p-SM pt-XS pb-XS">
+  <div class="w-full flex flex-row justify-between items-center border-2 border-t-0 rounded-b-lg p-sm pt-xs pb-xs">
     <button
       [disabled]="!isLoggedOn || commentForm.invalid || (awaitSubmit | async)"
       [ngClass]="{'opacity-60': !isLoggedOn || commentForm.invalid || (awaitSubmit | async)}"
-      class="bg-cta-light dark:dark-bg-cta-light text-regular py-XS px-MD btn"
+      class="bg-cta-light dark:dark-bg-cta-light text-regular py-xs px-md btn"
       type="submit"
     >
       Comment

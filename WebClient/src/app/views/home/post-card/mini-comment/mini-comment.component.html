@@ -1,14 +1,14 @@
-<div class="bg-grayscale-light-gray dark:bg-dark-grayscale-light-gray p-SM rounded-LG max-w-max w-full">
+<div class="bg-grayscale-light-gray dark:bg-dark-grayscale-light-gray p-sm rounded-lg max-w-max w-full">
   <div class="w-6 float-left">
     <a routerLink="/account/{{comm.account.id}}">
-      <img class="w-6 max-h-6 h-6 object-fill rounded-XL"
+      <img class="w-6 max-h-6 h-6 object-fill rounded-xl"
            src="{{comm.account.profilePicUrl | urlTransform}}"
            alt="{{comm.account.nickname}}">
     </a>
   </div>
 
   <div class="flex flex-col">
-    <div class="flex justify-between items-start gap-MD">
+    <div class="flex justify-between items-start gap-md">
       <a class="text-bold"
          routerLink="/account/{{comm.account.id}}">
         {{comm.account.nickname}}

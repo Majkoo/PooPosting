@@ -14,6 +14,6 @@
 .wrapper {
   @apply
   flex flex-col-reverse my-[3.5rem]
-  md:flex-row-reverse md:h-picture-modal-content-height md:mt-0 md:mb-0 md:pt-0 md:gap-MD
+  md:flex-row-reverse md:h-picture-modal-content-height md:mt-0 md:mb-0 md:pt-0 md:gap-md
   overflow-y-clip;
 }
