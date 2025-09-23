@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,4 +11,6 @@ import { CommonModule } from '@angular/common';
 })
 export class TagComponent {
   @Input({required: true}) tag!: string;
+  @Input() removable: boolean = false;
+  @Output() removed = new EventEmitter<boolean>(); //Fired if user click "X" button
 }

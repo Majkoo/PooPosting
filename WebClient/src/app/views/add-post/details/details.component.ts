@@ -1,4 +1,9 @@
-import {AfterContentInit, Component, inject, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  inject,
+  ViewChild
+} from '@angular/core';
 import {AddPostService} from "../add-post.service";
 import {Router} from "@angular/router";
 import {fadeInAnimation} from "../../../shared/utility/animations/fadeInAnimation";
@@ -27,14 +32,20 @@ import {NgForm} from "@angular/forms";
 
       <div class="flex flex-col gap-xs">
         Tags:
-        <input
-          type="text"
-          class="border-2 px-sm py-xs rounded-lg"
-          placeholder="Post tags..."
-          name="tags"
-          (keyup)="tagChanges()"
-          [(ngModel)]="postDetailsTemp.tags"
-        >
+        <div class="flex flex-wrap gap-2 border-2 px-sm py-xs rounded-lg bg-white">
+          <pp-tag *ngFor="let tag of tags; let i = index" [tag]="tag" [removable]="true" (removed)="removeTag(i)"/>
+
+          <input
+            type="text"
+            class="flex-1 outline-none"
+            placeholder="Add tag..."
+            [(ngModel)]="currentTag"
+            name="tagsInput"
+            (keydown.backspace)="this.currentTag == '' ? removeTag(this.tags.length-1) : ''"
+            (keydown.space)="addTag()"
+            (keydown.enter)="addTag(); $event.preventDefault()"
+          />
+        </div>
       </div>
 
       <!--      <div class="flex flex-col gap-xs">-->
@@ -99,24 +110,38 @@ export class DetailsComponent implements AfterContentInit {
   private router = inject(Router);
 
   postDetailsTemp: Partial<PostDetailsData> = {};
+  tags: string[] = [];
+  currentTag = '';
 
   async ngAfterContentInit() {
     if (!this.addPostService.canGoToDetails) await this.router.navigate(['/add-post/upload']);
+
+    const savedTags = this.addPostService.inMemoryCreatePictureDto.tags ?? [];
+    this.tags = [...savedTags];
     this.postDetailsTemp = {
       ...this.addPostService.inMemoryCreatePictureDto,
-      tags: this.addPostService.inMemoryCreatePictureDto.tags?.join(" ")
+      tags: undefined
     }
   }
 
-  tagChanges() {
-    const val =  this.postDetailsTemp.tags ?? "";
-    const tags = val
-      .split(" ")
-      .slice(0, 4)
-      .map(tag => tag.substring(0, 25));
+  addTag() {
+    const value = this.currentTag.trim();
+    if (value && this.tags.length < 4) {
+      this.tags.push(value.substring(0, 25));
+      this.currentTag = '';
+      this.syncTags();
+    }
+  }
 
-    this.addPostService.inMemoryCreatePictureDto.tags = tags;
-    this.postDetailsTemp.tags = tags.join(" ");
+  removeTag(index: number) {
+    console.log(index, this.tags);
+    
+    this.tags.splice(index, 1);
+    this.syncTags();
+  }
+
+  private syncTags() {
+    this.addPostService.inMemoryCreatePictureDto.tags = [...this.tags];
   }
 
   async goBack() {
@@ -132,9 +157,5 @@ export class DetailsComponent implements AfterContentInit {
 
   get canProceed() {
     return this.addPostService.canGoToReview;
-  }
-
-  get tags() {
-    return this.postDetailsTemp.tags;
   }
 }
