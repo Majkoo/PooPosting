@@ -23,7 +23,7 @@ import {Component} from '@angular/core';
       .spinner-container {
         @apply
         flex flex-col items-center justify-center
-        bg-black bg-opacity-30 p-3 pt-4 rounded gap-2
+        bg-black bg-opacity-30 p-md pt-md rounded gap-sm
       }
     }
 

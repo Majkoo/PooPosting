@@ -1,7 +1,7 @@
 <div class="m-4" @fadeIn>
 
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <h2 class="text-2xl font-bolder text-center mb-6">
+    <h2 class="title-large font-bolder text-center mb-lg">
       Login
     </h2>
 
@@ -17,7 +17,7 @@
         required
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-2 mt-1 text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-sm mt-xs text-regular"
         [@errorAnimation]="name.touched && name.dirty ? 'visible' : 'hidden'"
       >
 
@@ -42,7 +42,7 @@
         required
       >
       <div
-        class="text-warning dark:text-dark dark:text-dark-dark-warning opacity-75 px-2 mt-1 text-sm"
+        class="text-warning dark:text-dark-warning opacity-75 px-sm mt-xs text-regular"
         [@errorAnimation]="password.touched && password.dirty ? 'visible' : 'hidden'"
       >
 
@@ -59,7 +59,7 @@
     <div class="text-center">
 
       <button
-        class="px-20 py-3 bg-cta dark:dark-bg-cta text-white font-bold mt-4 rounded-lg disabled:opacity-60"
+        class="px-20 py-md bg-cta-500 dark:dark-bg-cta-500 text-white font-bold mt-4 rounded-lg disabled:opacity-60"
         type="submit"
         [disabled]="form.invalid || awaitSubmit"
       >
@@ -67,10 +67,10 @@
       </button>
 
       <div
-        class="mt-4 text-grey dark:text-dark dark:text-dark-dark-grey text-sm"
+        class="mt-4 text-grey text-regular"
       >
         Don't have an account?
-        <a [routerLink]="['/register']" class="text-cta dark:text-dark-cta">Sign up</a>
+        <a [routerLink]="['/register']" class="text-cta-500 dark:text-dark-cta">Sign up</a>
       </div>
 
     </div>

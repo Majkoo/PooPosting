@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
     const scrollTop = e.target['scrollingElement'].scrollTop;
 
     this.lastScrollTop - scrollTop < 0 ? this.headershown = "hidden" : this.headershown = "visible";
-    console.log(this.headershown);
     
     this.lastScrollTop = scrollTop;    
   };

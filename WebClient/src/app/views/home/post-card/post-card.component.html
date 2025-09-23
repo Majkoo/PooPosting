@@ -1,4 +1,4 @@
-<div class="pp-shadow w-full bg-surface-100 dark:bg-dark-surface-100 rounded-xl flex flex-col gap-2" *ngIf="pic">
+<div class="pp-shadow w-full bg-grayscale-50 dark:bg-dark-grayscale-50 rounded-xl flex flex-col gap-sm" *ngIf="pic">
 
   <!--  Image  -->
   <div class="flex rounded-t-xl justify-center items-center cursor-pointer"
@@ -10,14 +10,14 @@
   </div>
 
   <!--  Controls  -->
-  <div class="flex justify-between items-center px-3">
+  <div class="flex justify-between items-center px-md">
 
-      <a class="flex flex-row justify-between items-center gap-1" routerLink="/account/{{pic.account.id}}">
-        <img class="w-8 h-8 rounded-3xl object-center object-contain bg-grey dark:bg-dark-grey" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
-        <p class="font-bold h-min lh flex justify-center items-center sm:text-xl text-dark dark:text-dark-dark">{{pic.account.nickname}}</p>
+      <a class="flex flex-row justify-between items-center gap-xs" routerLink="/account/{{pic.account.id}}">
+        <img class="w-8 h-8 rounded-xl object-center object-contain bg-grey dark:bg-dark-grey" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
+        <p class="title-small h-min lh flex justify-center items-center sm:title-large">{{pic.account.nickname}}</p>
       </a>
 
-      <div class="flex items-start gap-1">
+      <div class="flex items-start gap-xs">
         <pp-mod-btns [pic]="pic"></pp-mod-btns>
         <pp-like-btn [(pic)]="pic"/>
         <pp-share-btn [(pic)]="pic"/>
@@ -26,20 +26,20 @@
     </div>
 
   <!--  Description  -->
-  <p class="text-md px-3 text-dark dark:text-dark-dark" *ngIf="pic.description">
+  <p class="title-small px-md" *ngIf="pic.description">
     {{pic.description}}
   </p>
 
   <!--  Tags  -->
-  <p class="flex gap-2 px-3 text-dark dark:text-dark-dark" *ngIf="pic.tags?.length">
+  <p class="flex gap-sm px-md text-dark dark:text-dark-dark" *ngIf="pic.tags?.length">
     <pp-tag *ngFor="let tag of pic.tags" [tag]="tag"/>
   </p>
 
   <!--  Comments  -->
   <ng-container  *ngIf="pic.commentCount && pic.comments?.length">
-    <p class="font-bold text-lg px-3 text-dark dark:text-dark-dark">Comments</p>
+    <p class="title-large px-md">Comments</p>
 
-    <div class="flex flex-col gap-2 px-3 text-dark dark:text-dark-dark">
+    <div class="flex flex-col gap-sm px-md text-dark dark:text-dark-dark">
       <pp-mini-comment [comm]="pic.comments[0]" />
     </div>
   </ng-container>
@@ -49,8 +49,8 @@
     ppOpenQueryModal
     [modalMode]="QueryModalEnum.VIEW_PICTURE"
     [id]="pic.id"
-    class="cursor-pointer bg-surface-100 dark:bg-dark-surface-100 border-1 rounded-md text-xs text-gray-400 border-grey flex items-center justify-between m-3 mt-1 px-3">
-    <p>Comment this...</p>
+    class="cursor-pointer bg-grayscale-50 dark:bg-dark-grayscale-50 border-1 rounded-md border-grey flex items-center justify-between m-3 mt-xs px-md">
+    <p class="text-small-regular">Comment this...</p>
     <span class="icon-vector text text-lg"></span>
   </div>
 

@@ -3,7 +3,7 @@
   <pp-account-skeleton/>
 </div>
 <div *ngIf="account$ | async as acc">
-  <div class="w-full flex flex-col justify-center items-center my-3 gap-4" @fadeIn>
+  <div class="w-full flex flex-col justify-center items-center my-3 gap-md" @fadeIn>
     <div class="flex w-full flex-col justify-center items-center">
       <div class="w-full flex justify-between items-center" *ngIf="isAccountCurrentUsers">
         <!--  Account settings  -->
@@ -21,22 +21,22 @@
         </button>
       </div>
       <img class="shadow-lg rounded-full object-contain aspect-square w-40 md:w-60 bg-grey dark:bg-dark-grey" src="{{acc.profilePicUrl | urlTransform}}" alt="{{acc.nickname}}">
-      <h2 class="text-2xl tracking-wide font-bold mt-2">{{acc.nickname}}</h2>
+      <h2 class="title-large tracking-wide font-bold mt-sm">{{acc.nickname}}</h2>
     </div>
 
-    <div class="flex gap-4 sm:gap-6 md:gap-8 justify-center items-center flex-wrap">
-      <span class="tag">
+    <div class="flex gap-md sm:gap-xl md:gap-xl justify-center items-center flex-wrap">
+      <span class="tag title-small white-text">
         Posts: {{ acc.pictureCount || 0 }}
       </span>
-      <span class="tag">
+      <span class="tag title-small white-text">
         Likes: {{ likesCount || 0 }}
       </span>
-      <span class="tag">
+      <span class="tag title-small white-text">
         Comments: {{ commentsCount || 0 }}
       </span>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mt-2">
+    <div class="grid grid-cols-2 gap-md mt-sm">
         <pp-post-preview *ngFor="let picture of (pictures$ | async); trackBy: trackByPictureId" [pic]="picture"/>
     </div>
   </div>

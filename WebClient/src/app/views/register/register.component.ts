@@ -21,7 +21,7 @@ import {AuthService} from "../../services/api/account/auth.service";
   templateUrl: './register.component.html',
   styles: [`
     .input {
-      @apply border-1 w-full py-2 px-3 rounded-lg transition ease-in-out
+      @apply border-1 w-full py-sm px-md rounded-lg transition ease-in-out
     }
   `],
   animations: [

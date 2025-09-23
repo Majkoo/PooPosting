@@ -3,7 +3,7 @@
   <div class="wrapper h-full">
 
     <!--  Sidebar -->
-    <div class="flex flex-col w-screen md:w-2/5 lg:w-3/8 xl:w-1/4 md:sticky md:top-0 md:p-3 md:rounded-lg md:shadow-xl md:bg-surface-100 dark:bg-dark-surface-100 md:h-screen">
+    <div class="flex flex-col w-screen md:w-2/5 lg:w-3/8 xl:w-1/4 md:sticky md:top-0 md:p-md md:rounded-lg md:shadow-xl md:bg-grayscale-50 dark:bg-dark-grayscale-50 md:h-screen">
 
       <div class="cont">
         <div class="section">
@@ -11,13 +11,13 @@
           <ng-container [ngTemplateOutlet]="isMobile ? description : accountSection"/>
 
           <!--  Tags  -->
-          <div class="flex flex-row gap-2.5 pb-4 px-3 md:mx-3 md:mt-0 md:px-0 order-2" *ngIf="pic.tags.length">
+          <div class="flex flex-row gap-md pb-md px-md md:mx-3 md:mt-0 md:px-0 order-2" *ngIf="pic.tags.length">
             <pp-tag *ngFor="let tag of pic.tags" [tag]="tag"/>
           </div>
 
           <!--  Controls  -->
-          <div class="flex flex-col px-4 md:px-3 py-2 pt-3 border-b-1 order-1 md:order-2 md:pt-0">
-            <div class="flex gap-3 text-2xl icon-dark">
+          <div class="flex flex-col px-md md:px-md py-sm pt-md border-b-1 order-1 md:order-2 md:pt-0">
+            <div class="flex gap-md title-large icon-dark">
               <pp-like-btn [(pic)]="pic" />
               <pp-share-btn [(pic)]="pic"/>
               <pp-mod-btns [pic]="pic"></pp-mod-btns>
@@ -35,12 +35,12 @@
     </div>
 
     <!--  Content  -->
-    <div class="w-full flex flex-col pt-3 text-dark dark:text-dark-dark">
+    <div class="w-full flex flex-col pt-md text-dark dark:text-dark-dark">
 
       <ng-container *ngIf="isMobile" [ngTemplateOutlet]="accountSection"></ng-container>
 
       <!--  Image  -->
-      <div class="w-full md:h-picture-modal-picture-height px-3 md:px-0 md:pl-3" @fadeIn>
+      <div class="w-full md:h-picture-modal-picture-height px-md md:px-0 md:pl-md" @fadeIn>
         <img
           alt="{{pic.name}}"
           class="w-full m-auto rounded-lg object-contain md:h-picture-modal-picture-height shadow-center"
@@ -51,15 +51,15 @@
       <a
         *ngIf="!isMobile"
         class="
-          absolute shadow-lg top-0 left-3 p-3 z-20 bg-primary-900 dark:bg-dark-primary-900 text-white opacity-80
+          absolute shadow-lg top-0 left-3 p-md z-20 bg-primary-900 dark:bg-dark-primary-900 text-white opacity-80
           rounded-br-lg rounded-bl-lg
           transition-all ease-in-out
-          hover:py-4 hover:opacity-100
-          active:py-3.5 select-none cursor-pointer
+          hover:py-md hover:opacity-100
+          active:py-md select-none cursor-pointer
         "
         (click)="closeModal()"
       >
-        Go back
+        <span class="text-regular white-text">Go back</span>
       </a>
 
     </div>
@@ -69,16 +69,16 @@
   <!--  Account Details  -->
   <ng-template #accountSection>
     <!--  Account  -->
-    <div class="flex flex-col rounded-xl bg-surface-300 dark:bg-dark-surface-300 text-dark dark:text-dark-dark mx-3 mb-3 md:pb-0 md:m-3 md:order-2">
+    <div class="flex flex-col rounded-xl bg-grayscale-200 dark:bg-dark-grayscale-200 text-dark dark:text-dark-dark mx-3 mb-3 md:pb-0 md:m-3 md:order-2">
 
       <a
-        class="flex px-4 py-3"
+        class="flex px-md py-md"
         routerLink="/account/{{pic.account.id}}"
       >
 
-        <div class="gap-2 justify-center items-center w-max flex flex-row" >
-          <img class="w-8 max-h-8 object-fill rounded-3xl" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
-          <div class="text-lg font-bolder">{{pic.account.nickname}}</div>
+        <div class="gap-sm justify-center items-center w-max flex flex-row" >
+          <img class="w-8 max-h-8 object-fill rounded-xl" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
+          <div class="title-large font-bolder">{{pic.account.nickname}}</div>
         </div>
 
         <div class="flex grow justify-end items-center">
@@ -86,7 +86,7 @@
         </div>
       </a>
 
-      <div class="px-4 pb-3 text-opacity-60" *ngIf="pic.description && !isMobile">
+      <div class="px-md pb-md text-opacity-60" *ngIf="pic.description && !isMobile">
         {{pic.description}}
       </div>
 
@@ -95,7 +95,7 @@
 
   <!--  Pic Description  -->
   <ng-template #description>
-    <div class="px-4 py-3 text-opacity-60 order-2" *ngIf="pic.description">
+    <div class="px-md py-md text-opacity-60 order-2" *ngIf="pic.description">
       {{pic.description}}
     </div>
   </ng-template>
@@ -104,7 +104,7 @@
   <ng-template #commentsOption>
     <!--  Comments heading  -->
     <h2
-      class="text-dark dark:text-dark-dark font-bold md:text-xl p-3 md:mt-0 order-3"
+      class="text-bold md:title-large p-md md:mt-0 order-3"
       [ngClass]="{'border-t-1 md:border-t-0' : pic.description || pic.tags.length}"
     >
       Comments:
@@ -114,7 +114,7 @@
     <pp-comments-display [pic]="pic" [ngClass]="'order-4'"/>
 
     <!--  Comments form  -->
-    <div class="comments-form p-3 order-5">
+    <div class="comments-form p-md order-5">
       <pp-comment-form [pic]="pic" (commentAdded)="onCommentAdd($event)"/>
     </div>
   </ng-template>

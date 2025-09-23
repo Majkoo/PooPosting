@@ -15,9 +15,9 @@ import {CommonModule} from "@angular/common";
       }
 
       .data-block {
-        @apply bottom-0 text-white w-full absolute transition-all duration-700 transform flex justify-between items-center gap-4;
+        @apply bottom-0 text-white w-full absolute transition-all duration-700 transform flex justify-between items-center gap-md;
         .data-piece {
-          @apply flex items-center justify-center gap-0.5 bg-black bg-opacity-40 py-2 px-4;
+          @apply flex items-center justify-center gap-xs bg-black bg-opacity-40 py-sm px-md;
         }
       }
 

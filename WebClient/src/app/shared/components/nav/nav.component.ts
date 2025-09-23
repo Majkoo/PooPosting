@@ -55,7 +55,7 @@ import { Component } from '@angular/core';
   styles: [`
     nav {
       @apply
-      bottom-0 fixed w-full z-30 bg-surface-100 dark:bg-dark-surface-100 px-4
+      bottom-0 fixed w-full z-30 bg-grayscale-50 dark:bg-dark-grayscale-50 px-md
       rounded-t-xl
     }
     .nav {
@@ -67,7 +67,7 @@ import { Component } from '@angular/core';
     .nav-link {
       @apply
       sm:w-full sm:flex sm:w-max sm:h-full
-      sm:px-2 sm:py-2
+      sm:px-sm sm:py-sm
     }
   `]
 })

@@ -11,13 +11,13 @@ import {CreatePictureDto} from "../models/createPictureDto";
 
     <div class="mt-4 flex items-center justify-between">
       <button
-        class="flex gap-1 text-white px-4 py-2 rounded-lg whitespace-nowrap bg-primary-800 dark:bg-dark dark:bg-dark-dark-primary-800 disabled:opacity-60"
+        class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-primary-800 dark:bg-dark dark:bg-dark-dark-primary-800 disabled:opacity-60"
         (click)="goBack()"
       >
         Previous step
       </button>
       <button
-        class="flex gap-1 text-white px-4 py-2 rounded-lg whitespace-nowrap bg-cta dark:dark-bg-cta disabled:opacity-60"
+        class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-cta-500 dark:dark-bg-cta-500 disabled:opacity-60"
         [disabled]="!canFinish"
         (click)="finish()"
       >

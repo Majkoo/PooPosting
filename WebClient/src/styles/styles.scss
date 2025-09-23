@@ -4,6 +4,7 @@
 
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "node_modules/primeng/resources/primeng.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 .icon-fz {
   font-size: 24px;
@@ -24,14 +25,14 @@
   margin: 0 !important;
 }
 body {
-  @apply top-0 w-full bg-surface-200
+  @apply top-0 w-full bg-grayscale-100
 }
 html {
   @apply scroll-smooth
 }
 
 * {
-  font-family: "poppins", sans-serif;
+  font-family: "Roboto", "poppins", sans-serif;
 }
 
 nav, header {
@@ -59,29 +60,29 @@ header, footer, nav {
 }
 
 .app-link {
-  @apply flex justify-center items-center gap-1 select-none dark:text-dark-dark hover:text-cta dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer h-full text-lg;
+  @apply flex justify-center items-center gap-xs select-none dark:text-dark-dark hover:text-cta-500 dark:hover:text-dark-cta-500 hover:text-opacity-70 transition ease-in-out cursor-pointer h-full title-large;
   >.icon {
-    @apply text-xl;
+    @apply title-large;
   }
 }
 
 .link {
-  @apply select-none hover:text-cta dark:text-dark-dark dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer;
+  @apply select-none hover:text-cta-500 dark:text-dark-dark dark:hover:text-dark-cta-500 hover:text-opacity-70 transition ease-in-out cursor-pointer;
   >.icon {
-    @apply text-xl;
+    @apply title-large;
   }
 }
 
 .nav-link {
-  @apply flex justify-center items-center gap-0.5 select-none dark:text-dark-dark hover:text-cta dark:hover:text-dark-cta hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-2;
+  @apply flex justify-center items-center gap-xs select-none dark:text-dark-dark hover:text-cta-500 dark:hover:text-dark-cta-500 hover:text-opacity-70 transition ease-in-out cursor-pointer h-full px-sm;
   &.link-active {
-    @apply text-cta dark:text-dark-cta hover:text-opacity-70;
+    @apply text-cta-500 dark:text-dark-cta-500 hover:text-opacity-70;
   }
 }
 
 .nav-link {
   span {
-    @apply text-lg hidden sm:block
+    @apply title-large hidden sm:block
   }
 }
 
@@ -102,8 +103,44 @@ header, footer, nav {
   active:opacity-75
 }
 
-
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.header, h1, h2, h3, h4, h5, h6{
+  @apply font-semibold text-grayscale-900 dark:text-dark-grayscale-900;
+  font-size: 32px;
+  line-height: 36px;
+}
+
+.title-large, p{
+  @apply font-semibold text-grayscale-900 dark:text-dark-grayscale-900;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.title-small{
+  @apply font-semibold text-grayscale-900 dark:text-dark-grayscale-900;
+  font-size: 18px;
+  line-height: 22px;
+}
+.text-bold{
+  @apply font-semibold text-grayscale-900 dark:text-dark-grayscale-900;
+  font-size: 14px;
+  line-height: 18px;
+}
+.text-small-bold{
+  @apply text-xs font-semibold text-grayscale-900 dark:text-dark-grayscale-900;
+}
+.text-regular, span, label{
+  @apply text-grayscale-900 dark:text-dark-grayscale-900;
+  font-size: 14px;
+  line-height: 18px;
+}
+.text-small-regular{
+  @apply text-xs text-grayscale-900 dark:text-dark-grayscale-900;
+}
+.white-text{
+  @apply dark:text-grayscale-900 text-dark-grayscale-900 #{!important};
 }
