@@ -48,6 +48,23 @@ export class AccountService {
       );
   }
 
+  getSetTags(): Observable<string[]>{
+    return this.httpClient
+      .get<string[]>(
+        `${this.accountApiUrl}/tags`,
+        {responseType: "json",}
+      );
+  }
+
+  changeSetTags(tags: string[]): Observable<string[]>{
+    return this.httpClient
+      .post<string[]>(
+        `${this.accountApiUrl}/tags`,
+        tags,
+        {responseType: "json",}
+      );
+  }
+
   getAccountsPaginated(pageSize: number, pageNumber: number, sortBy : string, sortDirection : string, searchPhrase: string): Observable<PagedResult<AccountDto>>{
     return searchPhrase == "" ? 
       this.httpClient

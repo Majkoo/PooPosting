@@ -28,13 +28,29 @@ public class AccountController(AccountService accountService) : ControllerBase
     {
         return Ok(await accountService.GetById(IdHasher.DecodeAccountId(accId)));
     }
-    
+
     [HttpGet]
     [Authorize]
     [Route("me")]
     public async Task<IActionResult> GetCurrentAccount()
     {
         return Ok(await accountService.GetCurrent());
+    }
+    [HttpPost]
+    [Authorize]
+    [Route("tags")]
+    public async Task<IActionResult> ChangeSetTags(
+        [FromBody] List<string> tags
+        )
+    {
+        return Ok(await accountService.ChangeSetTags(tags));
+    }
+    [HttpGet]
+    [Authorize]
+    [Route("tags")]
+    public async Task<IActionResult> GetSetTags()
+    {
+        return Ok(await accountService.GetSetTags());
     }
 
     [HttpDelete]

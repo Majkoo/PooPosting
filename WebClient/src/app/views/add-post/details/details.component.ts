@@ -32,22 +32,8 @@ import {NgForm} from "@angular/forms";
 
       <div class="flex flex-col gap-xs">
         Tags:
-        <div class="flex flex-wrap gap-2 border-2 px-sm py-xs rounded-lg bg-white">
-          <pp-tag *ngFor="let tag of tags; let i = index" [tag]="tag" [removable]="true" (removed)="removeTag(i)"/>
-
-          <input
-            type="text"
-            class="flex-1 outline-none"
-            placeholder="Add tag..."
-            [(ngModel)]="currentTag"
-            name="tagsInput"
-            (keydown.backspace)="this.currentTag == '' ? removeTag(this.tags.length-1) : ''"
-            (keydown.space)="addTag()"
-            (keydown.enter)="addTag(); $event.preventDefault()"
-          />
-        </div>
+        <pp-tag-input [tags]="tags" (tagsChange)="syncTags($event)"/>
       </div>
-
       <!--      <div class="flex flex-col gap-xs">-->
       <!--        Post Visibility:-->
       <!--        <div class="ml-sm">-->
@@ -124,24 +110,8 @@ export class DetailsComponent implements AfterContentInit {
     }
   }
 
-  addTag() {
-    const value = this.currentTag.trim();
-    if (value && this.tags.length < 4) {
-      this.tags.push(value.substring(0, 25));
-      this.currentTag = '';
-      this.syncTags();
-    }
-  }
-
-  removeTag(index: number) {
-    console.log(index, this.tags);
-    
-    this.tags.splice(index, 1);
-    this.syncTags();
-  }
-
-  private syncTags() {
-    this.addPostService.inMemoryCreatePictureDto.tags = [...this.tags];
+  public syncTags(tags: string[]) {
+    this.addPostService.inMemoryCreatePictureDto.tags = tags;
   }
 
   async goBack() {

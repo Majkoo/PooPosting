@@ -66,6 +66,41 @@ public class AccountService(
     }
 
 
+    public async Task<List<String>> ChangeSetTags(List<String> tags)
+    {
+        var accountId = accountContextService.GetAccountId();
+
+        var existing = await dbContext.AccountsSetTags.FirstOrDefaultAsync(x => x.AccountId == accountId);
+
+        if (existing is null)
+        {
+            existing = new AccountsSetTags
+            {
+                AccountId = accountId,
+                Tags = tags
+            };
+            await dbContext.AccountsSetTags.AddAsync(existing);
+        }
+        else
+        {
+            existing.Tags = tags;
+            dbContext.AccountsSetTags.Update(existing);
+        }
+
+        await dbContext.SaveChangesAsync();
+
+        return tags;
+    }
+
+    public async Task<List<String>> GetSetTags()
+    {
+        var accountId = accountContextService.GetAccountId();
+
+        var tags = await dbContext.AccountsSetTags.FirstOrDefaultAsync(x => x.AccountId == accountId);
+
+        return tags.Tags;
+    }
+
     public async Task<AccountDto> UpdateEmail(UpdateAccountEmailDto dto)
     {
         var account = await accountContextService.GetAccountAsync();
@@ -74,7 +109,7 @@ public class AccountService(
         await dbContext.SaveChangesAsync();
         return account.MapToDto();
     }
-    
+
     public async Task<AccountDto> UpdatePassword(UpdateAccountPasswordDto dto)
     {
         var account = await accountContextService.GetAccountAsync();

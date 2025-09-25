@@ -14,6 +14,7 @@ public class PictureDbContext : Microsoft.EntityFrameworkCore.DbContext
     public virtual required DbSet<Like> Likes { get; set; }
     public virtual required DbSet<Comment> Comments { get; set; }
     public virtual required DbSet<Tag> Tags { get; set; }
+    public virtual required DbSet<AccountsSetTags> AccountsSetTags { get; set; }
 
     // many-to-many
     public virtual required DbSet<PictureTag> PictureTags { get; set; }

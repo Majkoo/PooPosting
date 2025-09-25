@@ -13,7 +13,12 @@
     (valueChanged)="settingsService.setDarkModeSetting($event); changeTheme()">
 </pp-setting-option>
 
-<div class="header text-center">For moderators</div>
+<div class="flex flex-col gap-xs">
+  <span class="title-small">Favorite tags:</span>
+  <pp-tag-input [tags]="tags" (tagsChange)="this.tags = $event"/>
+</div>
+
+<div class="header text-center pt-xl">For moderators</div>
 
 <pp-setting-option 
     [ngClass]="isModeratororAdmin ? '' : 'hidden'"
