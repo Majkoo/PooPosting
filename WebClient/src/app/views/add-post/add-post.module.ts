@@ -13,6 +13,7 @@ import {MiniCommentComponent} from "../home/post-card/mini-comment/mini-comment.
 import {TagComponent} from "../../shared/components/tag/tag.component";
 import {UrlTransformModule} from "../../shared/utility/pipes/url-transform/url-transform.module";
 import { CreatedPostCardPreviewComponent } from './review/created-post-card-preview/created-post-card-preview.component';
+import { TagInputComponent } from "../../shared/components/tag-input/tag-input.component";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CreatedPostCardPreviewComponent } from './review/created-post-card-prev
     LikeBtnComponent,
     MiniCommentComponent,
     TagComponent,
-    UrlTransformModule
-  ]
+    UrlTransformModule,
+    TagInputComponent
+]
 })
 export class AddPostModule { }

@@ -1,4 +1,9 @@
-import {AfterContentInit, Component, inject, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  inject,
+  ViewChild
+} from '@angular/core';
 import {AddPostService} from "../add-post.service";
 import {Router} from "@angular/router";
 import {fadeInAnimation} from "../../../shared/utility/animations/fadeInAnimation";
@@ -27,16 +32,8 @@ import {NgForm} from "@angular/forms";
 
       <div class="flex flex-col gap-xs">
         Tags:
-        <input
-          type="text"
-          class="border-2 px-sm py-xs rounded-lg"
-          placeholder="Post tags..."
-          name="tags"
-          (keyup)="tagChanges()"
-          [(ngModel)]="postDetailsTemp.tags"
-        >
+        <pp-tag-input [tags]="tags" (tagsChange)="syncTags($event)"/>
       </div>
-
       <!--      <div class="flex flex-col gap-xs">-->
       <!--        Post Visibility:-->
       <!--        <div class="ml-sm">-->
@@ -99,24 +96,22 @@ export class DetailsComponent implements AfterContentInit {
   private router = inject(Router);
 
   postDetailsTemp: Partial<PostDetailsData> = {};
+  tags: string[] = [];
+  currentTag = '';
 
   async ngAfterContentInit() {
     if (!this.addPostService.canGoToDetails) await this.router.navigate(['/add-post/upload']);
+
+    const savedTags = this.addPostService.inMemoryCreatePictureDto.tags ?? [];
+    this.tags = [...savedTags];
     this.postDetailsTemp = {
       ...this.addPostService.inMemoryCreatePictureDto,
-      tags: this.addPostService.inMemoryCreatePictureDto.tags?.join(" ")
+      tags: undefined
     }
   }
 
-  tagChanges() {
-    const val =  this.postDetailsTemp.tags ?? "";
-    const tags = val
-      .split(" ")
-      .slice(0, 4)
-      .map(tag => tag.substring(0, 25));
-
+  public syncTags(tags: string[]) {
     this.addPostService.inMemoryCreatePictureDto.tags = tags;
-    this.postDetailsTemp.tags = tags.join(" ");
   }
 
   async goBack() {
@@ -132,9 +127,5 @@ export class DetailsComponent implements AfterContentInit {
 
   get canProceed() {
     return this.addPostService.canGoToReview;
-  }
-
-  get tags() {
-    return this.postDetailsTemp.tags;
   }
 }
