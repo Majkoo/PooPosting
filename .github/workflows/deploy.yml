@@ -61,8 +61,8 @@ jobs:
             - name: Compute tags/env
               id: meta
               run: |
-                  echo "backend_tag=${{ github.ref_name }}-${GITHUB_SHA::12}" >> $GITHUB_OUTPUT
-                  echo "webclient_tag=${{ github.ref_name }}-${GITHUB_SHA::12}" >> $GITHUB_OUTPUT
+                  echo "backend_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+                  echo "webclient_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
 
             - name: Build & push Backend image
               uses: docker/build-push-action@v5
@@ -139,10 +139,21 @@ jobs:
                   source: |
                       Deploy/.env,
                       Deploy/docker-compose.yml,
-                      Deploy/Caddyfile,
+                      Deploy/Caddyfile
+                  strip_components: 1
+                  target: ${{ vars.DEPLOY_PATH }}/
+
+            - name: Upload service configs (preserve dirs)
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.HOST_USER }}
+                  key: ${{ secrets.HOST_SSH_KEY }}
+                  port: ${{ secrets.HOST_PORT }}
+                  source: |
                       Backend/appsettings.json,
                       WebClient/nginx.conf
-                  strip_components: 1
+                  strip_components: 0
                   target: ${{ vars.DEPLOY_PATH }}/
 
             - name: Deploy over SSH

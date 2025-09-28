@@ -41,4 +41,3 @@ networks:
 volumes:
     caddy_data:
     caddy_config:
-    backend_wwwroot:
