@@ -7,10 +7,6 @@
 }
 
 {$DOMAIN_WEBCLIENT} {
-  @auth_enabled expression {env.BASIC_AUTH_ENABLE} == "true"
-  basic_auth @auth_enabled {
-    {$BASIC_AUTH_USER} {$BASIC_AUTH_HASH}
-  }
   reverse_proxy webclient:80
 }
 
