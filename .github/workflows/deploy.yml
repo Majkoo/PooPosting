@@ -63,6 +63,8 @@ jobs:
               run: |
                   echo "backend_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
                   echo "webclient_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+                  owner_lower=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+                  echo "owner_lower=${owner_lower}" >> "$GITHUB_OUTPUT"
 
             - name: Build & push Backend image
               uses: docker/build-push-action@v5
@@ -70,7 +72,7 @@ jobs:
                   context: ./Backend
                   push: true
                   tags: |
-                      ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.BACKEND_IMAGE }}:${{ steps.meta.outputs.backend_tag }}
+                      ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.BACKEND_IMAGE }}:${{ steps.meta.outputs.backend_tag }}
 
             - name: Build & push Webclient image
               uses: docker/build-push-action@v5
@@ -80,7 +82,7 @@ jobs:
                       ANGULAR_CONFIGURATION=${{ vars.ANGULAR_CONFIGURATION }}
                   push: true
                   tags: |
-                      ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
+                      ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
 
     deploy:
         name: Deploy
@@ -122,7 +124,7 @@ jobs:
                   {
                     printf '%s\n' \
                       "DOTNET_ENVIRONMENT=${{ vars.DOTNET_ENVIRONMENT }}" \
-                      "REPO_OWNER=${{ github.repository_owner }}" \
+                      "REPO_OWNER=${{ steps.meta.outputs.owner_lower }}" \
                       "BACKEND_IMAGE=${{ env.BACKEND_IMAGE }}" \
                       "WEBCLIENT_IMAGE=${{ env.WEBCLIENT_IMAGE }}" \
                       "BACKEND_TAG=${{ needs.build-push-docker.outputs.backend_tag }}" \
