@@ -65,27 +65,18 @@ builder.Services.AddScoped<IAuthorizationHandler, CommentOperationRequirementHan
 
 // Supabase
 var supabaseConfig = new SupabaseConfig();
-if (builder.Environment.IsDevelopment())
-{
-    supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointDev");
-    supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtDev");
-}
-if (builder.Environment.IsProduction())
-{
-    supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointProd");
-    supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtProd");
-}
+builder.Configuration.GetSection("SupabaseConfig").Bind(supabaseConfig);
 builder.Services.AddSingleton(supabaseConfig);
 builder.Services.AddHttpClient("SupabaseClient", client =>
 {
-    client.BaseAddress = new Uri(supabaseConfig.Endpoint + "/storage/v1/");
+    client.BaseAddress = new Uri(supabaseConfig.Endpoint + "/storage/v1/s3");
     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {supabaseConfig.Jwt}");
 });
 
 // DbContext
 builder.Services.AddDbContext<PictureDbContext>(options =>
 {
-        var connString = builder.Configuration.GetConnectionString(builder.Environment.IsProduction() ? "Prod" : "Dev");
+        var connString = builder.Configuration.GetConnectionString("Default");
             
         options.UseNpgsql(connString, settings =>
         {

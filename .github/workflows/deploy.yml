@@ -38,6 +38,7 @@ jobs:
         outputs:
             backend_tag: ${{ steps.meta.outputs.backend_tag }}
             webclient_tag: ${{ steps.meta.outputs.webclient_tag }}
+            owner_lower: ${{ steps.meta.outputs.owner_lower }}
         steps:
             - uses: actions/checkout@v4
 
@@ -61,8 +62,10 @@ jobs:
             - name: Compute tags/env
               id: meta
               run: |
-                  echo "backend_tag=${{ github.ref_name }}-${GITHUB_SHA::12}" >> $GITHUB_OUTPUT
-                  echo "webclient_tag=${{ github.ref_name }}-${GITHUB_SHA::12}" >> $GITHUB_OUTPUT
+                  echo "backend_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+                  echo "webclient_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+                  owner_lower=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+                  echo "owner_lower=${owner_lower}" >> "$GITHUB_OUTPUT"
 
             - name: Build & push Backend image
               uses: docker/build-push-action@v5
@@ -70,7 +73,7 @@ jobs:
                   context: ./Backend
                   push: true
                   tags: |
-                      ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.BACKEND_IMAGE }}:${{ steps.meta.outputs.backend_tag }}
+                      ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.BACKEND_IMAGE }}:${{ steps.meta.outputs.backend_tag }}
 
             - name: Build & push Webclient image
               uses: docker/build-push-action@v5
@@ -80,7 +83,7 @@ jobs:
                       ANGULAR_CONFIGURATION=${{ vars.ANGULAR_CONFIGURATION }}
                   push: true
                   tags: |
-                      ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
+                      ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
 
     deploy:
         name: Deploy
@@ -122,7 +125,7 @@ jobs:
                   {
                     printf '%s\n' \
                       "DOTNET_ENVIRONMENT=${{ vars.DOTNET_ENVIRONMENT }}" \
-                      "REPO_OWNER=${{ github.repository_owner }}" \
+                      "REPO_OWNER=${{ needs.build-push-docker.outputs.owner_lower }}" \
                       "BACKEND_IMAGE=${{ env.BACKEND_IMAGE }}" \
                       "WEBCLIENT_IMAGE=${{ env.WEBCLIENT_IMAGE }}" \
                       "BACKEND_TAG=${{ needs.build-push-docker.outputs.backend_tag }}" \
@@ -139,10 +142,21 @@ jobs:
                   source: |
                       Deploy/.env,
                       Deploy/docker-compose.yml,
-                      Deploy/Caddyfile,
+                      Deploy/Caddyfile
+                  strip_components: 1
+                  target: ${{ vars.DEPLOY_PATH }}/
+
+            - name: Upload service configs (preserve dirs)
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.HOST_USER }}
+                  key: ${{ secrets.HOST_SSH_KEY }}
+                  port: ${{ secrets.HOST_PORT }}
+                  source: |
                       Backend/appsettings.json,
                       WebClient/nginx.conf
-                  strip_components: 1
+                  strip_components: 0
                   target: ${{ vars.DEPLOY_PATH }}/
 
             - name: Deploy over SSH
