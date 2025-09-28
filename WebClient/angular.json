@@ -66,7 +66,7 @@
               "outputHashing": "all"
             },
 
-            "dev-server": {
+            "development": {
               "budgets": [
                 {
                   "type": "initial",
@@ -88,7 +88,7 @@
               "outputHashing": "all"
             },
 
-            "development": {
+            "local": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
