@@ -33,7 +33,7 @@ services:
             - DOMAIN_BACKEND=${DOMAIN_BACKEND}
             - DOMAIN_WEBCLIENT=${DOMAIN_WEBCLIENT}
             - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
-            - BASE_AUTH_ENABLE=${BASE_AUTH_ENABLE}
+            - BASIC_AUTH_ENABLE=${BASIC_AUTH_ENABLE}
             - BASIC_AUTH_USER=${BASIC_AUTH_USER}
             - BASIC_AUTH_HASH=${BASIC_AUTH_HASH}
         networks: [web]
