@@ -1,0 +1,15 @@
+{
+  email {$LETS_ENCRYPT_EMAIL}
+}
+
+{$DOMAIN_BACKEND} {
+  reverse_proxy backend:5000
+}
+
+{$DOMAIN_WEBCLIENT} {
+  reverse_proxy webclient:80
+}
+
+{$DOMAIN_ROOT} {
+  redir https://{$DOMAIN_WEBCLIENT}{uri}
+}
