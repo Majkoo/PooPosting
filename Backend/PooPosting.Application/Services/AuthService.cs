@@ -1,6 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +9,10 @@ using PooPosting.Application.Services.Helpers;
 using PooPosting.Domain.DbContext;
 using PooPosting.Domain.DbContext.Entities;
 using PooPosting.Domain.Exceptions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
 
 namespace PooPosting.Application.Services;
 
@@ -41,15 +43,49 @@ public class AuthService(
 
     public async Task<AuthSuccessResult> GenerateJwt(LoginDto dto)
     {
-        var account = await dbContext.Accounts.FirstOrDefaultAsync(a => a.Nickname == dto.Nickname);
-        if (account is null) throw new UnauthorizedException("Invalid nickname or password");
-        
+        var account = await dbContext.Accounts
+            .FirstOrDefaultAsync(a => a.Nickname == dto.Nickname || a.Email == dto.Nickname);
+
+        if (account is null)
+            throw new UnauthorizedException("Wrong password, please try again");
+
         var result = passwordHasher.VerifyHashedPassword(account, account.PasswordHash, dto.Password);
-        if (result == PasswordVerificationResult.Failed) throw new UnauthorizedException("Invalid nickname or password");
+        if (result == PasswordVerificationResult.Failed) throw new UnauthorizedException("Wrong password, please try again");
 
         return await GenerateAuthResult(account);
     }
-    
+
+    public async Task<AuthSuccessResult> GoogleLogin(GoogleLoginDto dto)
+    {
+        GoogleJsonWebSignature.Payload payload;
+        try
+        {
+            payload = await GoogleJsonWebSignature.ValidateAsync(dto.IdToken);
+        }
+        catch (Exception)
+        {
+             throw new UnauthorizedException("Invalid Google token");
+        }
+
+        var user = await dbContext.Accounts.FirstOrDefaultAsync(u => u.Email == payload.Email);
+
+        if (user == null)
+        {
+            user = new Account()
+            {
+                Nickname = dto.Name.Length > 16 ? dto.Name.Substring(0, 16) : dto.Name,
+                Email = dto.Email,
+                Provider = "Google",
+                ProfilePicUrl = dto.PhotoUrl,
+                PasswordHash = "GoogleHash"
+            };
+            dbContext.Accounts.Add(user);
+            await dbContext.SaveChangesAsync();
+        }
+
+        return await GenerateAuthResult(user);
+    }
+
     public async Task<AuthSuccessResult> GenerateJwt(RefreshSessionDto dto)
     {
         var account = await dbContext.Accounts.FirstOrDefaultAsync(a => a.Id == IdHasher.DecodeAccountId(dto.Uid));

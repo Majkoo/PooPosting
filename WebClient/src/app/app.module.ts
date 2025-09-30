@@ -15,7 +15,7 @@ import {TokenInterceptorService} from "./shared/utility/interceptors/token-inter
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { EasterEggComponent } from './shared/components/easter-egg/easter-egg.component';
 import { TextButtonComponent } from './shared/components/text-button/text-button.component';
-
+import {SocialLoginModule,SocialAuthServiceConfig,GoogleLoginProvider, FacebookLoginProvider,} from "@abacritt/angularx-social-login";
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +33,7 @@ import { TextButtonComponent } from './shared/components/text-button/text-button
     UrlTransformModule,
     TextButtonComponent,
     EasterEggComponent,
+    SocialLoginModule
   ],
   providers: [
     {
@@ -48,6 +49,28 @@ import { TextButtonComponent } from './shared/components/text-button/text-button
     {
       provide: MessageService,
       useClass: MessageService
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        lang: 'en',
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '305815243977-oaueknb64qadmfsapu7vij2b6am315n3.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
     }
   ],
   exports: [],

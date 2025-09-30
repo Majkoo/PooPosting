@@ -9,6 +9,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
 import {fadeInAnimation} from "../../shared/utility/animations/fadeInAnimation";
 import {AuthService} from "../../services/api/account/auth.service";
+import { GoogleSigninComponent } from "src/app/shared/components/google-signin/google-signin.component";
 
 @Component({
   selector: 'pp-register',
@@ -17,7 +18,8 @@ import {AuthService} from "../../services/api/account/auth.service";
     CommonModule,
     RouterLink,
     FormsModule,
-  ],
+    GoogleSigninComponent
+],
   templateUrl: './register.component.html',
   styles: [`
     .input {
@@ -61,6 +63,12 @@ export class RegisterComponent implements OnDestroy {
         }
       })
     );
+  }
+
+  afterGoogleSignIn(){
+    this.msgService.success("Successfully signed in", "Success");
+    this.awaitSubmit = false;
+    this.router.navigateByUrl('/');
   }
 
   ngOnDestroy() {

@@ -12,6 +12,7 @@ using PooPosting.Domain.DbContext.Entities;
 using PooPosting.Domain.DbContext.Pagination;
 using PooPosting.Domain.Enums;
 using PooPosting.Domain.Exceptions;
+using System.Formats.Tar;
 using System.Linq.Expressions;
 
 namespace PooPosting.Application.Services;
@@ -98,7 +99,7 @@ public class AccountService(
 
         var tags = await dbContext.AccountsSetTags.FirstOrDefaultAsync(x => x.AccountId == accountId);
 
-        return tags.Tags;
+        return tags?.Tags ?? new List<string>();
     }
 
     public async Task<AccountDto> UpdateEmail(UpdateAccountEmailDto dto)
