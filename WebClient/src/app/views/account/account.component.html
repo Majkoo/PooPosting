@@ -20,7 +20,7 @@
           <span>Logout</span>
         </button>
       </div>
-      <img class="shadow-lg rounded-full object-contain aspect-square w-40 md:w-60 bg-grey dark:bg-dark-grey" src="{{acc.profilePicUrl | urlTransform}}" alt="{{acc.nickname}}">
+      <img class="shadow-lg rounded-full object-contain aspect-square w-40 md:w-60 bg-grey dark:bg-dark-grey" src="{{acc.profilePicUrl.startsWith('https://') ? acc.profilePicUrl : (acc.profilePicUrl | urlTransform)}}" alt="{{acc.nickname}}">
       <h2 class="title-large tracking-wide font-bold mt-sm">{{acc.nickname}}</h2>
     </div>
 
