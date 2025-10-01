@@ -1,15 +1,15 @@
 <div class="m-4" @fadeIn>
 
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <h2 class="title-large font-bolder text-center mb-lg">
-      Login
-    </h2>
+    <div class="w-full pb-md flex-center">
+      <img class="invert" src="../../../assets/logo/logo-row.png" alt="PooPosting" height="48" width="221"/>
+    </div>
 
-    <div class="mb-3">
+    <div class="mb-md">
       <input
         type="text"
         class="input"
-        placeholder="Username"
+        placeholder="Username or Email"
         name="nickname"
         #name="ngModel"
         [(ngModel)]="loginDto.nickname"
@@ -24,13 +24,13 @@
         <div
           [@errorAnimation]="name.errors && name.errors['required'] ? 'visible' : 'hidden'"
         >
-          <span>Username is required</span>
+          <span>Username or Email is required</span>
         </div>
 
       </div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-md">
       <input
         type="password"
         class="input"
@@ -59,7 +59,7 @@
     <div class="text-center">
 
       <button
-        class="px-20 py-md bg-cta-500 dark:dark-bg-cta-500 text-white font-bold mt-4 rounded-lg disabled:opacity-60"
+        class="px-20 py-md bg-cta-500 dark:dark-bg-cta-500 text-white font-bold rounded-lg disabled:opacity-60"
         type="submit"
         [disabled]="form.invalid || awaitSubmit"
       >
@@ -67,13 +67,21 @@
       </button>
 
       <div
-        class="mt-4 text-grey text-regular"
+        class="my-md text-grey text-regular"
       >
         Don't have an account?
         <a [routerLink]="['/register']" class="text-cta-500 dark:text-dark-cta">Sign up</a>
       </div>
 
     </div>
+
+    <div class="flex items-center justify-between mb-md">
+      <div class="w-1/3 h-[1px] bg-grayscale-900 dark:dark-bg-grayscale-900"></div>
+      <span class="title-small">OR</span>
+      <div class="w-1/3 h-[1px] bg-grayscale-900 dark:dark-bg-grayscale-900"></div>
+    </div>
+
+    <pp-google-signin (loggedIn)="this.afterLogIn()"/>
 
   </form>
 

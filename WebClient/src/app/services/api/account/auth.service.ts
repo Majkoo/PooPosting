@@ -5,6 +5,8 @@ import {LoginDto} from "../../../shared/utility/dtos/LoginDto";
 import {AuthData} from "../../../shared/utility/models/authData";
 import {environment} from "../../../../environments/environment";
 import {CreateAccountDto} from "../../../shared/utility/dtos/CreateAccountDto";
+import { GoogleLoginDto } from 'src/app/shared/utility/dtos/GoogleLoginDto';
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,15 @@ export class AuthService {
     return this.httpClient
       .post<AuthData>(
         `${environment.apiUrl}/auth/login`,
+        dto,
+        {responseType: "json",})
+      .pipe(tap((res) => this.saveJwtData(res)));
+  }
+
+  loginwithGoogle(dto: SocialUser): Observable<AuthData> {
+    return this.httpClient
+      .post<AuthData>(
+        `${environment.apiUrl}/auth/google`,
         dto,
         {responseType: "json",})
       .pipe(tap((res) => this.saveJwtData(res)));

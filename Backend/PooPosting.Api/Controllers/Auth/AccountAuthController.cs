@@ -25,6 +25,14 @@ public class AccountAuthController(AuthService authService) : ControllerBase
     }
 
     [HttpPost]
+    [Route("google")]
+    public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginDto dto)
+    {
+        var result = await authService.GoogleLogin(dto);
+        return Ok(result);
+    }
+
+    [HttpPost]
     [Route("refresh")]
     public async Task<IActionResult> RefreshJwt([FromBody] RefreshSessionDto dto)
     {
