@@ -14,14 +14,14 @@
                 (click)="scrollCont.scrollBy({ left: 273, behavior: 'smooth' })"
                 [ngClass]="scrollLeft >= scrollCont.scrollWidth - scrollCont.clientWidth - 10 ? 'invisible' : 'visible'"
                 >
-                <div class="icon-angle-right text-large"></div>
+                <div class="icon-right text-large"></div>
             </div>
             <div 
                 class="w-8 h-8 absolute left-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer" 
                 (click)="scrollCont.scrollBy({ left: -273, behavior: 'smooth' })"
                  *ngIf="scrollLeft >= 10"
                 >
-                <div class="icon-angle-left text-large"></div>
+                <div class="icon-left text-large"></div>
             </div>
         </div>
     </div>
