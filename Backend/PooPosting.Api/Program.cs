@@ -85,7 +85,7 @@ builder.Services.AddHttpClient("SupabaseClient", client =>
 // DbContext
 builder.Services.AddDbContext<PictureDbContext>(options =>
 {
-        var connString = builder.Configuration.GetConnectionString(builder.Environment.IsProduction() ? "Prod" : "Dev");
+        var connString = builder.Configuration.GetConnectionString("Default");
             
         options.UseNpgsql(connString, settings =>
         {

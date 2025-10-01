@@ -44,7 +44,8 @@ public class Account: IIdentifiable
     
     [MaxLength(64)] 
     public string? RefreshToken { get; set; }
-    
+    public string? GoogleId { get; set; }
+
     public DateTime? RefreshTokenExpires { get; set; }
     
     
