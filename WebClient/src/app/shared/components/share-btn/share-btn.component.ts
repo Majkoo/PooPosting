@@ -29,7 +29,7 @@ export class ShareBtnComponent {
     {website: "Telegram", link: "https://t.me/share/url?url={picUrl}&text=Checkout this cool image on PooPosting!", color: "text-blue-400", icon: "icon-telegram"},
     {website: "Twitter/X", link: "https://twitter.com/intent/tweet?url={picUrl}&text=Checkout this cool image on PooPosting!", color: "text-gray-600", icon: "icon-twitter"},
     {website: "Facebook", link: "https://www.facebook.com/sharer/sharer.php?u={picUrl}", color: "text-blue-600", icon: "icon-facebook"},
-    {website: "E-mail", link: "mailto:?subject=Cool Picture!&body=Checkout this cool image on PooPosting {picUrl}", color: "text-red-500", icon: "icon-mail-alt"},
+    {website: "E-mail", link: "mailto:?subject=Cool Picture!&body=Checkout this cool image on PooPosting {picUrl}", color: "text-red-500", icon: "icon-mail"},
   ]
 
   dialogVisible: boolean = false;

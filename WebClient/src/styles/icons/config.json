@@ -22,7 +22,7 @@
     },
     {
       "uid": "8a0c2e4b2fa17107885228f89266247c",
-      "css": "vector-1",
+      "css": "play",
       "code": 59396,
       "src": "custom_icons",
       "selected": true,
@@ -134,7 +134,7 @@
     },
     {
       "uid": "2c1e68c9ee0fdb0830acc2bdd5c4933f",
-      "css": "add-post",
+      "css": "square",
       "code": 59406,
       "src": "custom_icons",
       "selected": true,
@@ -148,7 +148,7 @@
     },
     {
       "uid": "4e3deb012c4586807f9a204d766c8464",
-      "css": "vector",
+      "css": "comment",
       "code": 59407,
       "src": "custom_icons",
       "selected": true,
@@ -186,7 +186,7 @@
     },
     {
       "uid": "ccc2329632396dc096bb638d4b46fb98",
-      "css": "mail-alt",
+      "css": "mail",
       "code": 61664,
       "src": "fontawesome"
     },
@@ -222,31 +222,31 @@
     },
     {
       "uid": "7bf14281af5633a597f85b061ef1cfb9",
-      "css": "angle-right",
+      "css": "right",
       "code": 61701,
       "src": "fontawesome"
     },
     {
       "uid": "f3f90c8c89795da30f7444634476ea4f",
-      "css": "angle-left",
+      "css": "left",
       "code": 61700,
       "src": "fontawesome"
     },
     {
       "uid": "e4dde1992f787163e2e2b534b8c8067d",
-      "css": "angle-down",
+      "css": "down",
       "code": 61703,
       "src": "fontawesome"
     },
     {
       "uid": "5de9370846a26947e03f63142a3f1c07",
-      "css": "angle-up",
+      "css": "up",
       "code": 61702,
       "src": "fontawesome"
     },
     {
       "uid": "1a5cfa186647e8c929c2b17b9fc4dac1",
-      "css": "plus-squared",
+      "css": "add",
       "code": 61694,
       "src": "fontawesome"
     },
