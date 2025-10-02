@@ -85,10 +85,46 @@ jobs:
                   tags: |
                       ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
 
+    apply-migrations:
+        name: Apply Database Migrations
+        runs-on: ubuntu-latest
+        needs: [resolve-environment, build-push-docker]
+        environment: ${{ needs.resolve-environment.outputs.env_name }}
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup EF Tools
+              run: |
+                  set -e
+                  cd Backend
+                  dotnet tool install --global dotnet-ef || true
+
+            - name: Bundle EF Migrations
+              run: |
+                  set -e
+                  cd Backend
+                  export PATH="$PATH:$HOME/.dotnet/tools"
+                  dotnet ef migrations bundle \
+                    -r linux-x64 \
+                    --project PooPosting.Domain \
+                    --startup-project PooPosting.Api
+
+            - name: Dry Run Migration
+              run: |
+                  set -e
+                  chmod +x ./Backend/efbundle
+                  ./Backend/efbundle --connection "${{ secrets.CONNECTIONSTRINGS__DEFAULT }}" --dry-run
+
+            - name: Migrate Database
+              run: |
+                  set -e
+                  chmod +x ./Backend/efbundle
+                  ./Backend/efbundle --connection "${{ secrets.CONNECTIONSTRINGS__DEFAULT }}"
+
     deploy:
         name: Deploy
         runs-on: ubuntu-latest
-        needs: [resolve-environment, build-push-docker]
+        needs: [resolve-environment, build-push-docker, apply-migrations]
         environment: ${{ needs.resolve-environment.outputs.env_name }}
         steps:
             - uses: actions/checkout@v4
