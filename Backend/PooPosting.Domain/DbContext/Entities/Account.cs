@@ -18,7 +18,7 @@ public class Account: IIdentifiable
     [Required]
     [MaxLength(100)]
     public string Email { get; set; } = null!;
-    
+
     [Required]
     [MaxLength(255)]
     public string PasswordHash { get; set; } = null!;
@@ -33,9 +33,12 @@ public class Account: IIdentifiable
     [Required]
     public bool IsDeleted { get; set; } = false;
 
-    [Required] 
+    [Required]
     public int RoleId { get; set; } = 1;
-    
+
+    [Required]
+    public string Provider { get; set; } = "Pooposting";
+
     [AllowNull]
     public string ProfilePicUrl { get; set; }
     

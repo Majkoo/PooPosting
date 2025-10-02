@@ -29,7 +29,7 @@ import { Component } from '@angular/core';
         </a>
 
         <a
-          class="icon icon-plus-squared nav-link"
+          class="icon icon-add nav-link"
           routerLinkActive="link-active"
           routerLink="/add-post"
         >

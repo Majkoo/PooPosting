@@ -33,6 +33,7 @@ public class RegisterDtoValidator : AbstractValidator<RegisterDto>
             .NotEmpty()
             .MinimumLength(4)
             .MaximumLength(25)
+            .Matches(@"^[a-zA-Z0-9_.-]*$").WithMessage("Usernames cannot contain special characters")
             .Custom(
                 (value, context) =>
                 {

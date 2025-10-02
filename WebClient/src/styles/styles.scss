@@ -144,3 +144,7 @@ header, footer, nav {
 .white-text{
   @apply dark:text-grayscale-900 text-dark-grayscale-900 #{!important};
 }
+
+.flex-center{
+  @apply flex justify-center items-center
+}
