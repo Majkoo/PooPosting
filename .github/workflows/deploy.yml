@@ -113,13 +113,8 @@ jobs:
                   set -e
                   cd Backend
                   export PATH="$PATH:$HOME/.dotnet/tools"
+                  ls -la appsettings.json
                   dotnet ef migrations bundle \
                     -r linux-x64 \
                     --project PooPosting.Domain \
                     --startup-project PooPosting.Api
-
-            - name: Dry Run Migration
-              run: |
-                  set -e
-                  chmod +x ./Backend/efbundle
-                  ./Backend/efbundle --connection "${{ secrets.CONNECTIONSTRINGS__DEFAULT }}" --dry-run
