@@ -94,7 +94,7 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Prepare appsettings for ASP.NET Core
-              run: cp Backend/PooPosting.Api/appsettings.Template.json Backend/appsettings.json
+              run: cp Backend/appsettings.Template.json Backend/appsettings.json
 
             - name: Substitute secrets into appsettings
               uses: faradaytrs/substitute-secrets-action@2.1
@@ -102,6 +102,9 @@ jobs:
                   input: Backend/appsettings.json
                   substitutionRegex: \$<([A-Z0-9_]+)>
                   substitutionData: ${{ toJSON(secrets) }}
+            
+            - name: Copy appsettings to PooPosting.Api
+              run: cp Backend/appsettings.json Backend/PooPosting.Api/appsettings.json
 
             - name: Setup EF Tools
               run: |
@@ -113,8 +116,8 @@ jobs:
                   set -e
                   cd Backend
                   export PATH="$PATH:$HOME/.dotnet/tools"
-                  ls -la appsettings.json
                   dotnet ef migrations bundle \
                     -r linux-x64 \
                     --project PooPosting.Domain \
-                    --startup-project PooPosting.Api
+                    --startup-project PooPosting.Api \
+                    --self-contained 
