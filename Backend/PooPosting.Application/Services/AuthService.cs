@@ -67,7 +67,8 @@ public class AuthService(
              throw new UnauthorizedException("Invalid Google token");
         }
 
-        var user = await dbContext.Accounts.FirstOrDefaultAsync(u => u.Email == payload.Email);
+        var user = await dbContext.Accounts
+                .FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
 
         if (user == null)
         {
@@ -77,6 +78,7 @@ public class AuthService(
                 Email = dto.Email,
                 Provider = "Google",
                 ProfilePicUrl = dto.PhotoUrl,
+                GoogleId = payload.Subject,
                 PasswordHash = "GoogleHash"
             };
             dbContext.Accounts.Add(user);
