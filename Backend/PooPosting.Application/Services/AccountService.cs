@@ -110,6 +110,14 @@ public class AccountService(
         await dbContext.SaveChangesAsync();
         return account.MapToDto();
     }
+    public async Task<AccountDto> UpdateUsername(UpdateAccountUsernameDto dto)
+    {
+        var account = await accountContextService.GetAccountAsync();
+        account.Nickname = dto.Username;
+        dbContext.Update(account);
+        await dbContext.SaveChangesAsync();
+        return new AccountDto(); // change this to account.MapToDto() after fixing a bug
+    }
 
     public async Task<AccountDto> UpdatePassword(UpdateAccountPasswordDto dto)
     {

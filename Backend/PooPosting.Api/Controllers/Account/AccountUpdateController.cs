@@ -28,6 +28,15 @@ public class AccountUpdateController(AccountService accountService) : Controller
         return Ok(await accountService.UpdatePassword(dto));
     }
 
+    [HttpPost]
+    [Route("username")]
+    public async Task<IActionResult> UpdateAccountUsername(
+        [FromBody] UpdateAccountUsernameDto Username
+    )
+    {
+        return Ok(await accountService.UpdateUsername(Username));
+    }
+
     [HttpPatch]
     [Route("profile-picture")]
     public async Task<IActionResult> UpdateAccountProfilePic(
