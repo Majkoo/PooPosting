@@ -31,7 +31,7 @@
   </p>
 
   <!--  Tags  -->
-  <p class="flex gap-sm px-md text-dark dark:text-dark-dark" *ngIf="pic.tags?.length">
+  <p class="flex flex-wrap gap-sm px-md text-dark dark:text-dark-dark" *ngIf="pic.tags?.length">
     <pp-tag *ngFor="let tag of pic.tags" [tag]="tag"/>
   </p>
 

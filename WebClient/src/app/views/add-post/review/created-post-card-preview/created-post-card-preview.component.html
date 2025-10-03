@@ -26,7 +26,7 @@
   </p>
 
   <!--  Tags  -->
-  <p class="flex gap-sm px-md" *ngIf="postData.tags?.length">
+  <p class="flex gap-sm px-md flex-wrap" *ngIf="postData.tags?.length">
     <pp-tag *ngFor="let tag of postData.tags" [tag]="tag"/>
   </p>
 

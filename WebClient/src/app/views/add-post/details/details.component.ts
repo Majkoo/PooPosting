@@ -30,7 +30,7 @@ import {NgForm} from "@angular/forms";
         ></textarea>
       </div>
 
-      <div class="flex flex-col gap-xs">
+      <div class="flex flex-col flex-wrap gap-xs">
         Tags:
         <pp-tag-input [tags]="tags" (tagsChange)="syncTags($event)"/>
       </div>
