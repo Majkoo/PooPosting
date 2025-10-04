@@ -105,6 +105,11 @@ public class AccountService(
     public async Task<AccountDto> UpdateEmail(UpdateAccountEmailDto dto)
     {
         var account = await accountContextService.GetAccountAsync();
+        var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email ==  dto.Email);
+        if (existingEmail != null)
+        {
+            throw new BadRequestException($"That email already exists");
+        }
         account.Email = dto.Email;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
@@ -113,7 +118,12 @@ public class AccountService(
     public async Task<AccountDto> UpdateUsername(UpdateAccountUsernameDto dto)
     {
         var account = await accountContextService.GetAccountAsync();
-        account.Nickname = dto.Username;
+        var existingUsername = dbContext.Accounts.FirstOrDefault(x => x.Nickname == dto.Username);
+        if (existingUsername != null)
+        {
+            throw new BadRequestException($"That username already exists");
+        }
+        account.Nickname = dto.Username.Length > 16 ? dto.Username.Substring(0, 16) : dto.Username;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
         return new AccountDto(); // change this to account.MapToDto() after fixing a bug
