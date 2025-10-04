@@ -1,0 +1,31 @@
+<button
+  [ngClass]="{
+    cssClass: true,
+    'pt-sm pl-sm icon-dark icon-edit cursor-pointer': true,
+  }"
+  (click)="openDialog()"
+  class="text-dark dark:text-dark-dark"
+>
+</button>
+
+<p-dialog header="" [(visible)]="dialogVisible" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-lg" [resizable]="false">
+    <div class="w-96 overflow-hidden p-lg flex items-center flex-col bg-grayscale-50 dark:bg-dark-grayscale-50">
+        <div class="w-full flex">
+            <span class="w-full text-center pb-md font-bold text-large">Change Username</span>
+            <button class="m-0 icon-cancel absolute right-3 text-large" (click)="closeDialog()"></button>
+        </div>
+        <div class="w-full pb-md flex items-center flex-col">
+            <input
+              type="text"
+              class="input"
+              placeholder="New username"
+              #username
+              required>
+            <button
+              class="flex gap-xs text-regular white-text px-md py-sm rounded-lg whitespace-nowrap bg-primary-800 dark:bg-dark dark:bg-dark-dark-primary-800 disabled:opacity-60"
+              (click)="closeDialog(username.value)">
+              Change Username
+            </button>
+        </div>
+    </div>
+</p-dialog>

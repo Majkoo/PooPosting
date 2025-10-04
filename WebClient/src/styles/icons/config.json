@@ -261,6 +261,12 @@
       "css": "google",
       "code": 61856,
       "src": "fontawesome"
+    },
+    {
+      "uid": "41087bc74d4b20b55059c60a33bf4008",
+      "css": "edit",
+      "code": 59409,
+      "src": "fontawesome"
     }
   ]
 }
