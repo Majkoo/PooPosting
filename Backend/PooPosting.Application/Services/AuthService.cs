@@ -70,11 +70,30 @@ public class AuthService(
         var user = await dbContext.Accounts
                 .FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
 
+        var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
+        if (existingEmail != null)
+        {
+            throw new BadRequestException($"That email already exists");
+        }
+        var nickname = dto.Name.Length > 15 ? dto.Name.Substring(0, 15) : dto.Name;
+
+        var existingNickname = dbContext.Accounts.FirstOrDefault(x => x.Nickname == dto.Name);
+        if (existingNickname != null)
+        {
+            var count = -1;
+            while (existingNickname != null)
+            {
+                count++;
+                existingNickname = dbContext.Accounts.FirstOrDefault(x => x.Nickname == $"{dto.Name}{count}");
+            }
+            nickname += count;
+        }
+
         if (user == null)
         {
             user = new Account()
             {
-                Nickname = dto.Name.Length > 16 ? dto.Name.Substring(0, 16) : dto.Name,
+                Nickname = nickname,
                 Email = dto.Email,
                 Provider = "Google",
                 ProfilePicUrl = dto.PhotoUrl,

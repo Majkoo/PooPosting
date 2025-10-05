@@ -21,7 +21,10 @@
         </button>
       </div>
       <img class="shadow-lg rounded-full object-contain aspect-square w-40 md:w-60 bg-grey dark:bg-dark-grey" src="{{acc.profilePicUrl.trim() | urlTransform}}" alt="{{acc.nickname}}">
-      <h2 class="title-large tracking-wide font-bold mt-sm">{{acc.nickname}}</h2>
+      <div class="flex flex-row">
+        <h2 class="title-large tracking-wide font-bold mt-sm">{{acc.nickname}}</h2>
+        <pp-change-username *ngIf="isAccountCurrentUsers"/>
+      </div>
     </div>
 
     <div class="flex gap-md sm:gap-xl md:gap-xl justify-center items-center flex-wrap">
