@@ -104,16 +104,35 @@ public class AccountService(
 
     public async Task<AccountDto> UpdateEmail(UpdateAccountEmailDto dto)
     {
-        var account = await accountContextService.GetAccountAsync();
-        var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email ==  dto.Email);
-        if (existingEmail != null)
-        {
-            throw new BadRequestException($"That email already exists");
-        }
+        // determine user id
+        var userId = accountContextService.GetAccountId();
+        
+        // find the account by email & perform business logic checks
+        var emailAlreadyAssignedToCurrentUser = await dbContext.Accounts.AnyAsync(a => a.Id == userId && a.Email == dto.Email);
+        if (emailAlreadyAssignedToCurrentUser)
+            throw new BadRequestException("That email is already associated with your account");
+        var accountWithThatEmailExists = await dbContext.Accounts.AnyAsync(a => a.Email == dto.Email);
+        if (accountWithThatEmailExists)
+            throw new BadRequestException("That email already exists");
+        
+        // get current user
+        var account = await dbContext.Accounts
+                          .AsNoTracking()
+                          .FirstOrDefaultAsync(a => a.Id == userId)
+                      ?? throw new BadRequestException($"Could not find a user with id: {userId}");
+        
+        // act on the db
         account.Email = dto.Email;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
-        return account.MapToDto();
+
+        // return projected & updated dto to the user
+        return await dbContext.Accounts
+                   .AsNoTracking()
+                   .Where(a => a.Id == userId)
+                   .ProjectToDto()
+                   .FirstOrDefaultAsync() 
+               ?? throw new BadRequestException($"Could not find a user with id: {userId}");
     }
     public async Task<AccountDto> UpdateUsername(UpdateAccountUsernameDto dto)
     {
