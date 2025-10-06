@@ -23,7 +23,7 @@ public static class AccountMapper
 
     /// <summary>
     /// Maps an Account entity to AccountDto. Assumes Pictures, Likes, and Comments are already loaded.
-    /// Prefer ProjectToDto for IQueryable for more efficient data retrieval.
+    /// Prefer ProjectToDto over MapToDto IQueryable for more efficient data retrieval.
     /// </summary>
     public static AccountDto MapToDto(this Account a)
     {
