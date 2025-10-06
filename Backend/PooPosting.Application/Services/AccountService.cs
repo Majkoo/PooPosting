@@ -107,7 +107,7 @@ public class AccountService(
         // determine user id
         var userId = accountContextService.GetAccountId();
         
-        // find the account by email & perform business logic checks
+        // perform business logic checks
         var emailAlreadyAssignedToCurrentUser = await dbContext.Accounts.AnyAsync(a => a.Id == userId && a.Email == dto.Email);
         if (emailAlreadyAssignedToCurrentUser)
             throw new BadRequestException("That email is already associated with your account");
@@ -118,8 +118,7 @@ public class AccountService(
         // get current user
         var account = await dbContext.Accounts
                           .AsNoTracking()
-                          .FirstOrDefaultAsync(a => a.Id == userId)
-                      ?? throw new BadRequestException($"Could not find a user with id: {userId}");
+                          .FirstAsync(a => a.Id == userId); // should always be found as user is authenticated
         
         // act on the db
         account.Email = dto.Email;
@@ -131,30 +130,59 @@ public class AccountService(
                    .AsNoTracking()
                    .Where(a => a.Id == userId)
                    .ProjectToDto()
-                   .FirstOrDefaultAsync() 
-               ?? throw new BadRequestException($"Could not find a user with id: {userId}");
+                   .FirstAsync(); // should always be found as user is authenticated
     }
     public async Task<AccountDto> UpdateUsername(UpdateAccountUsernameDto dto)
     {
-        var account = await accountContextService.GetAccountAsync();
-        var existingUsername = dbContext.Accounts.FirstOrDefault(x => x.Nickname == dto.Username);
-        if (existingUsername != null)
-        {
-            throw new BadRequestException($"That username already exists");
-        }
-        account.Nickname = dto.Username.Length > 16 ? dto.Username.Substring(0, 16) : dto.Username;
+        // determine user id
+        var userId = accountContextService.GetAccountId();
+        
+        // perform business logic checks
+        var nicknameAlreadyAssignedToCurrentUser = await dbContext.Accounts.AnyAsync(a => a.Id == userId && a.Nickname == dto.Username);
+        if (nicknameAlreadyAssignedToCurrentUser)
+            throw new BadRequestException("You already have that nickname");
+        var accountWithThaNicknameExists = await dbContext.Accounts.AnyAsync(a => a.Nickname == dto.Username);
+        if (accountWithThaNicknameExists)
+            throw new BadRequestException("That nickname is taken");
+        
+        var account = await dbContext.Accounts
+            .AsNoTracking()
+            .FirstAsync(a => a.Id == userId); // should always be found as user is authenticated
+        
+        // act on the db
+        account.Nickname = dto.Username.Length > 16 ? dto.Username[..16] : dto.Username;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
-        return new AccountDto(); // change this to account.MapToDto() after fixing a bug
+        
+        // return projected & updated dto to the user
+        return await dbContext.Accounts
+            .AsNoTracking()
+            .Where(a => a.Id == account.Id)
+            .ProjectToDto()
+            .FirstAsync(); // should always be found as user is authenticated
     }
 
     public async Task<AccountDto> UpdatePassword(UpdateAccountPasswordDto dto)
     {
-        var account = await accountContextService.GetAccountAsync();
+        // determine user id
+        var userId = accountContextService.GetAccountId();
+
+        // fetch current state without tracking
+        var account = await dbContext.Accounts
+            .AsNoTracking()
+            .FirstAsync(a => a.Id == userId); // should always be found as user is authenticated
+
+        // act on the db
         account.PasswordHash = passwordHasher.HashPassword(account, dto.Password);
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
-        return account.MapToDto();
+
+        // return projected & updated dto to the user
+        return await dbContext.Accounts
+            .AsNoTracking()
+            .Where(a => a.Id == account.Id)
+            .ProjectToDto()
+            .FirstAsync(); // should always be found as user is authenticated
     }
 
     public Task<AccountDto> UpdateBackgroundPicture(UpdateAccountPictureDto dto)
