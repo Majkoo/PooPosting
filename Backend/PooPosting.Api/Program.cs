@@ -75,6 +75,11 @@ if (builder.Environment.IsProduction())
     supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointProd");
     supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtProd");
 }
+if (builder.Environment.IsEnvironment("Local"))
+{
+    supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointLocal");
+    supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtLocal");
+}
 builder.Services.AddSingleton(supabaseConfig);
 builder.Services.AddHttpClient("SupabaseClient", client =>
 {
