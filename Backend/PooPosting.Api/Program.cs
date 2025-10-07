@@ -65,13 +65,11 @@ builder.Services.AddScoped<IAuthorizationHandler, CommentOperationRequirementHan
 
 // Supabase
 var supabaseConfig = new SupabaseConfig();
-supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:Endpoint");
-supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:Jwt");
-
+builder.Configuration.GetSection("SupabaseConfig").Bind(supabaseConfig);
 builder.Services.AddSingleton(supabaseConfig);
 builder.Services.AddHttpClient("SupabaseClient", client =>
 {
-    client.BaseAddress = new Uri(supabaseConfig.Endpoint + "/storage/v1/");
+    client.BaseAddress = new Uri(supabaseConfig.Endpoint + "/storage/v1/s3");
     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {supabaseConfig.Jwt}");
 });
 
