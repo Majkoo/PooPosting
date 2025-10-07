@@ -65,21 +65,9 @@ builder.Services.AddScoped<IAuthorizationHandler, CommentOperationRequirementHan
 
 // Supabase
 var supabaseConfig = new SupabaseConfig();
-if (builder.Environment.IsDevelopment())
-{
-    supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointDev");
-    supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtDev");
-}
-if (builder.Environment.IsProduction())
-{
-    supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointProd");
-    supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtProd");
-}
-if (builder.Environment.IsEnvironment("Local"))
-{
-    supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:EndpointLocal");
-    supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:JwtLocal");
-}
+supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:Endpoint");
+supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:Jwt");
+
 builder.Services.AddSingleton(supabaseConfig);
 builder.Services.AddHttpClient("SupabaseClient", client =>
 {
