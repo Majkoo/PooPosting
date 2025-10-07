@@ -123,7 +123,7 @@ public class AccountService(
         {
             throw new BadRequestException($"That username already exists");
         }
-        account.Nickname = dto.Username.Length > 16 ? dto.Username.Substring(0, 16) : dto.Username;
+        account.Nickname = dto.Username.Length > 25 ? dto.Username.Substring(0, 25) : dto.Username;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
         return new AccountDto(); // change this to account.MapToDto() after fixing a bug
