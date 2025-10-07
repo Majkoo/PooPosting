@@ -1,5 +1,6 @@
 appsettings.json
 appsettings.Development.json
+appsettings.Local.json
 *.editorconfig
 bin/
 obj/
@@ -8,3 +9,5 @@ obj/
 internal-nlog.txt
 */internal-nlog.txt
 .vs
+supabase
+.vscode
