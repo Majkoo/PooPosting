@@ -1,5 +1,6 @@
 ﻿using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PooPosting.Application.Models.Configuration;
@@ -29,13 +30,13 @@ public class AuthService(
             Nickname = dto.Nickname,
             Email = dto.Email
         };
-        
+
         var hashedPassword = passwordHasher.HashPassword(newAccount, dto.Password);
         newAccount.PasswordHash = hashedPassword;
-        
+
         newAccount.ProfilePicUrl =
             Path.Combine("wwwroot", "accounts", "profile_pictures", $"default{new Random().Next(0, 5)}-pfp.webp");
-        
+
         var account = await dbContext.Accounts.AddAsync(newAccount);
         await dbContext.SaveChangesAsync();
         return IdHasher.EncodeAccountId(account.Entity.Id);
@@ -64,36 +65,38 @@ public class AuthService(
         }
         catch (Exception)
         {
-             throw new UnauthorizedException("Invalid Google token");
+            throw new UnauthorizedException("Invalid Google token");
         }
 
         var user = await dbContext.Accounts
                 .FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
 
-        var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
-        if (existingEmail != null)
-        {
-            throw new BadRequestException($"That email already exists");
-        }
-        var nickname = dto.Name.Length > 15 ? dto.Name.Substring(0, 15) : dto.Name;
-
-        var existingNickname = dbContext.Accounts.FirstOrDefault(x => x.Nickname == dto.Name);
-        if (existingNickname != null)
-        {
-            var count = -1;
-            while (existingNickname != null)
-            {
-                count++;
-                existingNickname = dbContext.Accounts.FirstOrDefault(x => x.Nickname == $"{dto.Name}{count}");
-            }
-            nickname += count;
-        }
-
         if (user == null)
         {
+            var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
+            if (existingEmail != null)
+            {
+                throw new BadRequestException($"That email already exists");
+            }
+
+            var nickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 25)); // max length of username is 25
+            var shorterNickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 21)); // this gives us room to generate different username
+
+            var existingNicknames = dbContext.Accounts
+                .Where(x => x.Nickname.StartsWith(shorterNickname))
+                .Select(a => a.Nickname)
+                .ToList();
+
+            var testNickname = nickname;
+            while (existingNicknames.Contains(testNickname))
+            {
+                var randomSuffix = new Random().Next(100, 9999).ToString();
+                testNickname = shorterNickname + randomSuffix;
+            }
+    
             user = new Account()
             {
-                Nickname = nickname,
+                Nickname = testNickname,
                 Email = dto.Email,
                 Provider = "Google",
                 ProfilePicUrl = dto.PhotoUrl,
@@ -110,21 +113,21 @@ public class AuthService(
     public async Task<AuthSuccessResult> GenerateJwt(RefreshSessionDto dto)
     {
         var account = await dbContext.Accounts.FirstOrDefaultAsync(a => a.Id == IdHasher.DecodeAccountId(dto.Uid));
-        
+
         if (account is null) throw new NotFoundException();
         if (account.RefreshToken != dto.RefreshToken) throw new UnauthorizedException("Refresh token invalid");
         if (account.RefreshTokenExpires > DateTime.UtcNow) throw new UnauthorizedException("Refresh token invalid");
 
         return await GenerateAuthResult(account);
     }
-    
+
     public async Task Forget(ForgetSessionDto dto)
     {
         var account = await dbContext.Accounts.FirstOrDefaultAsync(a => a.Id == IdHasher.DecodeAccountId(dto.Uid));
-        
+
         if (account is null) throw new NotFoundException();
         if (account.RefreshToken != dto.RefreshToken) throw new UnauthorizedException("Refresh token invalid");
-        
+
         if (account.RefreshTokenExpires < DateTime.UtcNow)
         {
             account.RefreshToken = null;
@@ -150,7 +153,7 @@ public class AuthService(
             claims,
             expires: expires,
             signingCredentials: cred);
-        
+
 
         var refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");
 
@@ -158,7 +161,7 @@ public class AuthService(
         account.RefreshTokenExpires = DateTime.UtcNow.AddDays(authenticationSettings.RefreshTokenExpireDays);
 
         await dbContext.SaveChangesAsync();
-            
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var authSuccessResult = new AuthSuccessResult()
         {
@@ -167,7 +170,7 @@ public class AuthService(
             RoleId = account.RoleId,
             RefreshToken = refreshToken
         };
-        
+
         return authSuccessResult;
     }
 }

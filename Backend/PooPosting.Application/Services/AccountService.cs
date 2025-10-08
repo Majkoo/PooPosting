@@ -150,7 +150,7 @@ public class AccountService(
             .FirstAsync(a => a.Id == userId); // should always be found as user is authenticated
         
         // act on the db
-        account.Nickname = dto.Username.Length > 16 ? dto.Username[..16] : dto.Username;
+        account.Nickname = dto.Username.Length > 25 ? dto.Username[..25] : dto.Username;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
         
