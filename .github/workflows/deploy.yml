@@ -87,10 +87,47 @@ jobs:
                   tags: |
                       ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
 
+    apply-migrations:
+      name: Apply Database Migrations
+      runs-on: ubuntu-latest
+      needs: [resolve-environment, build-push-docker]
+      environment: ${{ needs.resolve-environment.outputs.env_name }}
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Prepare appsettings for ASP.NET Core
+          run: cp Backend/PooPosting.Api/appsettings.Template.json Backend/PooPosting.Api/appsettings.json
+
+        - name: Substitute secrets into appsettings
+          uses: faradaytrs/substitute-secrets-action@2.1
+          with:
+              input: Backend/PooPosting.Api/appsettings.json
+              substitutionRegex: \$<([A-Z0-9_]+)>
+              substitutionData: ${{ toJSON(secrets) }}
+
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: ${{ vars.DOTNET_VERSION }}
+
+        - name: Restore dependencies
+          run: dotnet restore
+
+        - name: Install EF Core CLI
+          run: dotnet tool install --global dotnet-ef
+
+        - name: Add EF tools to PATH
+          run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+        - name: Apply EF Core migrations
+          run: dotnet ef database update --project Backend/PooPosting.Api/PooPosting.Api.csproj --startup-project Backend/PooPosting.Api/PooPosting.Api.csproj
+
     deploy:
         name: Deploy
         runs-on: ubuntu-latest
-        needs: [resolve-environment, build-push-docker]
+        needs: [resolve-environment, build-push-docker, apply-migrations]
         environment: ${{ needs.resolve-environment.outputs.env_name }}
         steps:
             - uses: actions/checkout@v4
