@@ -79,9 +79,8 @@ public class AuthService(
                 throw new BadRequestException($"That email already exists");
             }
 
-            var maxNicknameLenght = Account.MaxNicknameLength;
-            var nickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, maxNicknameLenght));
-            var shorterNickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, maxNicknameLenght - 4)); // this gives us room to generate different username
+            var nickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 25)); // max length of username is 25
+            var shorterNickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 21)); // this gives us room to generate different username
 
             var existingNicknames = dbContext.Accounts
                 .Where(x => x.Nickname.StartsWith(shorterNickname))
