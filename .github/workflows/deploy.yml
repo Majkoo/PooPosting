@@ -1,0 +1,181 @@
+name: Deploy Full Stack
+
+permissions:
+    contents: read
+    packages: write
+
+on:
+    push:
+        branches:
+            - develop
+
+env:
+    REGISTRY: ghcr.io
+    BACKEND_IMAGE: pooposting-backend
+    WEBCLIENT_IMAGE: pooposting-webclient
+
+jobs:
+    # For now we have only one environment, might be useful in the future
+    resolve-environment:
+        name: Resolve Environment
+        runs-on: ubuntu-latest
+        outputs:
+            env_name: ${{ steps.setenv.outputs.env_name }}
+        steps:
+            - id: setenv
+              run: |
+                  if [ "${GITHUB_REF_NAME}" = "main" ]; then
+                    echo "env_name=develop" >> "$GITHUB_OUTPUT"
+                  elif [ "${GITHUB_REF_NAME}" = "develop" ]; then
+                    echo "env_name=develop" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "env_name=develop" >> "$GITHUB_OUTPUT"
+                  fi
+
+    build-push-docker:
+        name: Build & Push Docker Images
+        runs-on: ubuntu-latest
+        needs: [resolve-environment]
+        environment: ${{ needs.resolve-environment.outputs.env_name }}
+        outputs:
+            backend_tag: ${{ steps.meta.outputs.backend_tag }}
+            webclient_tag: ${{ steps.meta.outputs.webclient_tag }}
+            owner_lower: ${{ steps.meta.outputs.owner_lower }}
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                  registry: docker.io
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Log in to GHCR
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Compute tags/env
+              id: meta
+              run: |
+                  echo "backend_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+                  echo "webclient_tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+                  owner_lower=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+                  echo "owner_lower=${owner_lower}" >> "$GITHUB_OUTPUT"
+
+            - name: Build & push Backend image
+              uses: docker/build-push-action@v5
+              with:
+                  context: ./Backend
+                  push: true
+                  tags: |
+                      ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.BACKEND_IMAGE }}:${{ steps.meta.outputs.backend_tag }}
+
+            - name: Build & push Webclient image
+              uses: docker/build-push-action@v5
+              with:
+                  context: ./WebClient
+                  build-args: |
+                      ANGULAR_CONFIGURATION=${{ vars.ANGULAR_CONFIGURATION }}
+                  push: true
+                  tags: |
+                      ${{ env.REGISTRY }}/${{ steps.meta.outputs.owner_lower }}/${{ env.WEBCLIENT_IMAGE }}:${{ steps.meta.outputs.webclient_tag }}
+
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        needs: [resolve-environment, build-push-docker]
+        environment: ${{ needs.resolve-environment.outputs.env_name }}
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Copy .env template
+              run: cp Deploy/.env.template Deploy/.env
+
+            - name: Substitute secrets into .env
+              uses: faradaytrs/substitute-secrets-action@2.1
+              with:
+                  input: Deploy/.env
+                  substitutionRegex: \$<([A-Z0-9_]+)>
+                  substitutionData: ${{ toJSON(secrets) }}
+
+            - name: Substitute vars into .env
+              uses: faradaytrs/substitute-secrets-action@2.1
+              with:
+                  input: Deploy/.env
+                  substitutionRegex: \$<([A-Z0-9_]+)>
+                  substitutionData: ${{ toJSON(vars) }}
+
+            - name: Prepare appsettings for ASP.NET Core
+              run: cp Backend/PooPosting.Api/appsettings.Template.json Backend/appsettings.json
+
+            - name: Substitute secrets into appsettings
+              uses: faradaytrs/substitute-secrets-action@2.1
+              with:
+                  input: Backend/appsettings.json
+                  substitutionRegex: \$<([A-Z0-9_]+)>
+                  substitutionData: ${{ toJSON(secrets) }}
+
+            - name: Append deployment metadata
+              run: |
+                  {
+                    printf '%s\n' \
+                      "DOTNET_ENVIRONMENT=${{ vars.DOTNET_ENVIRONMENT }}" \
+                      "REPO_OWNER=${{ needs.build-push-docker.outputs.owner_lower }}" \
+                      "BACKEND_IMAGE=${{ env.BACKEND_IMAGE }}" \
+                      "WEBCLIENT_IMAGE=${{ env.WEBCLIENT_IMAGE }}" \
+                      "BACKEND_TAG=${{ needs.build-push-docker.outputs.backend_tag }}" \
+                      "WEBCLIENT_TAG=${{ needs.build-push-docker.outputs.webclient_tag }}";
+                  } >> Deploy/.env
+
+            - name: Upload Deploy configs (flatten)
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.HOST_USER }}
+                  key: ${{ secrets.HOST_SSH_KEY }}
+                  port: ${{ secrets.HOST_PORT }}
+                  source: |
+                      Deploy/.env,
+                      Deploy/docker-compose.yml,
+                      Deploy/Caddyfile
+                  strip_components: 1
+                  target: ${{ vars.DEPLOY_PATH }}/
+
+            - name: Upload service configs (preserve dirs)
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.HOST_USER }}
+                  key: ${{ secrets.HOST_SSH_KEY }}
+                  port: ${{ secrets.HOST_PORT }}
+                  source: |
+                      Backend/appsettings.json,
+                      WebClient/nginx.conf
+                  strip_components: 0
+                  target: ${{ vars.DEPLOY_PATH }}/
+
+            - name: Deploy over SSH
+              uses: appleboy/ssh-action@v0.1.10
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.HOST_USER }}
+                  key: ${{ secrets.HOST_SSH_KEY }}
+                  port: ${{ secrets.HOST_PORT }}
+                  script: |
+                      set -e
+                      cd ${{ vars.DEPLOY_PATH }}
+
+                      # Login to GHCR
+                      echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+                      # Deploy
+                      docker compose --env-file .env pull
+                      docker compose --env-file .env up -d
+                      docker compose --env-file .env ps

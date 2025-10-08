@@ -1,0 +1,43 @@
+services:
+    backend:
+        image: ghcr.io/${REPO_OWNER}/${BACKEND_IMAGE}:${BACKEND_TAG}
+        restart: always
+        env_file:
+            - .env
+        volumes:
+            - ./Backend/appsettings.json:/app/appsettings.json:ro
+        networks: [web]
+
+    webclient:
+        image: ghcr.io/${REPO_OWNER}/${WEBCLIENT_IMAGE}:${WEBCLIENT_TAG}
+        restart: always
+        volumes:
+            - ./WebClient/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+        networks: [web]
+
+    caddy:
+        image: caddy:latest
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+            - caddy_data:/data
+            - caddy_config:/config
+        depends_on:
+            - backend
+            - webclient
+        environment:
+            - DOMAIN_ROOT=${DOMAIN_ROOT}
+            - DOMAIN_BACKEND=${DOMAIN_BACKEND}
+            - DOMAIN_WEBCLIENT=${DOMAIN_WEBCLIENT}
+            - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
+        networks: [web]
+
+networks:
+    web:
+
+volumes:
+    caddy_data:
+    caddy_config:
