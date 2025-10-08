@@ -12,7 +12,6 @@ using PooPosting.Domain.DbContext.Entities;
 using PooPosting.Domain.DbContext.Pagination;
 using PooPosting.Domain.Enums;
 using PooPosting.Domain.Exceptions;
-using System.Formats.Tar;
 using System.Linq.Expressions;
 
 namespace PooPosting.Application.Services;
@@ -148,9 +147,10 @@ public class AccountService(
         var account = await dbContext.Accounts
             .AsNoTracking()
             .FirstAsync(a => a.Id == userId); // should always be found as user is authenticated
-        
+
         // act on the db
-        account.Nickname = dto.Username.Length > 25 ? dto.Username[..25] : dto.Username;
+        var maxNicknameLenght = Account.MaxNicknameLength;
+        account.Nickname = dto.Username.Length > maxNicknameLenght ? dto.Username[..maxNicknameLenght] : dto.Username;
         dbContext.Update(account);
         await dbContext.SaveChangesAsync();
         

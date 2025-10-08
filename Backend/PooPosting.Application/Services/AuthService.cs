@@ -71,29 +71,30 @@ public class AuthService(
         var user = await dbContext.Accounts
                 .FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
 
-        var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
-        if (existingEmail != null)
-        {
-            throw new BadRequestException($"That email already exists");
-        }
-
-        var nickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 25)); // max length of username is 25
-        var shorterNickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 21)); // this gives us room to generate different username
-
-        var existingNicknames = dbContext.Accounts
-            .Where(x => x.Nickname.StartsWith(shorterNickname))
-            .Select(a => a.Nickname)
-            .ToList();
-
-        var testNickname = nickname;
-        while (existingNicknames.Contains(testNickname))
-        {
-            var randomSuffix = new Random().Next(100, 9999).ToString();
-            testNickname = shorterNickname + randomSuffix;
-        }
-
         if (user == null)
         {
+            var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
+            if (existingEmail != null)
+            {
+                throw new BadRequestException($"That email already exists");
+            }
+
+            var maxNicknameLenght = Account.MaxNicknameLength;
+            var nickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, maxNicknameLenght));
+            var shorterNickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, maxNicknameLenght - 4)); // this gives us room to generate different username
+
+            var existingNicknames = dbContext.Accounts
+                .Where(x => x.Nickname.StartsWith(shorterNickname))
+                .Select(a => a.Nickname)
+                .ToList();
+
+            var testNickname = nickname;
+            while (existingNicknames.Contains(testNickname))
+            {
+                var randomSuffix = new Random().Next(100, 9999).ToString();
+                testNickname = shorterNickname + randomSuffix;
+            }
+    
             user = new Account()
             {
                 Nickname = testNickname,

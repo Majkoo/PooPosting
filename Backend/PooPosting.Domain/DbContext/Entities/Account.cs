@@ -10,9 +10,10 @@ public class Account: IIdentifiable
 {
     [Key]
     public int Id { get; set; }
-    
+
+    public const int MaxNicknameLength = 25;
     [Required]
-    [MaxLength(25)]
+    [MaxLength(MaxNicknameLength)]
     public string Nickname { get; set; } = null!;
     
     [Required]
