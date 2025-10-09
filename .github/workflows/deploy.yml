@@ -5,9 +5,7 @@ permissions:
     packages: write
 
 on:
-    push:
-        branches:
-            - develop
+    workflow_dispatch:
 
 env:
     REGISTRY: ghcr.io
