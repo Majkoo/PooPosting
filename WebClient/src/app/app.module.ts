@@ -16,6 +16,7 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
 import { EasterEggComponent } from './shared/components/easter-egg/easter-egg.component';
 import { TextButtonComponent } from './shared/components/text-button/text-button.component';
 import {SocialLoginModule,SocialAuthServiceConfig,GoogleLoginProvider, FacebookLoginProvider,} from "@abacritt/angularx-social-login";
+import { HttpErrorInterceptorService } from './shared/utility/interceptors/http-error-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,11 +42,11 @@ import {SocialLoginModule,SocialAuthServiceConfig,GoogleLoginProvider, FacebookL
       useClass: TokenInterceptorService,
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpErrorInterceptorService,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true,
+    },
     {
       provide: MessageService,
       useClass: MessageService

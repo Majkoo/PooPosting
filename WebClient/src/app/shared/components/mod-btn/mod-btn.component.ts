@@ -33,7 +33,6 @@ export class ModBtnsComponent {
 
   banUser(){   
     this.accountService.banUserById(this.pic.account.id).pipe(
-      catchError(async () => (this.toastrService.error("Something went wrong"))),
       tap(() => this.toastrService.success("User deleted"))
     )
     .subscribe();
@@ -42,7 +41,6 @@ export class ModBtnsComponent {
   deleteImage(){
     this.pictureService.delete(this.pic.id).pipe(
       tap(() => this.toastrService.success("Picture deleted")),
-      catchError(async () => this.toastrService.error("Something went wrong"))
     )
     .subscribe()
   }

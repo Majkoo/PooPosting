@@ -119,7 +119,6 @@ export class AccountComponent implements OnInit{
     return this.accountService.getById(id).pipe(
       catchError(async (err) => {
         await this.router.navigate(['..']);
-        this.toastrService.error(err.error, defaultErrorHeading);
         return of(null);
       }))
   }

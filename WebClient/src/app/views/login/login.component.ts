@@ -51,7 +51,6 @@ export class LoginComponent implements OnDestroy {
           this.afterLogIn()
         },
         error: (err: HttpErrorResponse) => {
-          this.msgService.error(err.error, "Error");
           this.awaitSubmit = false;
         }
       })
