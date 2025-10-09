@@ -7,6 +7,16 @@
 }
 
 {$DOMAIN_WEBCLIENT} {
+  @auth_enabled expression {env.USE_BASIC_AUTH} == "true"
+  basicauth @auth_enabled {
+    {$BASIC_AUTH_USER} {$BASIC_AUTH_HASH}
+  }
+
+  @manifest path /manifest.webmanifest
+  handle @manifest {
+    reverse_proxy webclient:80
+  }
+
   reverse_proxy webclient:80
 }
 

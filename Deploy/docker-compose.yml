@@ -28,11 +28,8 @@ services:
         depends_on:
             - backend
             - webclient
-        environment:
-            - DOMAIN_ROOT=${DOMAIN_ROOT}
-            - DOMAIN_BACKEND=${DOMAIN_BACKEND}
-            - DOMAIN_WEBCLIENT=${DOMAIN_WEBCLIENT}
-            - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
+        env_file:
+            - .env
         networks: [web]
 
 networks:
