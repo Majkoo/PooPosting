@@ -28,10 +28,10 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
       const firstKey = Object.keys(reqError.error.errors)[0];
       return reqError.error.errors[firstKey][0];
     }
-
     if (typeof reqError.error === 'string') {
       return reqError.error;
     }
+    return "Something went wrong"
   }
 
   // private handleError(status: number, req: HttpRequest<any>, error: HttpErrorResponse) {
