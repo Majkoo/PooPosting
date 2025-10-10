@@ -65,8 +65,8 @@ builder.Services.AddScoped<IAuthorizationHandler, CommentOperationRequirementHan
 
 // Supabase
 var supabaseConfig = new SupabaseConfig();
-supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:Endpoint");
-supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:Jwt");
+supabaseConfig.Endpoint = builder.Configuration.GetValue<string>("SupabaseConfig:Endpoint")!;
+supabaseConfig.Jwt = builder.Configuration.GetValue<string>("SupabaseConfig:Jwt")!;
 
 builder.Services.AddSingleton(supabaseConfig);
 builder.Services.AddHttpClient("SupabaseClient", client =>
@@ -245,10 +245,7 @@ app.UseRouting();
 app.UseCors("All");
 
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 
 app.Run();
         
