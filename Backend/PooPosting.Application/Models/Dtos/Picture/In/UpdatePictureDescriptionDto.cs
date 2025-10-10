@@ -5,5 +5,5 @@ namespace PooPosting.Application.Models.Dtos.Picture.In;
 public class UpdatePictureDescriptionDto
 {
     [MaxLength(500)]
-    public string Description { get; set; }
+    public string? Description { get; set; }
 }

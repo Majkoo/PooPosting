@@ -6,5 +6,5 @@ public class UpdatePictureNameDto
 {
     [Required]
     [MaxLength(40)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }
