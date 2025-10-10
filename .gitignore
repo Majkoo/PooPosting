@@ -74,3 +74,6 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# System files
+.DS_Store

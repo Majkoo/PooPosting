@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{3ED331DD-9D9E-4F7C-BE88-7A5387986A49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pooposting.Api", "Backend\Pooposting.Api\Pooposting.Api.csproj", "{5D3DD747-EA67-4F68-9BDF-85A1FA0F41C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PooPosting.Api", "Backend\PooPosting.Api\PooPosting.Api.csproj", "{5D3DD747-EA67-4F68-9BDF-85A1FA0F41C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pooposting.Application", "Backend\Pooposting.Application\Pooposting.Application.csproj", "{69831525-6E5F-4321-B93F-8397986DD8F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PooPosting.Application", "Backend\PooPosting.Application\PooPosting.Application.csproj", "{69831525-6E5F-4321-B93F-8397986DD8F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PooPosting.Domain", "Backend\PooPosting.Domain\PooPosting.Domain.csproj", "{176F18CB-3FCC-4BB5-B587-BA07B1224CC7}"
 EndProject
