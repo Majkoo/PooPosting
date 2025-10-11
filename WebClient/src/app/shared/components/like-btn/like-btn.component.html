@@ -1,10 +1,8 @@
 <button
-  [disabled]="!isLoggedOn"
   [ngClass]="{
     cssClass: true,
     'm-0 icon-dark': true,
     'cursor-pointer': isLoggedOn,
-    'opacity-60': !isLoggedOn,
     'icon-heart--filled': pic.isLiked,
     'icon-heart--empty': !pic.isLiked
   }"
@@ -13,3 +11,9 @@
   class="text-dark dark:text-dark-dark"
 >
 </button>
+
+<pp-login-popup 
+      [header]="'Login to like pictures'" 
+      [dialogVisible]="loginPopupVisible" 
+      (dialogVisibleChange)="loginPopupVisible = !loginPopupVisible"
+    />

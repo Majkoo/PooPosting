@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {PaginatorModule} from "primeng/paginator";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LoginDto} from "../../shared/utility/dtos/LoginDto";
 import {validationErrorAnimation} from "../../shared/utility/animations/validationErrorAnimation";
@@ -12,11 +12,12 @@ import {fadeInAnimation} from "../../shared/utility/animations/fadeInAnimation";
 import {AuthService} from "../../services/api/account/auth.service";
 import { GoogleSigninComponent } from 'src/app/shared/components/google-signin/google-signin.component';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { LoginPopupComponent } from "src/app/shared/components/login-popup/login-popup.component";
 
 @Component({
   selector: 'pp-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, PaginatorModule, RouterLink, GoogleSigninComponent],
+  imports: [CommonModule, FormsModule, PaginatorModule, RouterLink, GoogleSigninComponent, LoginPopupComponent],
   templateUrl: './login.component.html',
   styles: [`
     .input {
@@ -28,7 +29,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
     fadeInAnimation
   ]
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnDestroy, OnInit {
   private sub = new Subscription();
   awaitSubmit = false;
   loginDto: LoginDto = {
@@ -39,6 +40,9 @@ export class LoginComponent implements OnDestroy {
   private authService = inject(AuthService);
   private msgService = inject(ToastrService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
+  loginPopupVisible = false;
 
   onSubmit() {
     if (this.awaitSubmit) return;
@@ -65,5 +69,12 @@ export class LoginComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  ngOnInit(){
+    const showPopup = this.route.snapshot.queryParamMap.get('showPopup');
+    if (showPopup === 'true') {
+      this.loginPopupVisible = true
+    }
   }
 }

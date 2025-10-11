@@ -34,7 +34,7 @@ export class ShareBtnComponent {
 
   dialogVisible: boolean = false;
   scrollLeft = 0;
-  
+
   openDialog() {
       this.dialogVisible = true;
   }

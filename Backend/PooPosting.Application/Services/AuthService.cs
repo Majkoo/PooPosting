@@ -63,7 +63,7 @@ public class AuthService(
         {
             payload = await GoogleJsonWebSignature.ValidateAsync(dto.IdToken);
         }
-        catch (Exception)
+        catch (Exception e)
         {
             throw new UnauthorizedException("Invalid Google token");
         }
