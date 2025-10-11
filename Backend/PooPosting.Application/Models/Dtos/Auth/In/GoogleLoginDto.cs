@@ -8,10 +8,10 @@ namespace PooPosting.Application.Models.Dtos.Auth.In
 {
     public class GoogleLoginDto
     {
-        public string IdToken { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string PhotoUrl { get; set; }
+        public required string IdToken { get; set; }
+        public required string Name { get; set; }
+        public required string Email { get; set; }
+        public required string PhotoUrl { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
     }

@@ -243,10 +243,7 @@ app.UseRouting();
 app.UseCors("All");
 
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 
 app.Run();
         
