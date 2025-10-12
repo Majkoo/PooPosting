@@ -25,21 +25,20 @@ export class LikeBtnComponent implements OnDestroy {
   private likeService = inject(PictureLikesService);
   private authService = inject(AuthService);
 
-  loginPopupVisible = false;
+  public loginPopupVisible = false;
 
   like(id: string) {
-    if (this.isLoggedOn){
-      this.sub.add(
-        this.likeService.likePicture(id).subscribe({
-          next: (result: PictureDto) => {
-            this.pic = result;
-          }
-        })
-      );
-    }
-    else{
+    if (!this.isLoggedOn){
       this.loginPopupVisible = true
+      return
     }
+    this.sub.add(
+      this.likeService.likePicture(id).subscribe({
+        next: (result: PictureDto) => {
+          this.pic = result;
+        }
+      })
+    );
   }
 
   ngOnDestroy() {

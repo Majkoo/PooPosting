@@ -42,7 +42,7 @@ export class LoginComponent implements OnDestroy, OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  loginPopupVisible = false;
+  public loginPopupVisible = false;
 
   onSubmit() {
     if (this.awaitSubmit) return;

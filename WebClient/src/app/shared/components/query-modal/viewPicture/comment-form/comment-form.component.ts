@@ -27,7 +27,7 @@ export class CommentFormComponent implements OnInit {
   private authService = inject(AuthService);
   private commentService = inject(CommentService);
 
-  loginPopupVisible = false;
+  public loginPopupVisible = false;
 
   get isLoggedOn() {
     return this.authService.isLoggedIn;
