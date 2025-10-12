@@ -26,8 +26,6 @@ export class GoogleSigninComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log(event.target.innerWidth);
-    
     this.googleButtonWidth = event.target.innerWidth;
   }
 
