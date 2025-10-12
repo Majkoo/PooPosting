@@ -80,7 +80,7 @@ export class AuthService {
   }
 
   get isModeratororAdmin(): boolean {
-    return this.isLoggedIn && this.getJwtData()!.roleId == 2 || this.getJwtData()!.roleId == 3
+    return this.isLoggedIn && this.getJwtData()?.roleId == 2 || this.getJwtData()?.roleId == 3
   }
 
   // verifyJwt(data: VerifyJwtDto): Observable<JwtUserData> {
