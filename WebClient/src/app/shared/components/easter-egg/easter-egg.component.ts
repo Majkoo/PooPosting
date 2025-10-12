@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
 
 @Component({
-  selector: 'pp-easter-egg',
-  imports: [CommonModule],
-  standalone: true,
-  templateUrl: './easter-egg.component.html',
-  styleUrls: ['./easter-egg.component.scss']
+    selector: 'pp-easter-egg',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './easter-egg.component.html',
+    styleUrls: ['./easter-egg.component.scss']
 })
 export class EasterEggComponent implements AfterViewInit {
   @Input() playEasterEgg: boolean = false;

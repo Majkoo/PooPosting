@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnInit, Output} from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { PostDetailsData } from '../../../views/add-post/models/postDetailsData';
 import { TagComponent } from "src/app/shared/components/tag/tag.component";
 import { FormsModule } from '@angular/forms';
@@ -7,10 +7,12 @@ import { AccountService } from 'src/app/services/api/account/account.service';
 import { catchError, tap } from 'rxjs';
 
 @Component({
-  selector: 'pp-tag-input',
-  template: `
+    selector: 'pp-tag-input',
+    template: `
       <div class="flex flex-wrap gap-2 border-2 px-sm py-xs rounded-lg bg-white">
-        <pp-tag *ngFor="let tag of tags; let i = index" [tag]="tag" [removable]="true" (removed)="removeTag(i)"/>
+        @for (tag of tags; track tag; let i = $index) {
+          <pp-tag [tag]="tag" [removable]="true" (removed)="removeTag(i)"/>
+        }
         <input
           type="text"
           class="flex-1 outline-none"
@@ -21,11 +23,11 @@ import { catchError, tap } from 'rxjs';
           (keydown.space)="addTag()"
           (keydown.enter)="addTag(); $event.preventDefault()"
           (keydown)="this.tags.length == 4 ? $event.preventDefault() : ''"
-        />
-      </div>
-    `,
-  standalone: true,
-  imports: [CommonModule, TagComponent, FormsModule],
+          />
+        </div>
+      `,
+    standalone: true,
+    imports: [TagComponent, FormsModule]
 })
 export class TagInputComponent implements OnInit {
   private accountService = inject(AccountService);

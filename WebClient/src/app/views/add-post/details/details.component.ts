@@ -11,8 +11,8 @@ import {PostDetailsData} from "../models/postDetailsData";
 import {NgForm} from "@angular/forms";
 
 @Component({
-  selector: 'pp-details',
-  template: `
+    selector: 'pp-details',
+    template: `
     <div
       class="flex flex-col gap-md"
       @fadeIn
@@ -87,8 +87,9 @@ import {NgForm} from "@angular/forms";
       </div>
     </div>
   `,
-  styles: [],
-  animations: [fadeInAnimation]
+    styles: [],
+    animations: [fadeInAnimation],
+    standalone: false
 })
 export class DetailsComponent implements AfterContentInit {
   @ViewChild('form', {static: true}) form!: NgForm;

@@ -10,11 +10,11 @@ declare global {
 }
 
 @Component({
-  selector: 'pp-google-signin',
-  templateUrl: './google-signin.component.html',
-  standalone: true,
-  imports: [GoogleSigninButtonModule]
-//   styleUrls: ['./google-signin.component.scss'],
+    selector: 'pp-google-signin',
+    templateUrl: './google-signin.component.html',
+    standalone: true,
+    imports: [GoogleSigninButtonModule]
+    //   styleUrls: ['./google-signin.component.scss'],
 })
 export class GoogleSigninComponent implements OnInit, OnDestroy {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -14,7 +14,7 @@ import {DateAgoPipe} from "../../../../../utility/pipes/date-ago/date-ago.pipe";
   imports: [CommonModule, CommentAccountInlineLinkComponent, DateAgoPipe],
   templateUrl: './comment.component.html',
   animations: [
-    fadeInOutAnimation
+      fadeInOutAnimation
   ]
 })
 export class CommentComponent {

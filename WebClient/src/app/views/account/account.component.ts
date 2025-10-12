@@ -17,12 +17,11 @@ import { AccountSkeletonComponent } from "./skeleton/account-skeleton.component"
 import { ChangeUsernameComponent } from "./change-username/change-username.component";
 
 @Component({
-  selector: 'pp-account',
-  standalone: true,
-  imports: [CommonModule, UrlTransformModule, PostPreviewComponent, AccountSkeletonComponent, ChangeUsernameComponent],
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss'],
-  animations: [fadeInAnimation]
+    selector: 'pp-account',
+    imports: [CommonModule, UrlTransformModule, PostPreviewComponent, AccountSkeletonComponent, ChangeUsernameComponent],
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.scss'],
+    animations: [fadeInAnimation]
 })
 export class AccountComponent implements OnInit{
 

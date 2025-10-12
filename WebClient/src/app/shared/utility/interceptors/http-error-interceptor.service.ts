@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { catchError, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 

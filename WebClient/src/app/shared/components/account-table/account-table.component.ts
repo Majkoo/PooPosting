@@ -7,10 +7,10 @@ import { catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'pp-account-table',
-  templateUrl: './account-table.component.html',
-  standalone: true,
-  imports: [CommonModule]
+    selector: 'pp-account-table',
+    templateUrl: './account-table.component.html',
+    standalone: true,
+    imports: [CommonModule]
 })
 export class AccountTableComponent {
   

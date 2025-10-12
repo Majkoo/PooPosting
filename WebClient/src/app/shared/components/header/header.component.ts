@@ -6,21 +6,22 @@ import {AccountService} from "../../../services/api/account/account.service";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'pp-header',
-  templateUrl: './header.component.html',
-  animations: [
-    trigger('animate', [
-      state('hidden', style({
-        top: "-56px"
-      })),
-      state('visible', style({
-        top: 0
-      })),
-      transition('hidden <=> visible', [
-        animate('0.5s ease')
-      ])
-    ])
-  ]
+    selector: 'pp-header',
+    templateUrl: './header.component.html',
+    animations: [
+        trigger('animate', [
+            state('hidden', style({
+                top: "-56px"
+            })),
+            state('visible', style({
+                top: 0
+            })),
+            transition('hidden <=> visible', [
+                animate('0.5s ease')
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   private authService = inject(AuthService);

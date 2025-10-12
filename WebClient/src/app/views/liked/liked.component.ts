@@ -12,13 +12,12 @@ import {PictureService} from "../../services/api/picture/picture.service";
 import {AuthService} from "../../services/api/account/auth.service";
 
 @Component({
-  selector: 'pp-liked',
-  standalone: true,
-  imports: [CommonModule, RouterLink, PostPreviewComponent],
-  templateUrl: './liked.component.html',
-  styles: [
-  ],
-  animations: [fadeInAnimation]
+    selector: 'pp-liked',
+    standalone: true,
+    imports: [CommonModule, RouterLink, PostPreviewComponent],
+    templateUrl: './liked.component.html',
+    styles: [],
+    animations: [fadeInAnimation]
 })
 export class LikedComponent {
   private accountService = inject(AccountService);

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pp-nav',
-  template: `
+    selector: 'pp-nav',
+    template: `
     <nav class="pp-shadow">
 
       <div class="nav cont">
@@ -52,7 +52,7 @@ import { Component } from '@angular/core';
 
     </nav>
   `,
-  styles: [`
+    styles: [`
     nav {
       @apply
       bottom-0 fixed w-full z-30 bg-grayscale-50 dark:bg-dark-grayscale-50 px-md
@@ -69,7 +69,8 @@ import { Component } from '@angular/core';
       sm:w-full sm:flex sm:w-max sm:h-full
       sm:px-sm sm:py-sm
     }
-  `]
+  `],
+    standalone: false
 })
 export class NavComponent {
 

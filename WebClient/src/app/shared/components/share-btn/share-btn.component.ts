@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PictureDto } from "../../utility/dtos/PictureDto";
 import { environment } from 'src/environments/environment';
@@ -12,10 +12,10 @@ interface ShareOption {
 }
 
 @Component({
-  selector: 'pp-share-btn',
-  standalone: true,
-  imports: [CommonModule, DialogModule],
-  templateUrl: './share-btn.component.html',
+    selector: 'pp-share-btn',
+    standalone: true,
+    imports: [CommonModule, DialogModule],
+    templateUrl: './share-btn.component.html'
 })
 export class ShareBtnComponent {
   @Input() cssClass?: string;
@@ -36,7 +36,7 @@ export class ShareBtnComponent {
   scrollLeft = 0;
 
   openDialog() {
-      this.dialogVisible = true;
+    this.dialogVisible = true;
   }
   
   closeDialog(option?: string): void {

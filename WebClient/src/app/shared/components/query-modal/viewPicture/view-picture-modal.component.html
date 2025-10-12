@@ -1,55 +1,49 @@
-<div *ngIf="pic" @fadeIn>
-
-  <div class="wrapper h-full">
-
-    <!--  Sidebar -->
-    <div class="flex flex-col w-screen md:w-2/5 lg:w-3/8 xl:w-1/4 md:sticky md:top-0 md:p-md md:rounded-lg md:shadow-xl md:bg-grayscale-50 dark:bg-dark-grayscale-50 md:h-screen">
-
-      <div class="cont">
-        <div class="section">
-
-          <ng-container [ngTemplateOutlet]="isMobile ? description : accountSection"/>
-
-          <!--  Tags  -->
-          <div class="flex flex-row flex-wrap gap-md pb-md px-md md:mx-3 md:mt-0 md:px-0 order-2" *ngIf="pic.tags.length">
-            <pp-tag *ngFor="let tag of pic.tags" [tag]="tag"/>
-          </div>
-
-          <!--  Controls  -->
-          <div class="flex flex-col px-md md:px-md py-sm pt-md border-b-1 order-1 md:order-2 md:pt-0">
-            <div class="flex gap-md title-large icon-dark">
-              <pp-like-btn [(pic)]="pic" />
-              <pp-share-btn [(pic)]="pic"/>
-              <pp-mod-btns [pic]="pic"></pp-mod-btns>
-              <div class="grow flex justify-end">
-                <span class="icon-setting icon-dark"></span>
+@if (pic) {
+  <div @fadeIn>
+    <div class="wrapper h-full bg-grayscale-50 dark:bg-dark-grayscale-50">
+      <!--  Sidebar -->
+      <div class="flex flex-col w-screen md:w-2/5 lg:w-3/8 xl:w-1/4 md:sticky md:top-0 md:p-md md:rounded-lg md:shadow-xl md:bg-grayscale-50 dark:bg-dark-grayscale-50 md:h-screen">
+        <div class="cont">
+          <div class="section">
+            <ng-container [ngTemplateOutlet]="isMobile ? description : accountSection"/>
+            <!--  Tags  -->
+            @if (pic.tags.length) {
+              <div class="flex flex-row flex-wrap gap-md pb-md px-md md:mx-3 md:mt-0 md:px-0 order-2">
+                @for (tag of pic.tags; track tag) {
+                  <pp-tag [tag]="tag"/>
+                }
+              </div>
+            }
+            <!--  Controls  -->
+            <div class="flex flex-col px-md md:px-md py-sm pt-md border-b-1 order-1 md:order-2 md:pt-0">
+              <div class="flex gap-md title-large icon-dark">
+                <pp-like-btn [(pic)]="pic" />
+                <pp-share-btn [(pic)]="pic"/>
+                <pp-mod-btns [pic]="pic"></pp-mod-btns>
+                <div class="grow flex justify-end">
+                  <span class="icon-setting icon-dark"></span>
+                </div>
               </div>
             </div>
+            <ng-container [ngTemplateOutlet]="commentsOption" />
           </div>
-
-          <ng-container [ngTemplateOutlet]="commentsOption" />
-
         </div>
       </div>
-
-    </div>
-
-    <!--  Content  -->
-    <div class="w-full flex flex-col pt-md text-dark dark:text-dark-dark">
-
-      <ng-container *ngIf="isMobile" [ngTemplateOutlet]="accountSection"></ng-container>
-
-      <!--  Image  -->
-      <div class="w-full md:h-picture-modal-picture-height px-md md:px-0 md:pl-md" @fadeIn>
-        <img
-          alt="{{pic.name}}"
-          class="w-full m-auto rounded-lg object-contain md:h-picture-modal-picture-height shadow-center"
-          src="{{pic.url | urlTransform}}"
-        >
-      </div>
-
-      <a
-        *ngIf="!isMobile"
+      <!--  Content  -->
+      <div class="w-full flex flex-col pt-md text-dark dark:text-dark-dark">
+        @if (isMobile) {
+          <ng-container [ngTemplateOutlet]="accountSection"></ng-container>
+        }
+        <!--  Image  -->
+        <div class="w-full md:h-picture-modal-picture-height px-md md:px-0 md:pl-md" @fadeIn>
+          <img
+            alt="{{pic.name}}"
+            class="w-full m-auto rounded-lg object-contain md:h-picture-modal-picture-height shadow-center"
+            src="{{pic.url | urlTransform}}"
+            >
+          </div>
+          @if (!isMobile) {
+            <a
         class="
           absolute shadow-lg top-0 left-3 p-md z-20 bg-primary-900 dark:bg-dark-primary-900 text-white opacity-80
           rounded-br-lg rounded-bl-lg
@@ -57,69 +51,64 @@
           hover:py-md hover:opacity-100
           active:py-md select-none cursor-pointer
         "
-        (click)="closeModal()"
-      >
-        <span class="text-regular white-text">Go back</span>
-      </a>
-
-    </div>
-
-  </div>
-
-  <!--  Account Details  -->
-  <ng-template #accountSection>
-    <!--  Account  -->
-    <div class="flex flex-col rounded-xl bg-grayscale-200 dark:bg-dark-grayscale-200 text-dark dark:text-dark-dark mx-3 mb-3 md:pb-0 md:m-3 md:order-2">
-
-      <a
-        class="flex px-md py-md"
-        routerLink="/account/{{pic.account.id}}"
-      >
-
-        <div class="gap-sm justify-center items-center w-max flex flex-row" >
-          <img class="w-8 max-h-8 object-fill rounded-xl" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
-          <div class="title-large font-bolder">{{pic.account.nickname}}</div>
+              (click)="closeModal()"
+              >
+              <span class="text-regular white-text">Go back</span>
+            </a>
+          }
         </div>
-
-        <div class="flex grow justify-end items-center">
-          <span class="icon-play"></span>
-        </div>
-      </a>
-
-      <div class="px-md pb-md text-opacity-60" *ngIf="pic.description && !isMobile">
-        {{pic.description}}
       </div>
-
+      <!--  Account Details  -->
+      <ng-template #accountSection>
+        <!--  Account  -->
+        <div class="flex flex-col rounded-xl bg-grayscale-200 dark:bg-dark-grayscale-200 text-dark dark:text-dark-dark mx-3 mb-3 md:pb-0 md:m-3 md:order-2">
+          <a
+            class="flex px-md py-md"
+            routerLink="/account/{{pic.account.id}}"
+            >
+            <div class="gap-sm justify-center items-center w-max flex flex-row" >
+              <img class="w-8 max-h-8 object-fill rounded-xl" src="{{pic.account.profilePicUrl | urlTransform}}" alt="{{pic.account.nickname}}">
+              <div class="title-large font-bolder">{{pic.account.nickname}}</div>
+            </div>
+            <div class="flex grow justify-end items-center">
+              <span class="icon-play"></span>
+            </div>
+          </a>
+          @if (pic.description && !isMobile) {
+            <div class="px-md pb-md text-opacity-60">
+              {{pic.description}}
+            </div>
+          }
+        </div>
+      </ng-template>
+      <!--  Pic Description  -->
+      <ng-template #description>
+        @if (pic.description) {
+          <div class="px-md py-md text-opacity-60 order-2">
+            {{pic.description}}
+          </div>
+        }
+      </ng-template>
+      <!--  Comments option  -->
+      <ng-template #commentsOption>
+        <!--  Comments heading  -->
+        <h2
+          class="text-bold md:title-large p-md md:mt-0 order-3"
+          [ngClass]="{'border-t-1 md:border-t-0' : pic.description || pic.tags.length}"
+          >
+          Comments:
+        </h2>
+        <!--  Comments display  -->
+        <pp-comments-display [pic]="pic" [ngClass]="'order-4'"/>
+        <!--  Comments form  -->
+        <div class="comments-form p-md order-5">
+          <pp-comment-form [pic]="pic" (commentAdded)="onCommentAdd($event)"/>
+        </div>
+      </ng-template>
     </div>
-  </ng-template>
-
-  <!--  Pic Description  -->
-  <ng-template #description>
-    <div class="px-md py-md text-opacity-60 order-2" *ngIf="pic.description">
-      {{pic.description}}
-    </div>
-  </ng-template>
-
-  <!--  Comments option  -->
-  <ng-template #commentsOption>
-    <!--  Comments heading  -->
-    <h2
-      class="text-bold md:title-large p-md md:mt-0 order-3"
-      [ngClass]="{'border-t-1 md:border-t-0' : pic.description || pic.tags.length}"
-    >
-      Comments:
-    </h2>
-
-    <!--  Comments display  -->
-    <pp-comments-display [pic]="pic" [ngClass]="'order-4'"/>
-
-    <!--  Comments form  -->
-    <div class="comments-form p-md order-5">
-      <pp-comment-form [pic]="pic" (commentAdded)="onCommentAdd($event)"/>
-    </div>
-  </ng-template>
-
-</div>
+  }
 
 
-<pp-view-picture-modal-skeleton *ngIf="!pic"/>
+  @if (!pic) {
+    <pp-view-picture-modal-skeleton/>
+  }

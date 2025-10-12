@@ -15,18 +15,20 @@
       [ngClass]="{'opacity-60': commentForm.invalid || (awaitSubmit | async)}"
       class="bg-cta-500 dark:dark-bg-cta-500 text-regular py-xs px-md btn"
       type="submit"
-    >
+      >
       Comment
     </button>
-    <div class="w-min" @fadeInOut *ngIf="(awaitSubmit | async)">
-      <!--  todo: create a loading spinner or sth and use it  -->
-      <span class="opacity-60">submitting...</span>
-    </div>
+    @if ((awaitSubmit | async)) {
+      <div class="w-min" @fadeInOut>
+        <!--  todo: create a loading spinner or sth and use it  -->
+        <span class="opacity-60">submitting...</span>
+      </div>
+    }
   </div>
 
 </form>
-<pp-login-popup 
-      [header]="'Login to comment on pictures'" 
-      [dialogVisible]="loginPopupVisible" 
-      (dialogVisibleChange)="loginPopupVisible = !loginPopupVisible"
-    />
+<pp-login-popup
+  [header]="'Login to comment on pictures'"
+  [dialogVisible]="loginPopupVisible"
+  (dialogVisibleChange)="loginPopupVisible = !loginPopupVisible"
+  />

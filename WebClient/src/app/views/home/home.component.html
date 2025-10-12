@@ -1,15 +1,21 @@
 <div @fadeIn>
-  <pp-create-account-banner *ngIf="!isLoggedIn" />
+  @if (!isLoggedIn) {
+    <pp-create-account-banner />
+  }
 
-  <div class="flex flex-col gap-xl" *ngIf="pictures$ | async">
+  @if (pictures$ | async) {
+    <div class="flex flex-col gap-xl">
+      @for (picture of (pictures$ | async); track trackByPictureId($index, picture)) {
+        <pp-post-card [pic]="picture"/>
+      }
+    </div>
+  }
 
-    <pp-post-card *ngFor="let picture of (pictures$ | async); trackBy: trackByPictureId" [pic]="picture"/>
-
-  </div>
-  
-  <div class="flex flex-col gap-xl" *ngIf="!(pictures$ | async)">
-
-    <pp-post-card-skeleton *ngFor="let i of [].constructor(4)"/>
-
-  </div>
+  @if (!(pictures$ | async)) {
+    <div class="flex flex-col gap-xl">
+      @for (i of [].constructor(4); track $index) {`
+        <pp-post-card-skeleton/>
+      }
+    </div>
+  }
 </div>

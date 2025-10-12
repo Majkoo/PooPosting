@@ -8,18 +8,15 @@ import {QueryModalEnum} from "../../../shared/components/query-modal/query-modal
 import {OpenQueryModalDirective} from "../../../shared/components/query-modal/open-query-modal.directive";
 
 @Component({
-  selector: 'pp-post-preview',
-  templateUrl: './post-preview.component.html',
-  standalone: true,
-  imports: [
-    RouterLink,
-    UrlTransformModule,
-    NgStyle,
-    NgClass,
-    NgOptimizedImage,
-    OpenQueryModalDirective
-  ],
-  styles: [`
+    selector: 'pp-post-preview',
+    templateUrl: './post-preview.component.html',
+    standalone: true,
+    imports: [
+        UrlTransformModule,
+        NgClass,
+        OpenQueryModalDirective
+    ],
+    styles: [`
     .image-wrapper {
       @apply relative bg-contain overflow-hidden cursor-pointer drop-shadow-xl rounded-lg aspect-square;
 

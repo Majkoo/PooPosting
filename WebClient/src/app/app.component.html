@@ -1,3 +1,5 @@
 <router-outlet />
 <pp-easter-egg/>
-<pp-spinner *ngIf="isLoading | async" />
+@if (isLoading | async) {
+  <pp-spinner />
+}
