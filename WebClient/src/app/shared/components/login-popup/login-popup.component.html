@@ -1,0 +1,22 @@
+<p-dialog header="Please login" [(visible)]="dialogVisible" (onHide)="closeDialog()" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-lg" [resizable]="false">
+    <div class="rounded-xl p-xl text-center">
+    <h2 class="text-2xl font-semibold mb-md text-grayscale-900 dark:text-dark-grayscale-900">
+      {{ header }}
+    </h2>
+
+    <p class="text-grayscale-500 dark:text-dark-grayscale-500 mb-xl">
+      Signup for Pooposting to stay in the loop.
+    </p>
+
+    <div class="flex-center gap-4">
+      <button
+        class="px-md py-sm bg-cta-500 dark:bg-dark-cta-500 text-dark dark:text-dark-dark rounded-lg">
+        <a [routerLink]="['/register']">Sign up</a>
+      </button>
+      <button
+        class="px-md py-sm text-cta-500 dark:text-dark-cta-500 rounded-lg">
+        <a [routerLink]="['/login']">Log in</a>
+      </button>
+    </div>
+  </div>
+</p-dialog>

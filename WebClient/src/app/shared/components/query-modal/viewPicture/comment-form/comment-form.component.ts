@@ -7,11 +7,12 @@ import {fadeInOutAnimation} from "../../../../utility/animations/fadeInOutAnimat
 import {CommentDto} from "../../../../utility/dtos/CommentDto";
 import {AuthService} from "../../../../../services/api/account/auth.service";
 import {CommentService} from "../../../../../services/api/comment/comment.service";
+import { LoginPopupComponent } from "../../../login-popup/login-popup.component";
 
 @Component({
   selector: 'pp-comment-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoginPopupComponent],
   templateUrl: './comment-form.component.html',
   animations: [fadeInOutAnimation]
 })
@@ -25,6 +26,8 @@ export class CommentFormComponent implements OnInit {
   private commentSubject = new Subject<string>();
   private authService = inject(AuthService);
   private commentService = inject(CommentService);
+
+  public loginPopupVisible = false;
 
   get isLoggedOn() {
     return this.authService.isLoggedIn;
@@ -45,8 +48,13 @@ export class CommentFormComponent implements OnInit {
   }
 
   comment() {
-    this.awaitSubmit.next(true);
-    this.commentSubject.next(this.commentText);
+    if (this.isLoggedOn){
+      this.awaitSubmit.next(true);
+      this.commentSubject.next(this.commentText);
+    }
+    else{
+      this.loginPopupVisible = true
+    }
   }
 
 }
