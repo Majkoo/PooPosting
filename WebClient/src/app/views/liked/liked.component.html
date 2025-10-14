@@ -1,26 +1,32 @@
-<div class="mt-4" *ngIf="(account$ | async) as acc" @fadeIn>
-  <h2 class="title-large text-center">
-    Hello,
-    <a
-      routerLink="/account/{{acc.id}}"
-      class="link font-bolder"
-    >
-      {{acc.nickname}}
-    </a>
-  </h2>
-  <p class="text-center my-4">
-    <span
-      class="title-small white-text tracking-wider bg-primary-900 dark:bg-dark-primary-900 text-white flex-wrap rounded-lg px-sm py-xs sm:px-md sm:py-sm cursor-default w-max"
-    >
-      Posts liked by you: {{totalLikedPictures}}
-    </span>
-  </p>
-  <p class="text-center my-4">
-    Here are some of the latest posts you liked:
-  </p>
-</div>
-<ng-container *ngIf="(pics$ | async) as pics">
-  <div class="grid grid-cols-2 gap-md" *ngIf="pics.length" @fadeIn>
-    <pp-post-preview *ngFor="let pic of pics" [pic]="pic" />
+@if ((account$ | async); as acc) {
+  <div class="mt-4" @fadeIn>
+    <h2 class="title-large text-center">
+      Hello,
+      <a
+        routerLink="/account/{{acc.id}}"
+        class="link font-bolder"
+        >
+        {{acc.nickname}}
+      </a>
+    </h2>
+    <p class="text-center my-4">
+      <span
+        class="title-small white-text tracking-wider bg-primary-900 dark:bg-dark-primary-900 text-white flex-wrap rounded-lg px-sm py-xs sm:px-md sm:py-sm cursor-default w-max"
+        >
+        Posts liked by you: {{totalLikedPictures}}
+      </span>
+    </p>
+    <p class="text-center my-4">
+      Here are some of the latest posts you liked:
+    </p>
   </div>
-</ng-container>
+}
+@if ((pics$ | async); as pics) {
+  @if (pics.length) {
+    <div class="grid grid-cols-2 gap-md" @fadeIn>
+      @for (pic of pics; track pic) {
+        <pp-post-preview [pic]="pic" />
+      }
+    </div>
+  }
+}

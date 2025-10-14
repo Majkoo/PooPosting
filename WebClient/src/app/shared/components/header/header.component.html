@@ -3,16 +3,15 @@
   <div class="cont px-md sm:px-0 h-14 flex items-center justify-between">
 
     <a class="nav-link" routerLink="/" (click)="onLogoClick()">
-      <img class="invert" ngSrc="../../../../assets/logo/logo-row.png" alt="PooPosting" height="32" width="147"/>
+      <img class="invert" src="../../../../assets/logo/logo-row.png" alt="PooPosting" height="32" width="147"/>
     </a>
 
-    <ng-container *ngIf="(account$ | async) as acc else loginLink">
+    @if ((account$ | async); as acc) {
       <div class="flex">
         <div
           class="nav-link gap-xs"
           routerLink="/account/{{acc.id}}"
           routerLinkActive="link-active">
-
           <p class="p-sm pr-0 text-small-regular text-end hidden sm:block">
             Welcome back, <br> <b>{{acc.nickname}}</b>
           </p>
@@ -20,25 +19,22 @@
             class="rounded-full w-10 h-10 mx-sm aspect-square dark:bg-dark-grey"
             src="{{acc.profilePicUrl | urlTransform}}"
             alt="{{acc.nickname}}"/>
-        </div>
-        <div class="nav-link gap-xs"
-          routerLink="/admin-page"
-          routerLinkActive="link-active">
+          </div>
+          <div class="nav-link gap-xs"
+            routerLink="/admin-page"
+            routerLinkActive="link-active">
+            <img
+              class="rounded-full w-10 h-10 aspect-square mx-sm mt-xs cursor-pointer dark:bg-dark-grey"
+              src="/assets/images/adminlogo.png"
+              [ngClass]="acc.roleId == '1' ? 'hidden' : ''"
+              alt="'admin panel'"/>
+            </div>
+          </div>
+        } @else {
+          <a routerLink="/login" class="icon icon-user nav-link"></a>
+        }
 
-          <img
-          class="rounded-full w-10 h-10 aspect-square mx-sm mt-xs cursor-pointer dark:bg-dark-grey"
-          src="/assets/images/adminlogo.png"
-          [ngClass]="acc.roleId == '1' ? 'hidden' : ''"
-          alt="'admin panel'"/>
-        </div>
       </div>
-      
-    </ng-container>
 
-  </div>
+    </header>
 
-</header>
-
-<ng-template #loginLink>
-  <a routerLink="/login" class="icon icon-user nav-link"></a>
-</ng-template>

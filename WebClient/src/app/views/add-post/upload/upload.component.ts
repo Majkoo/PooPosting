@@ -5,16 +5,17 @@ import {Router} from "@angular/router";
 import {fadeInAnimation} from "../../../shared/utility/animations/fadeInAnimation";
 
 @Component({
-  selector: 'pp-upload',
-  templateUrl: 'upload.component.html',
-  styles: [
-    `
+    selector: 'pp-upload',
+    templateUrl: 'upload.component.html',
+    styles: [
+        `
     * {
       @apply transition-all duration-200 ease-in-out disabled:opacity-60;
     }
     `
-  ],
-  animations: [fadeInAnimation]
+    ],
+    animations: [fadeInAnimation],
+    standalone: false
 })
 export class UploadComponent {
   @ViewChild('cropperComponent') cropperComponent!: CropperComponent & HTMLElement;

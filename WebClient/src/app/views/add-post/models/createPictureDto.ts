@@ -1,7 +1,7 @@
 import {PostVisibility} from "../../../shared/utility/enums/postVisibility";
 
 export interface CreatePictureDto {
-  tags: string[],
+  tags: string[] | undefined,
   description: string,
   visibilityOption: PostVisibility,
   url: string,

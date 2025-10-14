@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {DatePipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import { DatePipe, NgClass, NgOptimizedImage } from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {PictureDto} from "../../../shared/utility/dtos/PictureDto";
 import {UrlTransformModule} from "../../../shared/utility/pipes/url-transform/url-transform.module";
@@ -13,33 +13,28 @@ import { ModBtnsComponent } from 'src/app/shared/components/mod-btn/mod-btn.comp
 import { ShareBtnComponent } from "src/app/shared/components/share-btn/share-btn.component";
 
 @Component({
-  selector: 'pp-post-card',
-  templateUrl: './post-card.component.html',
-  styles: [`
+    selector: 'pp-post-card',
+    templateUrl: './post-card.component.html',
+    styles: [`
   .lh {
     line-height: 100% !important;
   }
   `
-  ],
-  imports: [
-    NgIf,
-    NgOptimizedImage,
-    RouterLink,
-    NgForOf,
-    UrlTransformModule,
-    NgClass,
-    DatePipe,
-    LikeBtnComponent,
-    ModBtnsComponent,
-    TagComponent,
-    MiniCommentComponent,
-    OpenQueryModalDirective,
-    ShareBtnComponent
-],
-  animations: [
-    fadeInAnimation
-  ],
-  standalone: true
+    ],
+    imports: [
+      RouterLink,
+      UrlTransformModule,
+      LikeBtnComponent,
+      ModBtnsComponent,
+      TagComponent,
+      MiniCommentComponent,
+      OpenQueryModalDirective,
+      ShareBtnComponent
+    ],
+    standalone: true,
+    animations: [
+        fadeInAnimation
+    ]
 })
 export class PostCardComponent {
   @Input() pic?: PictureDto;

@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {BehaviorSubject, Subscription, switchMap} from "rxjs";
 import {map} from "rxjs/operators";
 import {CommentComponent} from "./comment/comment.component";
@@ -19,11 +19,11 @@ import * as _ from 'lodash';
 
 
 @Component({
-  selector: 'pp-comments-display',
-  standalone: true,
-  imports: [CommonModule, CommentComponent],
-  templateUrl: './comments-display.component.html',
-  styleUrls: ['./comments-display.component.scss'],
+    selector: 'pp-comments-display',
+    standalone: true,
+    imports: [CommentComponent],
+    templateUrl: './comments-display.component.html',
+    styleUrls: ['./comments-display.component.scss']
 })
 export class CommentsDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input({required: true}) pic!: PictureDto;

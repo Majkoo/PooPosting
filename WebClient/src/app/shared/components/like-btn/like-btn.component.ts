@@ -8,13 +8,13 @@ import {AuthService} from "../../../services/api/account/auth.service";
 import { LoginPopupComponent } from "../login-popup/login-popup.component";
 
 @Component({
-  selector: 'pp-like-btn',
-  standalone: true,
-  imports: [CommonModule, LoginPopupComponent],
-  templateUrl: './like-btn.component.html',
-  animations: [
-    likeStateAnimation
-  ]
+    selector: 'pp-like-btn',
+    standalone: true,
+    imports: [CommonModule, LoginPopupComponent],
+    templateUrl: './like-btn.component.html',
+    animations: [
+        likeStateAnimation
+    ]
 })
 export class LikeBtnComponent implements OnDestroy {
   @Input() cssClass?: string;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {LoginDto} from "../../../shared/utility/dtos/LoginDto";
 import {AuthData} from "../../../shared/utility/models/authData";

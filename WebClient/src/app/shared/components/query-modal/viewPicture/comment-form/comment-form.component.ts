@@ -10,11 +10,11 @@ import {CommentService} from "../../../../../services/api/comment/comment.servic
 import { LoginPopupComponent } from "../../../login-popup/login-popup.component";
 
 @Component({
-  selector: 'pp-comment-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule, LoginPopupComponent],
-  templateUrl: './comment-form.component.html',
-  animations: [fadeInOutAnimation]
+    selector: 'pp-comment-form',
+    standalone: true,
+    imports: [CommonModule, FormsModule, LoginPopupComponent],
+    templateUrl: './comment-form.component.html',
+    animations: [fadeInOutAnimation]
 })
 export class CommentFormComponent implements OnInit {
   @Input({required: true}) pic!: PictureDto;

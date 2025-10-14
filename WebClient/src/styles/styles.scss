@@ -1,17 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "node_modules/primeng/resources/primeng.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
 .icon-fz {
   font-size: 24px;
 }
+input {
+  @apply text-black bg-white
+}
 .icon {
   margin: 0 !important;
-  @apply icon-fz flex justify-center items-center h-auto
+  @apply icon-fz flex justify-center items-center h-auto text-black
 }
 .icon-dark {
   margin: 0 !important;
