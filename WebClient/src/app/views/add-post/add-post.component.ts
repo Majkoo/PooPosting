@@ -3,10 +3,10 @@ import {fadeInAnimation} from "../../shared/utility/animations/fadeInAnimation";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'pp-add-post',
-  templateUrl: './add-post.component.html',
-  styles: [
-    `
+    selector: 'pp-add-post',
+    templateUrl: './add-post.component.html',
+    styles: [
+        `
       .step-heading {
         @apply block rounded-xl py-sm px-md text-white z-20;
       }
@@ -14,8 +14,9 @@ import {Router} from "@angular/router";
         @apply absolute bottom-4 w-full h-2 z-10 bg-gradient-to-r from-cta-500 to-primary-800 rounded;
       }
     `
-  ],
-  animations: [fadeInAnimation]
+    ],
+    animations: [fadeInAnimation],
+    standalone: false
 })
 export class AddPostComponent {
   private router = inject(Router);

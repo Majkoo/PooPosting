@@ -10,11 +10,11 @@ declare global {
 }
 
 @Component({
-  selector: 'pp-google-signin',
-  templateUrl: './google-signin.component.html',
-  standalone: true,
-  imports: [GoogleSigninButtonModule]
-//   styleUrls: ['./google-signin.component.scss'],
+    selector: 'pp-google-signin',
+    templateUrl: './google-signin.component.html',
+    standalone: true,
+    imports: [GoogleSigninButtonModule]
+    //   styleUrls: ['./google-signin.component.scss'],
 })
 export class GoogleSigninComponent implements OnInit, OnDestroy {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -26,8 +26,6 @@ export class GoogleSigninComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log(event.target.innerWidth);
-    
     this.googleButtonWidth = event.target.innerWidth;
   }
 

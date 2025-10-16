@@ -11,10 +11,10 @@ import { AccountService } from 'src/app/services/api/account/account.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'pp-settings',
-  templateUrl: './settings.component.html',
-  standalone: true,
-  imports: [SettingOptionComponent, SwitchBtnComponent, EasterEggComponent, CommonModule, TagInputComponent]
+    selector: 'pp-settings',
+    templateUrl: './settings.component.html',
+    standalone: true,
+    imports: [SettingOptionComponent, EasterEggComponent, CommonModule, TagInputComponent]
 })
 export class SettingsComponent {
   tags: string[] = [];

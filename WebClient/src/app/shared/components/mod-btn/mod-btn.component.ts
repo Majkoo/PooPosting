@@ -9,10 +9,10 @@ import { ToastrService } from 'ngx-toastr';
 import { SettingsService } from 'src/app/services/api/settings/settings.service';
 
 @Component({
-  selector: 'pp-mod-btns',
-  templateUrl: './mod-btn.component.html',
-  imports: [CommonModule],
-  standalone: true
+    selector: 'pp-mod-btns',
+    templateUrl: './mod-btn.component.html',
+    standalone: true,
+    imports: [CommonModule]
 })
 export class ModBtnsComponent {
   @Input({required: true}) pic!: PictureDto;
@@ -33,7 +33,6 @@ export class ModBtnsComponent {
 
   banUser(){   
     this.accountService.banUserById(this.pic.account.id).pipe(
-      catchError(async () => (this.toastrService.error("Something went wrong"))),
       tap(() => this.toastrService.success("User deleted"))
     )
     .subscribe();
@@ -42,7 +41,6 @@ export class ModBtnsComponent {
   deleteImage(){
     this.pictureService.delete(this.pic.id).pipe(
       tap(() => this.toastrService.success("Picture deleted")),
-      catchError(async () => this.toastrService.error("Something went wrong"))
     )
     .subscribe()
   }

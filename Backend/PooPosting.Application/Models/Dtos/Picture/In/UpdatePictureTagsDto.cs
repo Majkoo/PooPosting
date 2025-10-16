@@ -6,5 +6,5 @@ public class UpdatePictureTagsDto
 {
     [Required]
     [MaxLength(4)]
-    public string[] Tags { get; set; }
+    public required string[] Tags { get; set; }
 }

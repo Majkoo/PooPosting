@@ -5,31 +5,31 @@ import {FormsModule} from "@angular/forms";
 import {CreateAccountDto} from "../../shared/utility/dtos/CreateAccountDto";
 import {validationErrorAnimation} from "../../shared/utility/animations/validationErrorAnimation";
 import {Subscription} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
+import { HttpErrorResponse } from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
 import {fadeInAnimation} from "../../shared/utility/animations/fadeInAnimation";
 import {AuthService} from "../../services/api/account/auth.service";
 import { GoogleSigninComponent } from "src/app/shared/components/google-signin/google-signin.component";
 
 @Component({
-  selector: 'pp-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    FormsModule,
-    GoogleSigninComponent
-],
-  templateUrl: './register.component.html',
-  styles: [`
+    selector: 'pp-register',
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterLink,
+        FormsModule,
+        GoogleSigninComponent
+    ],
+    templateUrl: './register.component.html',
+    styles: [`
     .input {
       @apply border-1 w-full py-sm px-md rounded-lg transition ease-in-out
     }
   `],
-  animations: [
-    validationErrorAnimation,
-    fadeInAnimation
-  ]
+    animations: [
+        validationErrorAnimation,
+        fadeInAnimation
+    ]
 })
 export class RegisterComponent implements OnDestroy {
   private sub = new Subscription();
@@ -58,7 +58,6 @@ export class RegisterComponent implements OnDestroy {
           this.router.navigateByUrl('/login');
         },
         error: (err: HttpErrorResponse) => {
-          this.msgService.error(err.error.errors['ConflictError'][0] ?? "Something went wrong", "Error");
           this.awaitSubmit = false;
         }
       })

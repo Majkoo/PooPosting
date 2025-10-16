@@ -1,30 +1,33 @@
-<p-dialog header="Share to... " [(visible)]="dialogVisible" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-lg" [resizable]="false">
-    <div class="w-96 overflow-hidden p-lg flex items-center flex-col bg-grayscale-50 dark:bg-dark-grayscale-50">
-        <div class="w-full flex">
-            <span class="w-full text-center pb-md font-bold text-large">Share</span>
-            <button class="m-0 icon-cancel absolute right-3 text-large" (click)="closeDialog()"></button>
-        </div>
-        <div class="w-full pb-md flex items-center flex-row select-none overflow-auto no-scrollbar" (scroll)="onScroll($event)" #scrollCont>
-            <div *ngFor="let share of shareOptions" class="flex flex-col cursor-pointer p-sm m-xs rounded-lg hover:bg-grayscale-700 dark:hover:bg-dark-grayscale-700 btn" (click)="closeDialog(share.link)">
-                <div class="flex justify-center header pb-sm" [class]="[share.color, share.icon]"></div>
-                <span class="text-center">{{share.website}}</span>
-            </div>
-            <div 
-                class="w-8 h-8 absolute right-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer" 
-                (click)="scrollCont.scrollBy({ left: 273, behavior: 'smooth' })"
-                [ngClass]="scrollLeft >= scrollCont.scrollWidth - scrollCont.clientWidth - 10 ? 'invisible' : 'visible'"
-                >
-                <div class="icon-right text-large"></div>
-            </div>
-            <div 
-                class="w-8 h-8 absolute left-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer" 
-                (click)="scrollCont.scrollBy({ left: -273, behavior: 'smooth' })"
-                 *ngIf="scrollLeft >= 10"
-                >
-                <div class="icon-left text-large"></div>
-            </div>
-        </div>
+<p-dialog header="Share to... " [(visible)]="dialogVisible" (onHide)="closeDialog()" [draggable]="false" [showHeader]="false" [modal]="true" [dismissableMask]="true" contentStyleClass="rounded-lg" [resizable]="false">
+  <div class="w-96 overflow-hidden p-lg flex items-center flex-col bg-grayscale-50 dark:bg-dark-grayscale-50">
+    <div class="w-full flex">
+      <span class="w-full text-center pb-md font-bold text-large">Share</span>
+      <button class="m-0 icon-cancel icon absolute right-3 text-large" (click)="closeDialog()"></button>
     </div>
+    <div class="w-full pb-md flex items-center flex-row select-none overflow-auto no-scrollbar" (scroll)="onScroll($event)" #scrollCont>
+      @for (share of shareOptions; track share) {
+        <div class="flex flex-col cursor-pointer p-sm m-xs rounded-lg hover:bg-grayscale-700 dark:hover:bg-dark-grayscale-700 btn" (click)="closeDialog(share.link)">
+          <div class="flex justify-center header pb-sm" [class]="[share.color, share.icon]"></div>
+          <span class="text-center">{{share.website}}</span>
+        </div>
+      }
+      <div
+        class="w-8 h-8 absolute right-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer"
+        (click)="scrollCont.scrollBy({ left: 273, behavior: 'smooth' })"
+        [ngClass]="scrollLeft >= scrollCont.scrollWidth - scrollCont.clientWidth - 10 ? 'invisible' : 'visible'"
+        >
+        <div class="icon-right text-large"></div>
+      </div>
+      @if (scrollLeft >= 10) {
+        <div
+          class="w-8 h-8 absolute left-1 top-[42%] rounded-full bg-dark dark:bg-dark-dark p-md flex justify-center items-center cursor-pointer"
+          (click)="scrollCont.scrollBy({ left: -273, behavior: 'smooth' })"
+          >
+          <div class="icon-left text-large"></div>
+        </div>
+      }
+    </div>
+  </div>
 </p-dialog>
 
 <button
@@ -34,5 +37,5 @@
   }"
   (click)="openDialog()"
   class="text-dark dark:text-dark-dark"
->
+  >
 </button>

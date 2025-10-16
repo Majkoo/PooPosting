@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {Location, NgClass, NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
+import { Location, NgClass, NgTemplateOutlet } from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {CommentFormComponent} from "./comment-form/comment-form.component";
 import {CommentsDisplayComponent} from "./comments-display/comments-display.component";
@@ -19,29 +19,26 @@ import { ShareBtnComponent } from "../../share-btn/share-btn.component";
 import { ViewPictureModalSkeletonComponent } from "./skeleton/view-picture-modal-skeleton.component";
 
 @Component({
-  selector: 'pp-view-picture-modal',
-  templateUrl: './view-picture-modal.component.html',
-  styleUrls: ['./view-picture-modal.component.scss'],
-  standalone: true,
-  imports: [
+    selector: 'pp-view-picture-modal',
+    templateUrl: './view-picture-modal.component.html',
+    styleUrls: ['./view-picture-modal.component.scss'],
+    standalone: true,
+    imports: [
     UrlTransformModule,
     NgTemplateOutlet,
-    NgIf,
     RouterLink,
-    NgForOf,
     NgClass,
     TagComponent,
     ModBtnsComponent,
     LikeBtnComponent,
     CommentFormComponent,
-    CommentFormComponent,
     CommentsDisplayComponent,
     ShareBtnComponent,
     ViewPictureModalSkeletonComponent
 ],
-  animations: [
-    fadeInAnimation
-  ]
+    animations: [
+        fadeInAnimation
+    ]
 })
 export class ViewPictureModalComponent implements OnInit {
   pic: PictureDto | undefined;

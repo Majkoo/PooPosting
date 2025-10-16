@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { AccountDto } from 'src/app/shared/utility/dtos/AccountDto';
 import { UpdateAccountUsernameDto } from 'src/app/shared/utility/dtos/UpdateAccountUsernameDto';
 

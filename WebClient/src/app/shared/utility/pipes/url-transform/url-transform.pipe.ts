@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {environment} from "../../../../../environments/environment";
 
 @Pipe({
-  name: 'urlTransform'
+    name: 'urlTransform',
+    standalone: false
 })
 export class UrlTransformPipe implements PipeTransform {
   transform(value?: string | null): string | null | undefined {

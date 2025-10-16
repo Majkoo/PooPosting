@@ -8,5 +8,5 @@ public class AccountsSetTags : IIdentifiable
     [Key]
     public int Id { get; set; }
     public int AccountId { get; set; }
-    public List<string> Tags { get; set; }
+    public List<string>? Tags { get; set; }
 }

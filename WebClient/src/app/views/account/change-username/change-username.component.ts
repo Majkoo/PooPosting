@@ -6,15 +6,14 @@ import { tap } from 'rxjs';
 import { UpdateAccountUsernameDto } from 'src/app/shared/utility/dtos/UpdateAccountUsernameDto';
 
 @Component({
-  selector: 'pp-change-username',
-  standalone: true,
-  styles: [`
+    selector: 'pp-change-username',
+    styles: [`
     .input {
       @apply border-1 my-md w-full py-sm px-md rounded-lg transition ease-in-out
     }
   `],
-  imports: [CommonModule, DialogModule],
-  templateUrl: './change-username.component.html',
+    imports: [CommonModule, DialogModule],
+    templateUrl: './change-username.component.html'
 })
 export class ChangeUsernameComponent {
   private accountUpdateService = inject(AccountUpdateService)

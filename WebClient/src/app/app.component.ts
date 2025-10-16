@@ -2,9 +2,10 @@ import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/co
 import {SpinnerService} from "./services/state/spinner.service";
 import { SettingsService } from './services/api/settings/settings.service';
 @Component({
-  selector: 'pp-root',
-  templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'pp-root',
+    templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AppComponent {
   private spinnerService = inject(SpinnerService);

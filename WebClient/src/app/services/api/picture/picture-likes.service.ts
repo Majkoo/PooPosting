@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, Subject, tap} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {PictureDto} from "../../../shared/utility/dtos/PictureDto";
 import {environment} from "../../../../environments/environment";
 

@@ -23,7 +23,9 @@
 
   <!-- posts grid -->
   <div class="grid grid-cols-2 gap-md mt-sm w-full">
-    <div *ngFor="let i of [].constructor(6)" class="aspect-square rounded-lg bg-grey dark:bg-dark-grey"></div>
+    @for (i of [].constructor(6); track $index) {
+      <div class="aspect-square rounded-lg bg-grey dark:bg-dark-grey"></div>
+    }
   </div>
 
 </div>

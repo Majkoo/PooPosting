@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'pp-spinner',
-  template: `
+    selector: 'pp-spinner',
+    template: `
     <div class="backdrop">
       <div role="status" class="spinner-container">
         <svg aria-hidden="true" class="inline w-10 h-10 text-gray-200 animate-spin fill-cta" viewBox="0 0 102 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +13,7 @@ import {Component} from '@angular/core';
       </div>
     </div>
   `,
-  styles: [`
+    styles: [`
     .backdrop {
       @apply
       fixed w-screen h-screen top-0 left-0 z-50
@@ -27,7 +27,8 @@ import {Component} from '@angular/core';
       }
     }
 
-  `]
+  `],
+    standalone: false
 })
 export class SpinnerComponent {
 

@@ -5,15 +5,16 @@ import {Subscription} from "rxjs";
 import {likeStateAnimation} from "../../utility/animations/likeStateAnimation";
 import {PictureLikesService} from "../../../services/api/picture/picture-likes.service";
 import {AuthService} from "../../../services/api/account/auth.service";
+import { LoginPopupComponent } from "../login-popup/login-popup.component";
 
 @Component({
-  selector: 'pp-like-btn',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './like-btn.component.html',
-  animations: [
-    likeStateAnimation
-  ]
+    selector: 'pp-like-btn',
+    standalone: true,
+    imports: [CommonModule, LoginPopupComponent],
+    templateUrl: './like-btn.component.html',
+    animations: [
+        likeStateAnimation
+    ]
 })
 export class LikeBtnComponent implements OnDestroy {
   @Input() cssClass?: string;
@@ -24,7 +25,13 @@ export class LikeBtnComponent implements OnDestroy {
   private likeService = inject(PictureLikesService);
   private authService = inject(AuthService);
 
+  public loginPopupVisible = false;
+
   like(id: string) {
+    if (!this.isLoggedOn){
+      this.loginPopupVisible = true
+      return
+    }
     this.sub.add(
       this.likeService.likePicture(id).subscribe({
         next: (result: PictureDto) => {

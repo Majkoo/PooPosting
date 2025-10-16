@@ -7,10 +7,11 @@ import {AccountService} from "../../../../services/api/account/account.service";
 import {AuthService} from "../../../../services/api/account/auth.service";
 
 @Component({
-  selector: 'pp-created-post-card-preview',
-  templateUrl: './created-post-card-preview.component.html',
-  styles: [],
-  animations: [fadeInAnimation]
+    selector: 'pp-created-post-card-preview',
+    templateUrl: './created-post-card-preview.component.html',
+    styles: [],
+    animations: [fadeInAnimation],
+    standalone: false
 })
 export class CreatedPostCardPreviewComponent {
   @Input({required: true}) postData!: CreatePictureDto;

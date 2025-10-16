@@ -5,8 +5,8 @@ import {fadeInAnimation} from "../../../shared/utility/animations/fadeInAnimatio
 import {CreatePictureDto} from "../models/createPictureDto";
 
 @Component({
-  selector: 'pp-review',
-  template: `
+    selector: 'pp-review',
+    template: `
     <pp-created-post-card-preview [postData]="post" @fadeIn />
 
     <div class="mt-4 flex items-center justify-between">
@@ -25,7 +25,8 @@ import {CreatePictureDto} from "../models/createPictureDto";
       </button>
     </div>
   `,
-  animations: [fadeInAnimation]
+    animations: [fadeInAnimation],
+    standalone: false
 })
 export class ReviewComponent implements AfterContentInit {
   private router = inject(Router);

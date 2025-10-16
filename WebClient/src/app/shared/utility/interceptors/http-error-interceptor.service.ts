@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {Router} from "@angular/router";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { catchError, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 export const retryCount = 2;
 export const delayMs = 2000;
@@ -10,25 +11,27 @@ export const delayMs = 2000;
   providedIn: 'root'
 })
 export class HttpErrorInterceptorService implements HttpInterceptor {
-  constructor(
-    private router: Router,
-    ) { }
-  intercept(req: HttpRequest<HttpRequest<any>>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req);
-    // return next.handle(req)
-    //   .pipe(
-    //     retryWhen((error) => {
-    //       return error.pipe(
-    //         mergeMap((error, index) => {
-    //           if ((index < retryCount) && !((req.method === "GET") && (error.status === 404))) return of(error).pipe(delay(delayMs));
-    //           throw error;
-    //         })
-    //       );
-    //     }),
-    //     catchError((error: HttpErrorResponse) => {
-    //       return this.handleError(error.status, req, error);
-    //     })
-    //   );
+  private toastrService = inject(ToastrService);
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.toastrService.error(this.captureErrorMessage(error))
+        
+        return throwError(() => error);
+      })
+    );
+  }
+
+  captureErrorMessage(reqError: HttpErrorResponse){
+    if (reqError.error?.errors) {
+      const firstKey = Object.keys(reqError.error.errors)[0];
+      return reqError.error.errors[firstKey][0];
+    }
+    if (typeof reqError.error === 'string') {
+      return reqError.error;
+    }
+    return "Something went wrong"
   }
 
   // private handleError(status: number, req: HttpRequest<any>, error: HttpErrorResponse) {

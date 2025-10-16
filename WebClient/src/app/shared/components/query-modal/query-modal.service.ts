@@ -8,7 +8,7 @@ import {ViewPictureModalComponent} from "./viewPicture/view-picture-modal.compon
   providedIn: 'root',
 })
 export class QueryModalService {
-  dialogRef: DynamicDialogRef | undefined;
+  dialogRef: DynamicDialogRef | null | undefined;
 
   constructor(
     private dialogService: DialogService,
