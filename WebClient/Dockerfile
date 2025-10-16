@@ -1,5 +1,5 @@
 # Build Angular app
-FROM node:20 AS build
+FROM node:22 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
