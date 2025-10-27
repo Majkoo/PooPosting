@@ -14,5 +14,9 @@ namespace PooPosting.Application.Models.Dtos.Auth.In
         public required string PhotoUrl { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        
+        // For connecting accounts
+        public string? Password { get; set; }
+        public string? ConfirmPassword { get; set; }
     }
 }

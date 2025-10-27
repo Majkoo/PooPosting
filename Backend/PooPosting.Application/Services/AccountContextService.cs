@@ -1,11 +1,14 @@
 ﻿#nullable enable
-using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using PooPosting.Application.Mappers;
+using PooPosting.Application.Models.Dtos.Account.Out;
 using PooPosting.Application.Services.Helpers;
 using PooPosting.Domain.DbContext;
 using PooPosting.Domain.DbContext.Entities;
 using PooPosting.Domain.Exceptions;
+using System.Security.Claims;
+using System.Text;
 
 namespace PooPosting.Application.Services;
 
@@ -49,6 +52,16 @@ public class AccountContextService(
     {
         var idClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         return idClaim is not null ? int.Parse(idClaim) : null;
+    }
+    public async Task<AccountDto>? TryGetAccountAsync()
+    {
+        var idClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (idClaim is null) return null;
+
+        return await dbContext.Accounts
+            .Where(a => a.Id == int.Parse(idClaim))
+            .ProjectToDto()
+            .FirstOrDefaultAsync() ?? throw new NotFoundException();
     }
 
     public int GetAccountRole()

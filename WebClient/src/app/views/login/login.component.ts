@@ -12,6 +12,7 @@ import {fadeInAnimation} from "../../shared/utility/animations/fadeInAnimation";
 import {AuthService} from "../../services/api/account/auth.service";
 import { GoogleSigninComponent } from 'src/app/shared/components/google-signin/google-signin.component';
 import { LoginPopupComponent } from "src/app/shared/components/login-popup/login-popup.component";
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'pp-login',
@@ -60,10 +61,17 @@ export class LoginComponent implements OnDestroy, OnInit {
     );
   }
 
-  afterLogIn(){
-    this.msgService.success("Successfully logged in", "Success");
-    this.awaitSubmit = false;
-    this.router.navigateByUrl('/');
+  afterLogIn(googleIdToken?: SocialUser){
+    if (googleIdToken){
+      this.msgService.info("Pooposting account with this email already exists, please login to existing account to connect them, or use different account")
+      this.loginDto.googleIdToken = googleIdToken.idToken
+      this.loginDto.nickname = googleIdToken.email
+    }
+    else{
+      this.msgService.success("Successfully logged in", "Success");
+      this.awaitSubmit = false;
+      this.router.navigateByUrl('/');
+    }
   }
 
   ngOnDestroy() {

@@ -15,6 +15,7 @@ public static class AccountMapper
             ProfilePicUrl = a.ProfilePicUrl,
             RoleId = a.RoleId,
             AccountCreated = a.AccountCreated,
+            Provider = a.Provider,
             PictureCount = a.Pictures.Count,
             LikeCount = a.Pictures.Sum(p => p.Likes.Count),
             CommentCount = a.Pictures.Sum(p => p.Comments.Count)
@@ -35,6 +36,7 @@ public static class AccountMapper
             ProfilePicUrl = a.ProfilePicUrl,
             RoleId = a.RoleId,
             AccountCreated = a.AccountCreated,
+            Provider = a.Provider,
             PictureCount = a.Pictures.Count,
             LikeCount = a.Pictures.Sum(p => p.Likes.Count),
             CommentCount = a.Pictures.Sum(p => p.Comments.Count)

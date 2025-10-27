@@ -4,4 +4,7 @@ public class LoginDto
 {
     public string Nickname { get; init; } = null!;
     public string Password { get; init; } = null!;
+
+    // For connecting accounts
+    public string? GoogleIdToken { get; set; }
 }

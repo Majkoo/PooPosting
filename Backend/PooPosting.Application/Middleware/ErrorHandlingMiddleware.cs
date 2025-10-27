@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using PooPosting.Domain.Exceptions;
+using System.Text.Json;
 
 namespace PooPosting.Application.Middleware;
 
@@ -29,6 +30,19 @@ public class ErrorHandlingMiddleware(
         {
             context.Response.StatusCode = 403;
             await context.Response.WriteAsync(e.Message);
+        }
+        catch (AppException e)
+        {
+            var errorResponse = new
+            {
+                error = new
+                {
+                    code = e.Code,
+                    message = e.Message
+                }
+            };
+            context.Response.StatusCode = 409;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
         catch (NotFoundException)
         {

@@ -15,7 +15,7 @@ public class RegisterDtoValidator : AbstractValidator<RegisterDto>
             .Custom(
                 (value, context) =>
                 {
-                    var emailInUse = dbContext.Accounts.Any(a => a.Email == value);
+                    var emailInUse = dbContext.Accounts.Any(a => a.Email == value && a.Provider != "Google");
                     if (emailInUse)
                     {
                         context.AddFailure("ConflictError", "That Email is taken");

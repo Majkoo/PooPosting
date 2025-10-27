@@ -26,7 +26,7 @@ export class AuthService {
       .pipe(tap((res) => this.saveJwtData(res)));
   }
 
-  loginwithGoogle(dto: SocialUser): Observable<AuthData> {
+  loginwithGoogle(dto: GoogleLoginDto): Observable<AuthData> {
     return this.httpClient
       .post<AuthData>(
         `${environment.apiUrl}/auth/google`,
