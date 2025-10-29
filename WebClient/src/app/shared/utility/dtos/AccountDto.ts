@@ -9,6 +9,7 @@ export interface AccountDto {
   backgroundPicUrl: string;
   accountDescription: string;
   accountCreated: string;
+  provider: string;
 
   pictures: PictureDto[];
   pictureCount: number;

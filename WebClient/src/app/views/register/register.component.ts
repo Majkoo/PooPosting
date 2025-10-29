@@ -59,6 +59,10 @@ export class RegisterComponent implements OnDestroy {
         },
         error: (err: HttpErrorResponse) => {
           this.awaitSubmit = false;
+          const errorCode = err?.error?.error?.code || err?.error?.code;
+          if (errorCode === 'EMAIL_EXISTS') {
+            this.msgService.info("Google account with this email already exists, please login using google connect them, or use different account")
+          }
         }
       })
     );

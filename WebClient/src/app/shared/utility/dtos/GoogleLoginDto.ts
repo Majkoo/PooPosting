@@ -5,4 +5,6 @@ export interface GoogleLoginDto {
     PhotoUrl: string;
     FirstName: string;
     LastName: string;
+    Password?: string;
+    ConfirmPassword?: string;
 }

@@ -11,7 +11,8 @@ public class AccountDto
     public int PictureCount { get; init; }
     public int LikeCount { get; init; }
     public int CommentCount { get; init; }
-    
+
+    public string Provider { get; init; } = null!;
     public int RoleId { get; init; }
     public DateTime AccountCreated { get; init; }
 }

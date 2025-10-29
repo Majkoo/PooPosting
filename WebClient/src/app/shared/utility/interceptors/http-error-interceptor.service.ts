@@ -16,7 +16,10 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.toastrService.error(this.captureErrorMessage(error))
+        const message = this.captureErrorMessage(error)
+        if (message){
+          this.toastrService.error(message)
+        }
         
         return throwError(() => error);
       })
@@ -30,6 +33,11 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
     }
     if (typeof reqError.error === 'string') {
       return reqError.error;
+    }
+    console.log(reqError);
+    
+    if (reqError.error.error.code){
+      return null
     }
     return "Something went wrong"
   }

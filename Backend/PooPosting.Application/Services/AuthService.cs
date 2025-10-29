@@ -25,6 +25,15 @@ public class AuthService(
 {
     public async Task<string> RegisterAccount(RegisterDto dto)
     {
+        // Check if email is used in any google account
+        var existingAccount = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
+        if (existingAccount != null && existingAccount.Provider == "Google")
+        {
+            // Return for connecting accounts
+            throw new AppException("EMAIL_EXISTS", "That email already exists, please connect accounts");
+        }
+        
+        // If not, generate new account
         var newAccount = new Account()
         {
             Nickname = dto.Nickname,
@@ -44,6 +53,7 @@ public class AuthService(
 
     public async Task<AuthSuccessResult> GenerateJwt(LoginDto dto)
     {
+        // Verify login
         var account = await dbContext.Accounts
             .FirstOrDefaultAsync(a => a.Nickname == dto.Nickname || a.Email == dto.Nickname);
 
@@ -53,32 +63,41 @@ public class AuthService(
         var result = passwordHasher.VerifyHashedPassword(account, account.PasswordHash, dto.Password);
         if (result == PasswordVerificationResult.Failed) throw new UnauthorizedException("Wrong password, please try again");
 
+        // Try to connect existing pooposting account to new google account
+        if (dto.GoogleIdToken is not null && account.Provider == "Pooposting")
+        {
+            var payload = await ValidateGoogleLogin(dto.GoogleIdToken);
+            
+            if (payload.Email != account.Email) throw new BadRequestException("Google account doesn't match given email");
+
+            account.GoogleId = payload.Subject;
+            account.Provider = "GoogleAndPooposting";
+
+            await dbContext.SaveChangesAsync();
+        }
+
         return await GenerateAuthResult(account);
     }
 
     public async Task<AuthSuccessResult> GoogleLogin(GoogleLoginDto dto)
     {
-        GoogleJsonWebSignature.Payload payload;
-        try
-        {
-            payload = await GoogleJsonWebSignature.ValidateAsync(dto.IdToken);
-        }
-        catch (Exception e)
-        {
-            throw new UnauthorizedException("Invalid Google token");
-        }
+        var payload = await ValidateGoogleLogin(dto.IdToken);
 
         var user = await dbContext.Accounts
                 .FirstOrDefaultAsync(u => u.GoogleId == payload.Subject);
-
+        
+        // Generate new account
         if (user == null)
         {
+            // Check if there is pooposting account with same email
             var existingEmail = dbContext.Accounts.FirstOrDefault(x => x.Email == dto.Email);
             if (existingEmail != null)
             {
-                throw new BadRequestException($"That email already exists");
+                // Return for connecting accounts
+                throw new AppException("EMAIL_EXISTS", "That email already exists, please connect accounts");
             }
 
+            // Generate 25 long nickname
             var nickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 25)); // max length of username is 25
             var shorterNickname = dto.Name.Substring(0, Math.Min(dto.Name.Length, 21)); // this gives us room to generate different username
 
@@ -93,7 +112,8 @@ public class AuthService(
                 var randomSuffix = new Random().Next(100, 9999).ToString();
                 testNickname = shorterNickname + randomSuffix;
             }
-    
+
+            // Generate new account
             user = new Account()
             {
                 Nickname = testNickname,
@@ -104,6 +124,18 @@ public class AuthService(
                 PasswordHash = "GoogleHash"
             };
             dbContext.Accounts.Add(user);
+            await dbContext.SaveChangesAsync();
+        }
+        else if (dto.Password is not null && user.Provider == "Google")
+        {
+            // Try to connect existing google account to new pooposting account
+            if (payload.Email != user.Email) throw new BadRequestException("Pooposting account doesn't match given email");
+
+            var hashedPassword = passwordHasher.HashPassword(user, dto.Password);
+
+            user.PasswordHash = hashedPassword;
+            user.Provider = "GoogleAndPooposting";
+
             await dbContext.SaveChangesAsync();
         }
 
@@ -172,5 +204,17 @@ public class AuthService(
         };
 
         return authSuccessResult;
+    }
+
+    private async Task<GoogleJsonWebSignature.Payload> ValidateGoogleLogin(string IdToken)
+    {
+        try
+        {
+            return await GoogleJsonWebSignature.ValidateAsync(IdToken);
+        }
+        catch (Exception)
+        {
+            throw new UnauthorizedException("Invalid Google token");
+        }
     }
 }
